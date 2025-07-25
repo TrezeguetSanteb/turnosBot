@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/home/santi/Documents/personal/turnosBot/daemon_notificaciones.py", line 15, in <module>
+    from bot_config import config
+  File "/home/santi/Documents/personal/turnosBot/bot_config.py", line 7, in <module>
+    from dotenv import load_dotenv
+ModuleNotFoundError: No module named 'dotenv'
