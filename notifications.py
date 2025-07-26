@@ -47,6 +47,24 @@ class NotificationManager:
         except:
             return fecha_str
 
+    def crear_mensaje_cancelacion_usuario(self, nombre, fecha, hora):
+        """Crea mensaje de confirmación cuando el usuario cancela su propio turno"""
+        fecha_legible = self.formatear_fecha_legible(fecha, hora)
+
+        mensaje = f"""✅ *Confirmación de Cancelación* ✅
+
+Hola {nombre},
+
+Tu turno ha sido cancelado exitosamente:
+
+📅 **Fecha y hora:** {fecha_legible}
+
+¡Gracias por usar nuestro sistema! Si necesitas reservar un nuevo turno, escribe *hola*.
+
+¡Que tengas un buen día! 😊"""
+
+        return mensaje
+
     def crear_mensaje_cancelacion_admin(self, nombre, fecha, hora, motivo="administrativos"):
         """Crea mensaje de cancelación por motivos administrativos"""
         fecha_legible = self.formatear_fecha_legible(fecha, hora)
@@ -100,6 +118,16 @@ Para reservar un nuevo turno, escribe *hola* cuando gustes.
         self._guardar_log(notificacion)
 
         return notificacion
+
+    def notificar_cancelacion_usuario(self, turno_id, nombre, fecha, hora, telefono):
+        """Notifica la confirmación de cancelación de un turno por el usuario"""
+        mensaje = self.crear_mensaje_cancelacion_usuario(nombre, fecha, hora)
+        return self.registrar_notificacion(
+            telefono=telefono,
+            mensaje=mensaje,
+            tipo='cancelacion_usuario',
+            turno_id=turno_id
+        )
 
     def notificar_cancelacion_turno(self, turno_id, nombre, fecha, hora, telefono):
         """Notifica la cancelación de un turno específico"""
@@ -263,6 +291,11 @@ notification_manager = NotificationManager()
 
 
 # Funciones de conveniencia
+def notificar_cancelacion_usuario(turno_id, nombre, fecha, hora, telefono):
+    """Función de conveniencia para notificar cancelación por usuario"""
+    return notification_manager.notificar_cancelacion_usuario(turno_id, nombre, fecha, hora, telefono)
+
+
 def notificar_cancelacion_turno(turno_id, nombre, fecha, hora, telefono):
     """Función de conveniencia para notificar cancelación de turno"""
     return notification_manager.notificar_cancelacion_turno(turno_id, nombre, fecha, hora, telefono)

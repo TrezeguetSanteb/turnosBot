@@ -215,18 +215,20 @@ def verificar_notificaciones_pendientes(from_number):
     """Verifica si hay notificaciones pendientes para un usuario específico"""
     try:
         notificaciones = obtener_notificaciones_pendientes()
-        print(f"🔍 Verificando notificaciones para {from_number}: {len(notificaciones)} pendientes")
-        
+        print(
+            f"🔍 Verificando notificaciones para {from_number}: {len(notificaciones)} pendientes")
+
         notificaciones_usuario = [
             n for n in notificaciones if n['telefono'] == from_number]
-        
-        print(f"📱 Notificaciones para este usuario: {len(notificaciones_usuario)}")
+
+        print(
+            f"📱 Notificaciones para este usuario: {len(notificaciones_usuario)}")
 
         if notificaciones_usuario:
             # Enviar la primera notificación pendiente
             notificacion = notificaciones_usuario[0]
             mensaje = notificacion['mensaje']
-            
+
             print(f"📨 Enviando notificación: {notificacion['tipo']}")
 
             # Marcar como enviada
@@ -246,12 +248,8 @@ def handle_message(incoming_msg, from_number, user_states, user_data):
     state = user_states.get(from_number, 'inicio')
     config_horarios = cargar_config()
 
-    # Verificar notificaciones pendientes al inicio
-    notificacion_pendiente = verificar_notificaciones_pendientes(from_number)
-    if notificacion_pendiente:
-        # Si hay una notificación pendiente, enviarla primero
-        user_states[from_number] = 'inicio'
-        return notificacion_pendiente
+    # Las notificaciones se envían automáticamente por el daemon, no aquí
+    # Esto evita interferir con el flujo de conversación
 
     # Menú principal
     if incoming_msg.lower() in ['hola', 'start', '/start'] or state == 'inicio':
@@ -280,7 +278,7 @@ def handle_message(incoming_msg, from_number, user_states, user_data):
                 if turnos:
                     respuesta = '📅 *Tus turnos reservados:*\n\n'
                     for i, t in enumerate(turnos, 1):
-                        respuesta += f"{i}. {t[0]}: {formatear_fecha_legible(t[1], t[2])}\n"
+                        respuesta += f"{i}) {t[0]}: {formatear_fecha_legible(t[1], t[2])}\n"
                     respuesta += '\n💬 Escribe *hola* para volver al menú principal'
                     user_states[from_number] = 'inicio'
                     return respuesta
@@ -297,7 +295,7 @@ def handle_message(incoming_msg, from_number, user_states, user_data):
                 if turnos:
                     respuesta = '🗑️ *Cancelar Turno* 🗑️\n\n¿Qué turno deseas cancelar?\n\n'
                     for idx, t in enumerate(turnos, 1):
-                        respuesta += f"{idx}. {t[1]}: {formatear_fecha_legible(t[2], t[3])}\n"
+                        respuesta += f"{idx}) {t[1]}: {formatear_fecha_legible(t[2], t[3])}\n"
                     respuesta += '\nEscribe el número del turno a cancelar:'
                     user_states[from_number] = 'esperando_cancelacion'
                     user_data[from_number] = {'turnos': turnos}
@@ -344,7 +342,7 @@ def handle_message(incoming_msg, from_number, user_states, user_data):
             if turnos:
                 respuesta = '¿Qué turno deseas cancelar? Escribe el número correspondiente:\n'
                 for idx, t in enumerate(turnos, 1):
-                    respuesta += f"{idx}. {t[1]}: {formatear_fecha_legible(t[2], t[3])}\n"
+                    respuesta += f"{idx}) {t[1]}: {formatear_fecha_legible(t[2], t[3])}\n"
                 user_states[from_number] = 'esperando_cancelacion'
                 user_data[from_number] = {'turnos': turnos}
                 return respuesta.strip()
@@ -395,7 +393,7 @@ def handle_message(incoming_msg, from_number, user_states, user_data):
         fechas = obtener_fechas_disponibles()
         respuesta = '📅 *Seleccionar Fecha* 📅\n\n¿Qué día prefieres para tu turno?\n\n'
         for i, fecha in enumerate(fechas, 1):
-            respuesta += f"{i}. {fecha['etiqueta'].title()} ({fecha['fecha_legible']})\n"
+            respuesta += f"{i}) {fecha['etiqueta'].title()} ({fecha['fecha_legible']})\n"
         respuesta += '\nEscribe el número del día:'
         user_data[from_number]['fechas_disponibles'] = fechas
         return respuesta
@@ -414,7 +412,7 @@ def handle_message(incoming_msg, from_number, user_states, user_data):
                 if horarios:
                     respuesta = f"🕐 *Seleccionar Horario* 🕐\n\nFecha: {fechas[opcion-1]['fecha_legible']}\n\nHorarios disponibles:\n\n"
                     for i, hora in enumerate(horarios, 1):
-                        respuesta += f"{i}. {hora}\n"
+                        respuesta += f"{i}) {hora}\n"
                     respuesta += '\nEscribe el número del horario:'
                     user_data[from_number]['horarios_disponibles'] = horarios
                     return respuesta

@@ -1,19 +1,36 @@
-# Sistema de Notificaciones - Bot de Turnos
+# Sistema de Notificaciones - Bot Multi-Canal
 
-Sistema simple para enviar notificaciones automáticas cuando se cancelan turnos.
+Sistema universal para enviar notificaciones automáticas por **Telegram** y **WhatsApp** cuando se cancelan turnos.
+
+## ✨ Características
+
+- 🔄 **Multi-canal**: Telegram y WhatsApp automáticamente
+- ⚙️ **Configuración simple**: Solo edita `.env`
+- 🤖 **Envío automático**: Al cancelar desde panel admin
+- 📱 **Detección inteligente**: Detecta automáticamente qué canal usar
+- 🚀 **Escalable**: Agrega nuevos canales fácilmente
 
 ## Configuración Rápida
 
-1. **Cambiar token del bot**: Edita `.env` y cambia `BOT_TOKEN`
-2. **Iniciar daemon**: `./control_notificaciones.sh start`
-3. **Verificar estado**: `./control_notificaciones.sh status`
+### Telegram
+1. **Cambiar token**: Edita `BOT_TOKEN` en `.env`
+
+### WhatsApp (Opcional)
+2. **Configurar Meta API**: Edita variables `WHATSAPP_*` en `.env`
+3. **Ver guía completa**: `WHATSAPP_SETUP.md`
+
+### Iniciar Sistema
+3. **Iniciar daemon**: `./control_notificaciones.sh start`
+4. **Verificar estado**: `./control_notificaciones.sh status`
 
 ## Archivos Principales
 
-- **`.env`** - Configuración (solo cambiar BOT_TOKEN)
-- **`bot_config.py`** - Manejo centralizado del token
+- **`.env`** - Configuración central (Telegram + WhatsApp)
+- **`bot_config.py`** - Manejo centralizado de configuración
 - **`bot_telegram.py`** - Bot de Telegram interactivo
-- **`bot_sender.py`** - Envío automático de notificaciones
+- **`bot_whatsapp.py`** - Bot de WhatsApp interactivo
+- **`bot_sender.py`** - Envío universal automático (Telegram + WhatsApp)
+- **`whatsapp_sender.py`** - Módulo específico de WhatsApp
 - **`daemon_notificaciones.py`** - Daemon que ejecuta bot_sender.py cada 60 segundos
 - **`control_notificaciones.sh`** - Script de control del daemon
 
@@ -28,6 +45,45 @@ Sistema simple para enviar notificaciones automáticas cuando se cancelan turnos
 ./control_notificaciones.sh test     # Ejecutar envío una vez
 
 # Bot interactivo
+python bot_telegram.py    # Iniciar bot de Telegram
+python bot_whatsapp.py    # Iniciar bot de WhatsApp
+
+# Envío manual
+python bot_sender.py      # Enviar notificaciones pendientes (todos los canales)
+
+# Panel web admin
+python admin_panel.py     # Panel web para gestionar turnos
+```
+
+## Detección Automática de Canales
+
+El sistema detecta automáticamente qué canal usar según el número:
+
+- **Telegram**: Números que son solo dígitos (ej: `123456789`)
+- **WhatsApp**: Números con formato internacional (ej: `+541234567890`)
+
+## Configuración Multi-Bot
+
+Para correr múltiples instancias:
+
+1. **Copia la carpeta** del proyecto
+2. **Cambia solo el `.env`** con diferentes tokens
+3. **Ejecuta** cada instancia independientemente
+
+## Estructura de .env
+
+```bash
+# Telegram Bot
+BOT_TOKEN='tu_token_telegram'
+
+# WhatsApp Bot (Meta API) - Opcional
+WHATSAPP_ACCESS_TOKEN='tu_token_whatsapp'
+WHATSAPP_PHONE_NUMBER_ID='tu_phone_number_id'
+WHATSAPP_BUSINESS_ACCOUNT_ID='tu_business_account_id'
+
+# Sistema
+NOTIFICATION_INTERVAL=60
+LOG_LEVEL=INFO
 python bot_telegram.py               # Iniciar bot para respuestas
 ```
 

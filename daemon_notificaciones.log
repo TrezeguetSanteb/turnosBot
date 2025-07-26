@@ -1,6 +1,29 @@
-Traceback (most recent call last):
-  File "/home/santi/Documents/personal/turnosBot/daemon_notificaciones.py", line 15, in <module>
-    from bot_config import config
-  File "/home/santi/Documents/personal/turnosBot/bot_config.py", line 7, in <module>
-    from dotenv import load_dotenv
-ModuleNotFoundError: No module named 'dotenv'
+[2025-07-25 15:55:09] 🤖 DAEMON DE NOTIFICACIONES INICIADO
+[2025-07-25 15:55:09] ==================================================
+[2025-07-25 15:55:09] Intervalo: 60 segundos
+[2025-07-25 15:55:09] Script: bot_sender.py
+[2025-07-25 15:55:09] Presiona Ctrl+C para detener
+[2025-07-25 15:55:09] ==================================================
+[2025-07-25 15:55:09] 🚀 Ejecutando bot_sender.py...
+[2025-07-25 15:55:09] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-25 15:56:09] 🚀 Ejecutando bot_sender.py...
+[2025-07-25 15:56:09] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-25 15:57:09] 🚀 Ejecutando bot_sender.py...
+[2025-07-25 15:57:09] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-25 15:58:09] 🚀 Ejecutando bot_sender.py...
+[2025-07-25 15:58:10] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-25 15:59:10] 🚀 Ejecutando bot_sender.py...
+[2025-07-25 15:59:10] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-25 16:00:10] 🚀 Ejecutando bot_sender.py...
+[2025-07-25 16:00:11] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-25 16:01:11] 🚀 Ejecutando bot_sender.py...
+[2025-07-25 16:01:11] ✅ bot_sender.py ejecutado exitosamente
+
+🛑 Recibida señal 15. Deteniendo daemon...
+[2025-07-25 16:02:08] 🏁 Daemon detenido
+[2025-07-25 16:02:08] 📊 ESTADÍSTICAS DEL DAEMON
+[2025-07-25 16:02:08]     Tiempo activo: 0h 6m
+[2025-07-25 16:02:08]     Ejecuciones: 7
+[2025-07-25 16:02:08]     Errores: 0
+[2025-07-25 16:02:08]     Notificaciones enviadas: 0
+[2025-07-25 16:02:08]     Último envío: 16:01:11

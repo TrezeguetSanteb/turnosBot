@@ -184,6 +184,21 @@ class DatabaseManager:
         try:
             conn = self._get_connection()
             c = conn.cursor()
+
+            # Primero obtener los datos del turno antes de cancelarlo
+            c.execute(
+                'SELECT nombre, fecha, hora FROM turno WHERE id = ? AND telefono = ?',
+                (turno_id, telefono)
+            )
+            turno_info = c.fetchone()
+
+            if not turno_info:
+                conn.close()
+                return False
+
+            nombre, fecha, hora = turno_info
+
+            # Cancelar el turno
             c.execute(
                 'DELETE FROM turno WHERE id = ? AND telefono = ?',
                 (turno_id, telefono)
@@ -191,6 +206,20 @@ class DatabaseManager:
             filas_afectadas = c.rowcount
             conn.commit()
             conn.close()
+
+            # Si se canceló exitosamente, crear notificación
+            if filas_afectadas > 0:
+                try:
+                    from notifications import notificar_cancelacion_usuario
+                    notificar_cancelacion_usuario(
+                        turno_id, nombre, fecha, hora, telefono)
+                    print(
+                        f"📨 Notificación de cancelación creada para {telefono}")
+                except Exception as e:
+                    print(
+                        f"⚠️ Error al crear notificación de cancelación: {e}")
+                    # No fallar la cancelación por un error de notificación
+
             return filas_afectadas > 0
         except Exception as e:
             print(f"Error al cancelar turno por usuario: {e}")

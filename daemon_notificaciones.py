@@ -75,7 +75,8 @@ def ejecutar_bot_sender():
                         print(f"    {line}")
         else:
             stats['errores'] += 1
-            log_mensaje(f"❌ Error al ejecutar bot_sender.py: {resultado.stderr}")
+            log_mensaje(
+                f"❌ Error al ejecutar bot_sender.py: {resultado.stderr}")
 
     except Exception as e:
         stats['errores'] += 1
@@ -129,7 +130,7 @@ async def main():
                 if not ejecutando:
                     break
                 await asyncio.sleep(1)
-            
+
             if not ejecutando:
                 break
 
