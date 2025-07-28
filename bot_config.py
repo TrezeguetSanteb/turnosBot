@@ -54,6 +54,10 @@ class BotConfig:
         """Verifica si WhatsApp está configurado"""
         return bool(self.WHATSAPP_ACCESS_TOKEN and self.WHATSAPP_PHONE_NUMBER_ID)
 
+    def get_admin_phone_number(self):
+        """Obtiene el número de teléfono del administrador"""
+        return self.ADMIN_PHONE_NUMBER
+
 
 # Instancia global de configuración
 config = BotConfig()

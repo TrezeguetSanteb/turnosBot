@@ -39,14 +39,16 @@ def verify_webhook():
     verify_token = request.args.get('hub.verify_token')
     challenge = request.args.get('hub.challenge')
 
-    # Token de verificación (puedes usar cualquier string)
-    expected_token = "mi_token_verificacion_whatsapp"
+    # Token de verificación desde variable de entorno directamente
+    expected_token = os.environ.get(
+        'WHATSAPP_VERIFY_TOKEN', 'mi_token_verificacion_whatsapp')
 
     if verify_token == expected_token:
         logger.info("Webhook verificado exitosamente")
         return challenge
     else:
-        logger.error("Token de verificación inválido")
+        logger.error(
+            f"Token de verificación inválido. Esperado: {expected_token}, Recibido: {verify_token}")
         return "Error de verificación", 403
 
 

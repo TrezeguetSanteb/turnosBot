@@ -10,7 +10,7 @@ import time
 import subprocess
 import sys
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 import signal
 from bot_config import config
 
@@ -21,11 +21,13 @@ EJECUTAR_AL_INICIO = True
 
 # Variables globales para el control del daemon
 ejecutando = True
+ultimo_mantenimiento = None  # Para controlar el mantenimiento diario
 stats = {
     'ejecuciones': 0,
     'errores': 0,
     'ultimo_envio': None,
-    'notificaciones_enviadas': 0
+    'notificaciones_enviadas': 0,
+    'ultimo_mantenimiento': None
 }
 
 
@@ -84,20 +86,56 @@ def ejecutar_bot_sender():
 
 
 def mostrar_estadisticas():
-    """Muestra estadísticas del daemon"""
-    uptime = time.time() - stats.get('inicio', time.time())
-    horas = int(uptime // 3600)
-    minutos = int((uptime % 3600) // 60)
-
-    log_mensaje("📊 ESTADÍSTICAS DEL DAEMON")
-    log_mensaje(f"    Tiempo activo: {horas}h {minutos}m")
-    log_mensaje(f"    Ejecuciones: {stats['ejecuciones']}")
-    log_mensaje(f"    Errores: {stats['errores']}")
+    """Muestra las estadísticas del daemon"""
+    log_mensaje("📊 === ESTADÍSTICAS ===")
+    log_mensaje(f"   Ejecuciones: {stats['ejecuciones']}")
+    log_mensaje(f"   Errores: {stats['errores']}")
     log_mensaje(
-        f"    Notificaciones enviadas: {stats['notificaciones_enviadas']}")
+        f"   Notificaciones enviadas: {stats['notificaciones_enviadas']}")
     if stats['ultimo_envio']:
+        log_mensaje(f"   Último envío: {stats['ultimo_envio']}")
+    if stats['ultimo_mantenimiento']:
         log_mensaje(
-            f"    Último envío: {stats['ultimo_envio'].strftime('%H:%M:%S')}")
+            f"   Último mantenimiento: {stats['ultimo_mantenimiento']}")
+    log_mensaje("==================")
+
+
+def ejecutar_mantenimiento_db():
+    """Ejecuta el mantenimiento de la base de datos"""
+    try:
+        log_mensaje("🔧 Ejecutando mantenimiento de base de datos...")
+
+        from db_maintenance import mantenimiento_completo
+        mantenimiento_completo()
+
+        # Actualizar estadísticas
+        global ultimo_mantenimiento
+        ultimo_mantenimiento = datetime.now()
+        stats['ultimo_mantenimiento'] = ultimo_mantenimiento.strftime(
+            '%H:%M:%S')
+
+        log_mensaje("✅ Mantenimiento de BD completado")
+
+    except Exception as e:
+        log_mensaje(f"❌ Error en mantenimiento de BD: {e}")
+
+
+def necesita_mantenimiento():
+    """Verifica si es necesario ejecutar mantenimiento (una vez por día)"""
+    global ultimo_mantenimiento
+
+    if ultimo_mantenimiento is None:
+        return True
+
+    # Verificar si ha pasado un día
+    ahora = datetime.now()
+    tiempo_transcurrido = ahora - ultimo_mantenimiento
+
+    # Ejecutar mantenimiento cada 24 horas
+    return tiempo_transcurrido.total_seconds() > 86400  # 24 horas
+
+
+# ...existing code...
 
 
 async def main():
@@ -142,6 +180,10 @@ async def main():
             if contador_stats >= 10:
                 mostrar_estadisticas()
                 contador_stats = 0
+
+            # Ejecutar mantenimiento de la base de datos si es necesario
+            if necesita_mantenimiento():
+                ejecutar_mantenimiento_db()
 
         except Exception as e:
             log_mensaje(f"❌ Error en el loop principal: {e}")

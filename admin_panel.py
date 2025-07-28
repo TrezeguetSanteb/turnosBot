@@ -9,6 +9,9 @@ from database import obtener_turnos_por_fecha, eliminar_turno_admin, obtener_tod
 # Importar el módulo de notificaciones
 from notifications import notificar_cancelacion_turno, notificar_dia_bloqueado
 
+# Importar notificaciones para admin
+from admin_notifications import notificar_admin
+
 CONFIG_PATH = 'config.json'
 
 app = Flask(__name__)
@@ -187,6 +190,12 @@ def bloquear_dia():
         config['dias_bloqueados'].append(fecha)
         guardar_config(config)
 
+        # Notificar al admin sobre el bloqueo
+        try:
+            notificar_admin('bloqueo_dia', fecha)
+        except Exception as e:
+            print(f"❌ Error al notificar admin sobre bloqueo: {e}")
+
     return redirect(url_for('index', semana=semana))
 
 
@@ -198,6 +207,12 @@ def desbloquear_dia():
     if fecha in config['dias_bloqueados']:
         config['dias_bloqueados'].remove(fecha)
         guardar_config(config)
+
+        # Notificar al admin sobre el desbloqueo
+        try:
+            notificar_admin('desbloqueo_dia', fecha)
+        except Exception as e:
+            print(f"❌ Error al notificar admin sobre desbloqueo: {e}")
     return redirect(url_for('index', semana=semana))
 
 
@@ -329,5 +344,63 @@ def static_files(filename):
     return send_from_directory('static', filename)
 
 
+@app.route('/health')
+def health_check():
+    """Endpoint de salud para monitoreo de plataformas cloud"""
+    return jsonify({
+        'status': 'ok',
+        'service': 'TurnosBot Admin Panel',
+        'timestamp': datetime.now().isoformat()
+    })
+
+
+@app.route('/api/stats')
+def api_stats():
+    """Endpoint para estadísticas de la base de datos"""
+    try:
+        from db_maintenance import obtener_estadisticas_db
+        stats = obtener_estadisticas_db()
+
+        if stats:
+            return jsonify({
+                'status': 'ok',
+                'datos': stats,
+                'timestamp': datetime.now().isoformat()
+            })
+        else:
+            return jsonify({
+                'status': 'error',
+                'mensaje': 'No se pudieron obtener estadísticas'
+            }), 500
+
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'mensaje': str(e)
+        }), 500
+
+
+@app.route('/api/mantenimiento', methods=['POST'])
+def api_mantenimiento():
+    """Endpoint para ejecutar mantenimiento manual"""
+    try:
+        from db_maintenance import mantenimiento_completo
+        mantenimiento_completo()
+
+        return jsonify({
+            'status': 'ok',
+            'mensaje': 'Mantenimiento ejecutado correctamente',
+            'timestamp': datetime.now().isoformat()
+        })
+
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'mensaje': str(e)
+        }), 500
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=9000, debug=True)
+    # El puerto lo asigna automáticamente la plataforma cloud
+    port = int(os.environ.get('PORT', 9000))
+    app.run(host='0.0.0.0', port=port, debug=False)

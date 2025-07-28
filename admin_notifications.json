@@ -1,0 +1,32 @@
+[
+  {
+    "timestamp": "2025-07-28T16:33:56.685332",
+    "tipo": "bloqueo_dia",
+    "datos": {
+      "fecha": "2025-07-30",
+      "accion": "bloqueado"
+    },
+    "enviada": false
+  },
+  {
+    "timestamp": "2025-07-28T16:33:56.685603",
+    "tipo": "desbloqueo_dia",
+    "datos": {
+      "fecha": "2025-07-30",
+      "accion": "desbloqueado"
+    },
+    "enviada": false
+  },
+  {
+    "timestamp": "2025-07-28T16:50:39.334971",
+    "tipo": "nuevo_turno",
+    "datos": {
+      "nombre": "Santi",
+      "telefono": "7224928858",
+      "fecha": "2025-07-28",
+      "hora": "17:30",
+      "canal": "WhatsApp"
+    },
+    "enviada": false
+  }
+]

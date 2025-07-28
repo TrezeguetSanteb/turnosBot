@@ -360,6 +360,15 @@ def handle_message(incoming_msg, from_number, user_states, user_data):
                 turno_info = turnos[opcion-1]
 
                 if cancelar_turno_por_usuario(turno_id, from_number):
+                    # Notificar al admin sobre la cancelación
+                    try:
+                        from admin_notifications import notificar_cancelacion_turno
+                        notificar_cancelacion_turno(
+                            turno_info[1], turno_info[2], turno_info[3])
+                    except Exception as e:
+                        print(
+                            f"⚠️ Error enviando notificación de cancelación: {e}")
+
                     user_states[from_number] = 'inicio'
                     user_data.pop(from_number, None)
                     fecha_legible = formatear_fecha_legible(
@@ -442,6 +451,15 @@ def handle_message(incoming_msg, from_number, user_states, user_data):
                         return f"❌ El horario {datos['hora']} ya fue reservado por otro usuario.\n\nPor favor selecciona otro horario:"
 
                     if crear_turno(datos['nombre'], datos['fecha'], datos['hora'], from_number):
+                        # Notificar al admin sobre el nuevo turno
+                        try:
+                            from admin_notifications import notificar_nuevo_turno
+                            notificar_nuevo_turno(
+                                datos['nombre'], from_number, datos['fecha'], datos['hora'])
+                        except Exception as e:
+                            print(
+                                f"⚠️ Error enviando notificación de admin: {e}")
+
                         user_states[from_number] = 'inicio'
                         user_data.pop(from_number)
                         fecha_legible = formatear_fecha_legible(
