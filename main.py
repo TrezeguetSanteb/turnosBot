@@ -1,127 +1,92 @@
 #!/usr/bin/env python3
 """
-Proceso principal para Railway - Ejecuta todos los servicios
-VERSIÓN NUEVA ESTRUCTURA: Usa imports desde src/
+TurnosBot - Sistema de Gestión de Turnos
+Optimizado para Railway deployment
 """
 import os
 import sys
 import threading
 import time
-import subprocess
-import signal
-from flask import Flask
+import sqlite3
 
-# Agregar src al path para imports
+# Configurar path para imports
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 
 
 def log(message):
-    print(f"[MAIN] {message}", flush=True)
+    """Log con timestamp para Railway"""
+    import datetime
+    timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    print(f"[{timestamp}] {message}", flush=True)
 
 
-def verificar_variables_entorno():
-    """Verificar que todas las variables de entorno requeridas estén configuradas"""
-    log("🔍 Verificando variables de entorno...")
+def verificar_configuracion():
+    """Verificar configuración y variables de entorno"""
+    log("🔍 Verificando configuración...")
 
     # Variables críticas para WhatsApp
-    variables_criticas = {
-        'WHATSAPP_ACCESS_TOKEN': 'Token de acceso de WhatsApp Business API',
-        'WHATSAPP_PHONE_NUMBER_ID': 'ID del número de teléfono de WhatsApp',
-        'WHATSAPP_VERIFY_TOKEN': 'Token de verificación del webhook',
-        'ADMIN_PHONE_NUMBER': 'Número de teléfono del administrador'
-    }
+    whatsapp_vars = [
+        'WHATSAPP_ACCESS_TOKEN',
+        'WHATSAPP_PHONE_NUMBER_ID',
+        'WHATSAPP_VERIFY_TOKEN',
+        'ADMIN_PHONE_NUMBER'
+    ]
 
-    # Variables opcionales con valores por defecto
-    variables_opcionales = {
-        'WHATSAPP_BUSINESS_ACCOUNT_ID': 'ID de la cuenta de WhatsApp Business',
-        'NOTIFICATION_INTERVAL': 'Intervalo de notificaciones (default: 60)',
-        'LOG_LEVEL': 'Nivel de logging (default: INFO)',
-        'PORT': 'Puerto del servidor (default: 9000)'
-    }
-
-    errores = []
-    advertencias = []
-
-    # Verificar variables críticas
-    for var, descripcion in variables_criticas.items():
-        valor = os.environ.get(var)
-        if not valor:
-            errores.append(f"❌ {var}: {descripcion}")
+    whatsapp_ok = True
+    for var in whatsapp_vars:
+        if not os.environ.get(var):
+            whatsapp_ok = False
+            break
         else:
-            # Ocultar parte del token por seguridad
-            if 'TOKEN' in var:
-                valor_mostrar = valor[:10] + "..." + \
-                    valor[-5:] if len(valor) > 15 else valor[:5] + "..."
-            elif 'PHONE' in var:
-                valor_mostrar = valor[:5] + "..." + \
-                    valor[-4:] if len(valor) > 9 else valor
-            else:
-                valor_mostrar = valor[:10] + \
-                    "..." if len(valor) > 10 else valor
-            log(f"✅ {var}: {valor_mostrar}")
+            # Mostrar parcialmente por seguridad
+            value = os.environ.get(var)
+            masked = value[:8] + "..." if len(value) > 8 else "***"
+            log(f"✅ {var}: {masked}")
 
-    # Verificar variables opcionales
-    for var, descripcion in variables_opcionales.items():
-        valor = os.environ.get(var)
-        if not valor:
-            advertencias.append(f"⚠️  {var}: {descripcion}")
-        else:
-            log(f"✅ {var}: {valor}")
+    if not whatsapp_ok:
+        log("⚠️ Variables de WhatsApp incompletas")
+        log("🔧 Configúralas en Railway Dashboard > Variables")
 
-    # Mostrar resultados
-    if errores:
-        log("❌ VARIABLES CRÍTICAS FALTANTES:")
-        for error in errores:
-            log(f"   {error}")
-        log("")
-        log("🔧 Para configurar en Railway:")
-        log("   1. Ve a Railway Dashboard > Tu Proyecto > Variables")
-        log("   2. Click 'Add Variable' para cada una")
-        log("   3. Redeploy automático después de agregar variables")
-        log("")
-
-    if advertencias:
-        log("⚠️  Variables opcionales no configuradas:")
-        for adv in advertencias:
-            log(f"   {adv}")
-        log("")
-
-    # Verificar configuración específica de Railway
+    # Entorno
+    is_railway = bool(os.environ.get('RAILWAY_STATIC_URL'))
     railway_url = os.environ.get('RAILWAY_STATIC_URL')
-    if railway_url:
-        log(f"🚂 Railway URL: {railway_url}")
-    else:
-        log("ℹ️  RAILWAY_STATIC_URL no disponible (normal en desarrollo local)")
 
-    return len(errores) == 0
+    if is_railway and railway_url:
+        log(f"🚂 Railway URL: {railway_url}")
+    elif is_railway:
+        log("🚂 Ejecutando en Railway")
+    else:
+        log("💻 Ejecutando localmente")
+
+    return whatsapp_ok
 
 
 def run_daemon():
-    """Ejecutar daemon de notificaciones en thread separado"""
+    """Ejecutar daemon de notificaciones"""
     import asyncio
 
     def daemon_wrapper():
         try:
-            log("Iniciando daemon de notificaciones...")
-            # Importar desde nueva estructura
+            log("🤖 Iniciando daemon de notificaciones...")
             from services.daemon import main as daemon_main
-            # Pasar in_thread=True para evitar problemas con signals
             asyncio.run(daemon_main(in_thread=True))
+        except ImportError as e:
+            log(f"⚠️ No se pudo importar daemon: {e}")
         except Exception as e:
-            log(f"Error en daemon: {e}")
-            time.sleep(5)  # Esperar antes de reintentar
-            daemon_wrapper()  # Reintentar
+            log(f"❌ Error en daemon: {e}")
+            # Esperar antes de que el thread termine
+            time.sleep(5)
 
     daemon_wrapper()
 
 
 def run_whatsapp_bot():
-    """Ejecutar bot de WhatsApp en thread separado"""
+    """Ejecutar bot de WhatsApp"""
     try:
-        log("Iniciando bot de WhatsApp...")
+        log("📱 Iniciando bot de WhatsApp...")
         from bots.whatsapp_bot import app as whatsapp_app
 
-        # Obtener puerto para WhatsApp (puerto principal + 1)
+        # Puerto para WhatsApp (puerto principal + 1)
         main_port = int(os.environ.get('PORT', 9000))
         whatsapp_port = main_port + 1
 
@@ -129,83 +94,108 @@ def run_whatsapp_bot():
             host='0.0.0.0',
             port=whatsapp_port,
             debug=False,
-            use_reloader=False  # Importante en threading
+            use_reloader=False
         )
+    except ImportError as e:
+        log(f"⚠️ No se pudo importar WhatsApp bot: {e}")
     except Exception as e:
-        log(f"Error en bot WhatsApp: {e}")
+        log(f"❌ Error en WhatsApp bot: {e}")
 
 
 def run_admin_panel():
-    """Ejecutar panel de administración"""
+    """Ejecutar panel de administración (proceso principal para Railway)"""
     try:
-        log("Iniciando panel de administración...")
+        log("🌐 Iniciando panel de administración...")
         from admin.panel import app as admin_app
 
         port = int(os.environ.get('PORT', 9000))
+
         admin_app.run(
             host='0.0.0.0',
             port=port,
             debug=False,
             use_reloader=False
         )
+    except ImportError as e:
+        log(f"❌ No se pudo importar panel admin: {e}")
+        raise  # Critical error - Railway needs to restart
     except Exception as e:
-        log(f"Error en panel admin: {e}")
+        log(f"❌ Error en panel admin: {e}")
+        raise  # Critical error - Railway needs to restart
+
+
+def inicializar_base_datos():
+    """Inicializar base de datos SQLite"""
+    try:
+        # Crear directorio data si no existe
+        os.makedirs('data', exist_ok=True)
+
+        db_path = 'data/turnos.db'
+        schema_path = 'data/schema.sql'
+
+        if not os.path.exists(db_path):
+            if os.path.exists(schema_path):
+                with open(schema_path, 'r', encoding='utf-8') as f:
+                    schema = f.read()
+                conn = sqlite3.connect(db_path)
+                conn.executescript(schema)
+                conn.close()
+                log("✅ Base de datos creada desde schema")
+            else:
+                log("⚠️ No se encuentra schema.sql, usando base de datos vacía")
+        else:
+            log("✅ Base de datos existente")
+
+    except Exception as e:
+        log(f"❌ Error inicializando BD: {e}")
+        raise
 
 
 def main():
-    log("🚀 Iniciando TurnosBot en Railway... (NUEVA ESTRUCTURA)")
+    """Función principal optimizada para Railway"""
+    log("🚀 Iniciando TurnosBot...")
 
-    # Verificar variables de entorno
-    if not verificar_variables_entorno():
-        log("⚠️ Continuando con configuración incompleta...")
-        log("⚠️ Algunas funcionalidades pueden no estar disponibles")
-
-    log("")  # Línea en blanco para separar
+    # Verificar configuración
+    has_whatsapp = verificar_configuracion()
 
     # Inicializar base de datos
     log("📦 Inicializando base de datos...")
-    try:
-        import sqlite3
-        schema_path = 'data/schema.sql' if os.path.exists(
-            'data/schema.sql') else 'schema.sql'
-        db_path = 'data/turnos.db' if os.path.exists('data/') else 'turnos.db'
+    inicializar_base_datos()
 
-        if not os.path.exists(db_path):
-            with open(schema_path, 'r') as f:
-                schema = f.read()
-            conn = sqlite3.connect(db_path)
-            conn.executescript(schema)
-            conn.close()
-            log("✅ Base de datos creada")
-        else:
-            log("✅ Base de datos existente")
-    except Exception as e:
-        log(f"❌ Error con base de datos: {e}")
+    # Obtener configuración del entorno
+    is_railway = bool(os.environ.get('RAILWAY_STATIC_URL'))
+    port = int(os.environ.get('PORT', 9000))
 
-    # Iniciar servicios en threads
+    log(f"🌐 Entorno: {'Railway' if is_railway else 'Local'}")
+    log(f"📱 WhatsApp: {'Configurado' if has_whatsapp else 'No configurado'}")
+
+    # Iniciar servicios en background threads
     threads = []
 
-    # 1. Daemon de notificaciones
-    daemon_thread = threading.Thread(target=run_daemon, daemon=True)
-    daemon_thread.start()
-    threads.append(daemon_thread)
-    log("✅ Daemon iniciado")
+    # 1. Daemon de notificaciones (solo si WhatsApp está configurado)
+    if has_whatsapp:
+        daemon_thread = threading.Thread(target=run_daemon, daemon=True)
+        daemon_thread.start()
+        threads.append(daemon_thread)
+        log("✅ Daemon de notificaciones iniciado")
+    else:
+        log("⚠️ Daemon no iniciado (WhatsApp no configurado)")
 
-    # 2. Bot de WhatsApp (si está configurado)
-    if os.environ.get('WHATSAPP_ACCESS_TOKEN'):
+    # 2. Bot WhatsApp (solo si está configurado)
+    if has_whatsapp:
         whatsapp_thread = threading.Thread(
             target=run_whatsapp_bot, daemon=True)
         whatsapp_thread.start()
         threads.append(whatsapp_thread)
-        log("✅ Bot WhatsApp iniciado")
+        log("✅ Bot de WhatsApp iniciado")
     else:
-        log("⚠️ WhatsApp no configurado")
+        log("⚠️ Bot de WhatsApp no iniciado")
 
-    # 3. Panel de administración (proceso principal)
-    log("✅ Todos los servicios iniciados")
-    log(f"🌐 Panel disponible en puerto {os.environ.get('PORT', 9000)}")
+    # 3. Panel admin en el proceso principal (Railway requirement)
+    log(f"🌐 Panel admin disponible en puerto {port}")
+    log("✅ Todos los servicios configurados")
 
-    # El panel admin corre en el thread principal
+    # Ejecutar panel admin (bloquea hasta terminar)
     run_admin_panel()
 
 
