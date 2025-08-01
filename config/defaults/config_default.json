@@ -1,0 +1,36 @@
+{
+    "hora_inicio": 8,
+    "hora_fin": 18,
+    "intervalo": 30,
+    "dias_bloqueados": [],
+    "horarios_por_dia": {
+        "Lunes": {
+            "manana": {"hora_inicio": 8, "hora_fin": 12, "intervalo": 30},
+            "tarde": {"hora_inicio": 15, "hora_fin": 18, "intervalo": 30}
+        },
+        "Martes": {
+            "manana": {"hora_inicio": 8, "hora_fin": 12, "intervalo": 30},
+            "tarde": {"hora_inicio": 15, "hora_fin": 18, "intervalo": 30}
+        },
+        "Miércoles": {
+            "manana": {"hora_inicio": 8, "hora_fin": 12, "intervalo": 30},
+            "tarde": {"hora_inicio": 15, "hora_fin": 18, "intervalo": 30}
+        },
+        "Jueves": {
+            "manana": {"hora_inicio": 8, "hora_fin": 12, "intervalo": 30},
+            "tarde": {"hora_inicio": 15, "hora_fin": 18, "intervalo": 30}
+        },
+        "Viernes": {
+            "manana": {"hora_inicio": 8, "hora_fin": 12, "intervalo": 30},
+            "tarde": {"hora_inicio": 15, "hora_fin": 18, "intervalo": 30}
+        },
+        "Sábado": {
+            "manana": {"hora_inicio": 8, "hora_fin": 12, "intervalo": 30},
+            "tarde": {"hora_inicio": 15, "hora_fin": 18, "intervalo": 30}
+        },
+        "Domingo": {
+            "manana": {"hora_inicio": 8, "hora_fin": 12, "intervalo": 30},
+            "tarde": {"hora_inicio": 15, "hora_fin": 18, "intervalo": 30}
+        }
+    }
+}

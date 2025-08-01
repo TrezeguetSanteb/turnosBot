@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Panel Admin - Sistema de Turnos</title>
+
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Turnos Admin">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Icons for different platforms -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/static/icon-512.png">
+    <link rel="apple-touch-icon" href="/static/icon-192.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="/static/icon-192.png">
+
+    <!-- Windows tiles -->
+    <meta name="msapplication-TileColor" content="#667eea">
+    <meta name="msapplication-TileImage" content="/static/icon-192.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            padding-bottom: 80px;
+        }
+
+        /* Header móvil */
+        .mobile-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .mobile-header h1 {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .mobile-header .subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Banner de instalación PWA */
+        .install-banner {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        .install-content {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            gap: 12px;
+        }
+
+        .install-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .install-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .install-text strong {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .install-text small {
+            font-size: 12px;
+            opacity: 0.9;
+            display: block;
+        }
+
+        .install-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .install-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Navegación de semanas */
+        .week-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 72px;
+            z-index: 99;
+        }
+
+        .week-nav button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .week-nav button:hover {
+            background: #5a67d8;
+            transform: translateY(-1px);
+        }
+
+        .week-nav .current-week {
+            font-weight: 600;
+            font-size: 16px;
+            color: #333;
+        }
+
+        /* Días de la semana */
+        .days-container {
+            padding: 16px;
+        }
+
+        .day-card {
+            background: white;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .day-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .day-info {
+            flex: 1;
+        }
+
+        .day-name {
+            font-weight: 600;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .day-date {
+            font-size: 14px;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .day-status {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-today {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-blocked {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-normal {
+            background: #e2e6ea;
+            color: #495057;
+        }
+
+        .day-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .config-btn {
+            background: #667eea;
+            color: white;
+        }
+
+        .block-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .unblock-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Turnos */
+        .turnos-section {
+            padding: 16px;
+        }
+
+        .turnos-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .turnos-count {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .turnos-list {
+            display: grid;
+            gap: 8px;
+        }
+
+        .turno-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .turno-item.nuevo {
+            border-left-color: #28a745;
+            background: #d4fff4;
+        }
+
+        .turno-info {
+            flex: 1;
+        }
+
+        .turno-nombre {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .turno-detalles {
+            font-size: 12px;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .delete-btn:hover {
+            background: #c82333;
+            transform: scale(1.1);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 20px;
+            padding: 24px;
+            border-radius: 16px;
+            width: calc(100% - 40px);
+            max-width: 400px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .time-config {
+            margin-bottom: 20px;
+        }
+
+        .time-range {
+            background: #f8f9fa;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+
+        .time-range-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .time-range-title::before {
+            content: '';
+            width: 4px;
+            height: 16px;
+            background: #667eea;
+            border-radius: 2px;
+        }
+
+        .time-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 4px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .input-group input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 24px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5a67d8;
+        }
+
+        .btn-secondary {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .btn-secondary:hover {
+            background: #dee2e6;
+        }
+
+        /* Estado vacío */
+        .empty-state {
+            text-align: center;
+            padding: 24px;
+            color: #666;
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+            opacity: 0.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .time-inputs {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .modal-content {
+                margin: 10px;
+                width: calc(100% - 20px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mobile-header">
+        <h1>🗓️ Panel Admin</h1>
+        <div class="subtitle">Gestión de Turnos</div>
+    </div>
+
+    <!-- Botón de instalación PWA -->
+    <div id="installButton" class="install-banner" style="display: none;">
+        <div class="install-content">
+            <span class="install-icon">📱</span>
+            <div class="install-text">
+                <strong>¡Instala la App!</strong>
+                <small>Accede más rápido desde tu pantalla de inicio</small>
+            </div>
+            <button onclick="installPWA()" class="install-btn">Instalar</button>
+        </div>
+    </div>
+
+    <div class="week-nav">
+        <button onclick="cambiarSemana(-1)">← Anterior</button>
+        <div class="current-week" id="semanaActual">Esta Semana</div>
+        <button onclick="cambiarSemana(1)">Siguiente →</button>
+    </div>
+
+    <div class="days-container" id="diasContainer">
+        <!-- Los días se cargarán dinámicamente -->
+    </div>
+
+    <!-- Modal para configurar horarios -->
+    <div id="configModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">⚙️ Configurar Horarios</div>
+                <button class="close-btn" onclick="cerrarModal()">&times;</button>
+            </div>
+
+            <form id="configForm">
+                <input type="hidden" id="nombreDia" name="nombre_dia">
+                <input type="hidden" id="semanaParam" name="semana">
+
+                <div class="time-config">
+                    <div class="time-range">
+                        <div class="time-range-title">🌅 Mañana</div>
+                        <div class="time-inputs">
+                            <div class="input-group">
+                                <label>Inicio</label>
+                                <input type="number" name="manana_hora_inicio" min="6" max="12" value="8">
+                            </div>
+                            <div class="input-group">
+                                <label>Fin</label>
+                                <input type="number" name="manana_hora_fin" min="8" max="14" value="12">
+                            </div>
+                            <div class="input-group">
+                                <label>Intervalo</label>
+                                <input type="number" name="manana_intervalo" min="15" max="60" step="15" value="30">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="time-range">
+                        <div class="time-range-title">🌇 Tarde</div>
+                        <div class="time-inputs">
+                            <div class="input-group">
+                                <label>Inicio</label>
+                                <input type="number" name="tarde_hora_inicio" min="12" max="18" value="15">
+                            </div>
+                            <div class="input-group">
+                                <label>Fin</label>
+                                <input type="number" name="tarde_hora_fin" min="14" max="22" value="18">
+                            </div>
+                            <div class="input-group">
+                                <label>Intervalo</label>
+                                <input type="number" name="tarde_intervalo" min="15" max="60" step="15" value="30">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="cerrarModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ========================================
+        // PWA FUNCTIONALITY
+        // ========================================
+        let deferredPrompt;
+        let isInstalled = false;
+
+        // Registrar Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+
+        // Manejar evento de instalación PWA
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('beforeinstallprompt event fired');
+            e.preventDefault();
+            deferredPrompt = e;
+            showInstallButton();
+        });
+
+        // Detectar si ya está instalada la PWA
+        window.addEventListener('appinstalled', (evt) => {
+            console.log('PWA installed');
+            isInstalled = true;
+            hideInstallButton();
+        });
+
+        // Función para mostrar botón de instalación
+        function showInstallButton() {
+            const installButton = document.getElementById('installButton');
+            if (installButton) {
+                installButton.style.display = 'block';
+            }
+        }
+
+        // Función para ocultar botón de instalación
+        function hideInstallButton() {
+            const installButton = document.getElementById('installButton');
+            if (installButton) {
+                installButton.style.display = 'none';
+            }
+        }
+
+        // Función para instalar PWA
+        function installPWA() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                        hideInstallButton();
+                    } else {
+                        console.log('User dismissed the install prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        }
+
+        // ========================================
+        // APP FUNCTIONALITY
+        // ========================================
+        let semanaActual = new Date();
+        let datosCache = null;
+
+        // Obtener inicio de semana (lunes)
+        function getInicioSemana(fecha) {
+            const d = new Date(fecha);
+            const day = d.getDay(); // 0=domingo, 1=lunes, etc.
+
+            // Calcular cuántos días restar para llegar al lunes
+            const diff = day === 0 ? -6 : 1 - day; // Si es domingo (-6), sino (1 - day)
+
+            // Crear nueva fecha sin modificar la original
+            const inicioSemana = new Date(d);
+            inicioSemana.setDate(d.getDate() + diff);
+
+            console.log('getInicioSemana input:', fecha);
+            console.log('día de semana:', day, ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'][day]);
+            console.log('diff:', diff);
+            console.log('inicio semana calculado:', inicioSemana);
+
+            return inicioSemana;
+        }
+
+        // Formatear fecha para mostrar
+        function formatearFecha(fecha) {
+            // Si viene como string (YYYY-MM-DD), usar una técnica más robusta
+            let fechaObj;
+            if (typeof fecha === 'string') {
+                // Alternativa: parsing manual más explícito
+                const [year, month, day] = fecha.split('-').map(Number);
+                const fechaManual = new Date();
+                fechaManual.setFullYear(year);
+                fechaManual.setMonth(month - 1);
+                fechaManual.setDate(day);
+                fechaManual.setHours(12, 0, 0, 0); // Fijar a mediodía para evitar problemas de zona horaria
+
+                // Usar la fecha manual que es más confiable
+                fechaObj = fechaManual;
+            } else {
+                fechaObj = new Date(fecha);
+            }
+
+            // Formateo manual para evitar problemas de locale
+            const diasSemana = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+            const meses = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+
+            const numerodiaSemana = fechaObj.getDay();
+            const diaSemana = diasSemana[numerodiaSemana];
+            const dia = fechaObj.getDate();
+            const numeroMes = fechaObj.getMonth();
+            const mes = meses[numeroMes];
+
+            const resultado = `${diaSemana}, ${dia} ${mes}`;
+            return resultado;
+        }
+
+        // Formatear fecha para API
+        function formatearFechaAPI(fecha) {
+            return fecha.toISOString().split('T')[0];
+        }
+
+        // Cargar datos de la semana
+        async function cargarSemana() {
+            try {
+                const inicioSemana = getInicioSemana(semanaActual);
+                const fechaStr = formatearFechaAPI(inicioSemana);
+
+                const response = await fetch(`/api/turnos_semana?semana=${fechaStr}`);
+                const datos = await response.json();
+
+                datosCache = datos;
+                mostrarDatos(datos);
+                actualizarTituloSemana(inicioSemana);
+            } catch (error) {
+                console.error('Error al cargar datos:', error);
+                mostrarError();
+            }
+        }
+
+        // Mostrar datos en el DOM
+        function mostrarDatos(datos) {
+            const container = document.getElementById('diasContainer');
+            container.innerHTML = '';
+
+            // Filtrar días: mostrar solo desde hoy en adelante
+            const hoy = new Date();
+            const fechaHoy = formatearFechaAPI(hoy);
+
+            const diasFiltrados = datos.dias_semana.filter(dia => dia.fecha >= fechaHoy);
+
+            diasFiltrados.forEach(dia => {
+                const diaElement = crearElementoDia(dia);
+                container.appendChild(diaElement);
+            });
+        }
+
+        // Crear elemento de día
+        function crearElementoDia(dia) {
+            const diaDiv = document.createElement('div');
+            diaDiv.className = 'day-card';
+
+            const statusBadges = [];
+            if (dia.es_hoy) statusBadges.push('<span class="status-badge status-today">Hoy</span>');
+            if (dia.bloqueado) statusBadges.push('<span class="status-badge status-blocked">Bloqueado</span>');
+            if (!dia.es_hoy && !dia.bloqueado) statusBadges.push('<span class="status-badge status-normal">Disponible</span>');
+
+            const turnosHtml = dia.turnos.length > 0
+                ? dia.turnos.map(turno => `
+                    <div class="turno-item ${turno[5] ? 'nuevo' : ''}">
+                        <div class="turno-info">
+                            <div class="turno-nombre">${turno[1]}</div>
+                            <div class="turno-detalles">${turno[3]} • ${turno[4]}</div>
+                        </div>
+                        <button class="delete-btn" onclick="eliminarTurno(${turno[0]})" title="Eliminar turno">×</button>
+                    </div>
+                `).join('')
+                : '<div class="empty-state"><div class="empty-state-icon">📅</div><div>Sin turnos</div></div>';
+
+            diaDiv.innerHTML = `
+                <div class="day-header">
+                    <div class="day-info">
+                        <div class="day-name">${dia.nombre}</div>
+                        <div class="day-date">${formatearFecha(dia.fecha)}</div>
+                    </div>
+                    <div class="day-status">
+                        ${statusBadges.join('')}
+                    </div>
+                    <div class="day-actions">
+                        <button class="action-btn config-btn" onclick="abrirConfiguracion('${dia.nombre}', '${dia.fecha}')" title="Configurar horarios">
+                            ⚙️
+                        </button>
+                        ${dia.bloqueado
+                    ? `<button class="action-btn unblock-btn" onclick="desbloquearDia('${dia.fecha}')" title="Desbloquear día">🔓</button>`
+                    : `<button class="action-btn block-btn" onclick="bloquearDia('${dia.fecha}')" title="Bloquear día">🔒</button>`
+                }
+                    </div>
+                </div>
+                <div class="turnos-section">
+                    <div class="turnos-header">
+                        <div class="turnos-count">${dia.turnos.length} turno${dia.turnos.length !== 1 ? 's' : ''}</div>
+                    </div>
+                    <div class="turnos-list">
+                        ${turnosHtml}
+                    </div>
+                </div>
+            `;
+
+            return diaDiv;
+        }
+
+        // Actualizar título de semana
+        function actualizarTituloSemana(inicioSemana) {
+            const hoy = new Date();
+            const inicioEstaSemana = getInicioSemana(hoy);
+
+            let titulo;
+            if (formatearFechaAPI(inicioSemana) === formatearFechaAPI(inicioEstaSemana)) {
+                titulo = 'Desde Hoy';
+            } else if (inicioSemana > hoy) {
+                const finSemana = new Date(inicioSemana);
+                finSemana.setDate(finSemana.getDate() + 6);
+                titulo = `${inicioSemana.getDate()}/${inicioSemana.getMonth() + 1} - ${finSemana.getDate()}/${finSemana.getMonth() + 1}`;
+            } else {
+                // Semana pasada
+                const finSemana = new Date(inicioSemana);
+                finSemana.setDate(finSemana.getDate() + 6);
+                titulo = `${inicioSemana.getDate()}/${inicioSemana.getMonth() + 1} - ${finSemana.getDate()}/${finSemana.getMonth() + 1}`;
+            }
+
+            document.getElementById('semanaActual').textContent = titulo;
+        }
+
+        // Cambiar semana
+        function cambiarSemana(direccion) {
+            const nuevaFecha = new Date(semanaActual);
+            nuevaFecha.setDate(nuevaFecha.getDate() + (direccion * 7));
+            semanaActual = nuevaFecha;
+            cargarSemana();
+        }
+
+        // Abrir modal de configuración
+        function abrirConfiguracion(nombreDia, fecha) {
+            if (!datosCache) return;
+
+            const dia = datosCache.dias_semana.find(d => d.nombre === nombreDia);
+            if (!dia) return;
+
+            document.getElementById('nombreDia').value = nombreDia;
+            document.getElementById('semanaParam').value = datosCache.semana_inicio_str;
+
+            // Llenar valores actuales
+            const form = document.getElementById('configForm');
+            if (dia.horario.manana) {
+                form.manana_hora_inicio.value = dia.horario.manana.hora_inicio;
+                form.manana_hora_fin.value = dia.horario.manana.hora_fin;
+                form.manana_intervalo.value = dia.horario.manana.intervalo;
+            }
+            if (dia.horario.tarde) {
+                form.tarde_hora_inicio.value = dia.horario.tarde.hora_inicio;
+                form.tarde_hora_fin.value = dia.horario.tarde.hora_fin;
+                form.tarde_intervalo.value = dia.horario.tarde.intervalo;
+            }
+
+            document.getElementById('configModal').classList.add('show');
+        }
+
+        // Cerrar modal
+        function cerrarModal() {
+            document.getElementById('configModal').classList.remove('show');
+        }
+
+        // Guardar configuración
+        document.getElementById('configForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            try {
+                const formData = new FormData(this);
+                const response = await fetch('/configurar_rangos', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    cerrarModal();
+                    cargarSemana(); // Recargar datos
+                } else {
+                    alert('Error al guardar configuración');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error de conexión');
+            }
+        });
+
+        // Eliminar turno
+        async function eliminarTurno(turnoId) {
+            if (!confirm('¿Estás seguro de que quieres eliminar este turno?')) return;
+
+            try {
+                const response = await fetch(`/eliminar/${turnoId}`, {
+                    method: 'POST'
+                });
+
+                if (response.ok) {
+                    cargarSemana(); // Recargar datos
+                } else {
+                    alert('Error al eliminar turno');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error de conexión');
+            }
+        }
+
+        // Bloquear día
+        async function bloquearDia(fecha) {
+            try {
+                const formData = new FormData();
+                formData.append('fecha', fecha);
+                formData.append('semana', datosCache.semana_inicio_str);
+
+                const response = await fetch('/bloquear_dia', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    cargarSemana();
+                } else {
+                    alert('Error al bloquear día');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error de conexión');
+            }
+        }
+
+        // Desbloquear día
+        async function desbloquearDia(fecha) {
+            try {
+                const formData = new FormData();
+                formData.append('fecha', fecha);
+                formData.append('semana', datosCache.semana_inicio_str);
+
+                const response = await fetch('/desbloquear_dia', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    cargarSemana();
+                } else {
+                    alert('Error al desbloquear día');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error de conexión');
+            }
+        }
+
+        // Mostrar error
+        function mostrarError() {
+            document.getElementById('diasContainer').innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-state-icon">⚠️</div>
+                    <div>Error al cargar datos</div>
+                    <button class="btn btn-primary" onclick="cargarSemana()" style="margin-top: 12px;">Reintentar</button>
+                </div>
+            `;
+        }
+
+        // Cerrar modal al hacer clic fuera
+        document.getElementById('configModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                cerrarModal();
+            }
+        });
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function () {
+            // Configurar semana actual para mostrar desde hoy
+            const hoy = new Date();
+            semanaActual = hoy;
+            cargarSemana();
+
+            // Inicializar PWA
+            initializePWA();
+        });
+
+        // ========================================
+        // PWA INITIALIZATION
+        // ========================================
+        function initializePWA() {
+            // Detectar si está ejecutándose como PWA
+            const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+            const isInStandaloneMode = ('standalone' in window.navigator) && window.navigator.standalone;
+
+            if (isStandalone || isInStandaloneMode) {
+                console.log('App ejecutándose como PWA');
+                document.body.classList.add('pwa-mode');
+                hideInstallButton();
+            }
+
+            // Detectar actualizaciones del Service Worker
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('SW registered successfully');
+
+                        // Escuchar actualizaciones
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    showUpdateNotification();
+                                }
+                            });
+                        });
+                    })
+                    .catch((error) => {
+                        console.log('SW registration failed');
+                    });
+
+                // Escuchar mensajes del SW
+                navigator.serviceWorker.addEventListener('message', (event) => {
+                    if (event.data && event.data.type === 'OFFLINE_READY') {
+                        showOfflineNotification();
+                    }
+                });
+            }
+
+            // Detectar cambios de conectividad
+            window.addEventListener('online', () => {
+                showConnectivityNotification('✅ Conexión restaurada', 'success');
+                // Recargar datos cuando vuelve la conexión
+                cargarSemana();
+            });
+
+            window.addEventListener('offline', () => {
+                showConnectivityNotification('📱 Sin conexión - Modo offline', 'warning');
+            });
+        }
+
+        // Mostrar notificación de actualización disponible
+        function showUpdateNotification() {
+            const notification = document.createElement('div');
+            notification.className = 'update-notification';
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <span>🆕 Nueva versión disponible</span>
+                    <button onclick="updateApp()" class="update-btn">Actualizar</button>
+                </div>
+            `;
+            document.body.appendChild(notification);
+        }
+
+        // Actualizar la aplicación
+        function updateApp() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistration().then((registration) => {
+                    if (registration && registration.waiting) {
+                        registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+                        window.location.reload();
+                    }
+                });
+            }
+        }
+
+        // Mostrar notificación de conectividad
+        function showConnectivityNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `connectivity-notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Mostrar notificación de modo offline
+        function showOfflineNotification() {
+            const notification = document.createElement('div');
+            notification.className = 'offline-notification';
+            notification.innerHTML = `
+                <div class="notification-content">
+                    📱 App lista para funcionar sin conexión
+                </div>
+            `;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 4000);
+        }
+    </script>
+
+    <!-- Estilos adicionales para notificaciones PWA -->
+    <style>
+        .update-notification,
+        .connectivity-notification,
+        .offline-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            padding: 12px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            animation: slideInDown 0.3s ease-out;
+            max-width: 90%;
+            text-align: center;
+        }
+
+        .update-notification {
+            background: #667eea;
+        }
+
+        .connectivity-notification.success {
+            background: #4CAF50;
+        }
+
+        .connectivity-notification.warning {
+            background: #ff9800;
+        }
+
+        .offline-notification {
+            background: #2196F3;
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .update-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .pwa-mode .install-banner {
+            display: none !important;
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateX(-50%) translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</body>
+
+</html>

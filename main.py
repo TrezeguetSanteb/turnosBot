@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
 Proceso principal para Railway - Ejecuta todos los servicios
+VERSIÓN NUEVA ESTRUCTURA: Usa imports desde src/
 """
 import os
 import sys
@@ -10,64 +11,12 @@ import subprocess
 import signal
 from flask import Flask
 
+# Agregar src al path para imports
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
+
 
 def log(message):
     print(f"[MAIN] {message}", flush=True)
-
-
-def run_daemon():
-    """Ejecutar daemon de notificaciones en thread separado"""
-    import asyncio
-
-    def daemon_wrapper():
-        try:
-            log("Iniciando daemon de notificaciones...")
-            # Importar y ejecutar daemon async
-            from daemon_notificaciones import main as daemon_main
-            asyncio.run(daemon_main())
-        except Exception as e:
-            log(f"Error en daemon: {e}")
-            time.sleep(5)  # Esperar antes de reintentar
-            daemon_wrapper()  # Reintentar
-
-    daemon_wrapper()
-
-
-def run_whatsapp_bot():
-    """Ejecutar bot de WhatsApp en thread separado"""
-    try:
-        log("Iniciando bot de WhatsApp...")
-        from bot_whatsapp import app as whatsapp_app
-
-        # Obtener puerto para WhatsApp (puerto principal + 1)
-        main_port = int(os.environ.get('PORT', 9000))
-        whatsapp_port = main_port + 1
-
-        whatsapp_app.run(
-            host='0.0.0.0',
-            port=whatsapp_port,
-            debug=False,
-            use_reloader=False  # Importante en threading
-        )
-    except Exception as e:
-        log(f"Error en bot WhatsApp: {e}")
-
-
-def run_admin_panel():
-    """Ejecutar panel de administración"""
-    try:
-        log("Iniciando panel de administración...")
-        from admin_panel import app as admin_app
-
-        port = int(os.environ.get('PORT', 9000))
-        admin_app.run(
-            host='0.0.0.0',
-            port=port,
-            debug=False,
-            use_reloader=False
-        )
-    except Exception as e:
-        log(f"Error en panel admin: {e}")
 
 
 def verificar_variables_entorno():
@@ -147,8 +96,64 @@ def verificar_variables_entorno():
     return len(errores) == 0
 
 
+def run_daemon():
+    """Ejecutar daemon de notificaciones en thread separado"""
+    import asyncio
+
+    def daemon_wrapper():
+        try:
+            log("Iniciando daemon de notificaciones...")
+            # Importar desde nueva estructura
+            from services.daemon import main as daemon_main
+            # Pasar in_thread=True para evitar problemas con signals
+            asyncio.run(daemon_main(in_thread=True))
+        except Exception as e:
+            log(f"Error en daemon: {e}")
+            time.sleep(5)  # Esperar antes de reintentar
+            daemon_wrapper()  # Reintentar
+
+    daemon_wrapper()
+
+
+def run_whatsapp_bot():
+    """Ejecutar bot de WhatsApp en thread separado"""
+    try:
+        log("Iniciando bot de WhatsApp...")
+        from bots.whatsapp_bot import app as whatsapp_app
+
+        # Obtener puerto para WhatsApp (puerto principal + 1)
+        main_port = int(os.environ.get('PORT', 9000))
+        whatsapp_port = main_port + 1
+
+        whatsapp_app.run(
+            host='0.0.0.0',
+            port=whatsapp_port,
+            debug=False,
+            use_reloader=False  # Importante en threading
+        )
+    except Exception as e:
+        log(f"Error en bot WhatsApp: {e}")
+
+
+def run_admin_panel():
+    """Ejecutar panel de administración"""
+    try:
+        log("Iniciando panel de administración...")
+        from admin.panel import app as admin_app
+
+        port = int(os.environ.get('PORT', 9000))
+        admin_app.run(
+            host='0.0.0.0',
+            port=port,
+            debug=False,
+            use_reloader=False
+        )
+    except Exception as e:
+        log(f"Error en panel admin: {e}")
+
+
 def main():
-    log("🚀 Iniciando TurnosBot en Railway...")
+    log("🚀 Iniciando TurnosBot en Railway... (NUEVA ESTRUCTURA)")
 
     # Verificar variables de entorno
     if not verificar_variables_entorno():
@@ -161,10 +166,14 @@ def main():
     log("📦 Inicializando base de datos...")
     try:
         import sqlite3
-        if not os.path.exists('turnos.db'):
-            with open('schema.sql', 'r') as f:
+        schema_path = 'data/schema.sql' if os.path.exists(
+            'data/schema.sql') else 'schema.sql'
+        db_path = 'data/turnos.db' if os.path.exists('data/') else 'turnos.db'
+
+        if not os.path.exists(db_path):
+            with open(schema_path, 'r') as f:
                 schema = f.read()
-            conn = sqlite3.connect('turnos.db')
+            conn = sqlite3.connect(db_path)
             conn.executescript(schema)
             conn.close()
             log("✅ Base de datos creada")
@@ -172,11 +181,6 @@ def main():
             log("✅ Base de datos existente")
     except Exception as e:
         log(f"❌ Error con base de datos: {e}")
-
-    # Verificar variables de entorno
-    if not verificar_variables_entorno():
-        log("❌ Configuración incompleta. Corrige las variables de entorno.")
-        return
 
     # Iniciar servicios en threads
     threads = []

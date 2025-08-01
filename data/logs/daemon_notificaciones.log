@@ -1,0 +1,2130 @@
+Error obteniendo estadísticas: no such table: turnos
+Error en limpieza de turnos: no such table: turnos
+[2025-07-28 16:49:35] 🤖 DAEMON DE NOTIFICACIONES INICIADO
+[2025-07-28 16:49:35] ==================================================
+[2025-07-28 16:49:35] Intervalo: 60 segundos
+[2025-07-28 16:49:35] Script: bot_sender.py
+[2025-07-28 16:49:35] Presiona Ctrl+C para detener
+[2025-07-28 16:49:35] ==================================================
+[2025-07-28 16:49:35] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 16:49:35] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 16:50:35] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 16:50:35] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 16:50:35] 🔧 Ejecutando mantenimiento de base de datos...
+[2025-07-28 16:50:35] ✅ Mantenimiento de BD completado
+[2025-07-28 16:51:35] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 16:51:36] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 16:52:36] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 16:52:36] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 16:53:36] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 16:53:36] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 16:54:36] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 16:54:36] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 16:55:36] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 16:55:36] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 16:56:36] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 16:56:36] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 16:57:37] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 16:57:38] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 16:57:38] 📋 Output del envío:
+    📊 Notificaciones pendientes: 1
+    📨 Enviando a 7224928858: cancelacion_turno
+    ✅ Telegram enviado a 7224928858
+    🧹 Limpiando notificaciones enviadas...
+    🧹 Limpieza completada: 1 notificaciones enviadas eliminadas
+    ✅ Proceso completado - Enviadas: 1, Eliminadas: 1
+[2025-07-28 16:58:38] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 16:58:38] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 16:59:38] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 16:59:39] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 16:59:39] 📊 === ESTADÍSTICAS ===
+[2025-07-28 16:59:39]    Ejecuciones: 11
+[2025-07-28 16:59:39]    Errores: 0
+[2025-07-28 16:59:39]    Notificaciones enviadas: 0
+[2025-07-28 16:59:39]    Último envío: 2025-07-28 16:59:39.001590
+[2025-07-28 16:59:39]    Último mantenimiento: 16:50:35
+[2025-07-28 16:59:39] ==================
+[2025-07-28 17:00:39] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:00:39] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:01:39] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:01:39] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:02:39] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:02:39] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:03:39] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:03:39] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:04:39] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:04:39] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:05:39] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:05:40] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:06:40] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:06:40] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:07:40] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:07:40] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:08:40] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:08:40] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:09:40] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:09:40] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:09:40] 📊 === ESTADÍSTICAS ===
+[2025-07-28 17:09:40]    Ejecuciones: 21
+[2025-07-28 17:09:40]    Errores: 0
+[2025-07-28 17:09:40]    Notificaciones enviadas: 0
+[2025-07-28 17:09:40]    Último envío: 2025-07-28 17:09:40.696992
+[2025-07-28 17:09:40]    Último mantenimiento: 16:50:35
+[2025-07-28 17:09:40] ==================
+[2025-07-28 17:10:40] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:10:40] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:11:40] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:11:41] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:12:41] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:12:41] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:13:41] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:13:41] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:14:41] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:14:41] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:15:41] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:15:41] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:16:41] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:16:41] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:17:41] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:17:42] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:18:42] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:18:42] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:19:42] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:19:42] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:19:42] 📊 === ESTADÍSTICAS ===
+[2025-07-28 17:19:42]    Ejecuciones: 31
+[2025-07-28 17:19:42]    Errores: 0
+[2025-07-28 17:19:42]    Notificaciones enviadas: 0
+[2025-07-28 17:19:42]    Último envío: 2025-07-28 17:19:42.433233
+[2025-07-28 17:19:42]    Último mantenimiento: 16:50:35
+[2025-07-28 17:19:42] ==================
+[2025-07-28 17:20:42] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:20:42] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:21:42] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:21:42] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:22:42] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:22:42] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:23:43] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:23:43] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:24:43] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:24:43] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:25:43] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:25:43] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:26:43] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:26:43] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:27:43] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:27:43] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:28:43] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:28:44] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:29:44] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:29:44] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:29:44] 📊 === ESTADÍSTICAS ===
+[2025-07-28 17:29:44]    Ejecuciones: 41
+[2025-07-28 17:29:44]    Errores: 0
+[2025-07-28 17:29:44]    Notificaciones enviadas: 0
+[2025-07-28 17:29:44]    Último envío: 2025-07-28 17:29:44.269919
+[2025-07-28 17:29:44]    Último mantenimiento: 16:50:35
+[2025-07-28 17:29:44] ==================
+[2025-07-28 17:30:44] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:30:44] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:31:44] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:31:44] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:32:44] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:32:44] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:33:44] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:33:44] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:34:45] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:34:45] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:35:45] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:35:45] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:36:45] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:36:45] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:37:45] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:37:45] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:38:45] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:38:45] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:39:45] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:39:46] ✅ bot_sender.py ejecutado exitosamente
+[2025-07-28 17:39:46] 📊 === ESTADÍSTICAS ===
+[2025-07-28 17:39:46]    Ejecuciones: 51
+[2025-07-28 17:39:46]    Errores: 0
+[2025-07-28 17:39:46]    Notificaciones enviadas: 0
+[2025-07-28 17:39:46]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-28 17:39:46]    Último mantenimiento: 16:50:35
+[2025-07-28 17:39:46] ==================
+[2025-07-28 17:40:46] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:40:46] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 17:41:46] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:41:46] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 17:42:46] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:42:46] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 17:43:46] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:43:46] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 17:44:46] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:44:46] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 17:45:46] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:45:46] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 17:46:46] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:46:46] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 17:47:46] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:47:46] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 17:48:46] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:48:46] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 17:49:46] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:49:46] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 17:49:46] 📊 === ESTADÍSTICAS ===
+[2025-07-28 17:49:46]    Ejecuciones: 61
+[2025-07-28 17:49:46]    Errores: 10
+[2025-07-28 17:49:46]    Notificaciones enviadas: 0
+[2025-07-28 17:49:46]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-28 17:49:46]    Último mantenimiento: 16:50:35
+[2025-07-28 17:49:46] ==================
+[2025-07-28 17:50:47] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:50:47] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 17:51:47] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:51:47] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 17:52:47] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:52:47] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 17:53:47] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:53:47] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 17:54:47] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:54:47] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 17:55:47] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:55:47] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 17:56:47] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:56:47] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 17:57:47] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:57:47] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 17:58:47] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:58:47] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 17:59:47] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 17:59:47] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 17:59:47] 📊 === ESTADÍSTICAS ===
+[2025-07-28 17:59:47]    Ejecuciones: 71
+[2025-07-28 17:59:47]    Errores: 20
+[2025-07-28 17:59:47]    Notificaciones enviadas: 0
+[2025-07-28 17:59:47]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-28 17:59:47]    Último mantenimiento: 16:50:35
+[2025-07-28 17:59:47] ==================
+[2025-07-28 18:00:47] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:00:47] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:01:48] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:01:48] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:02:48] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:02:48] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:03:48] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:03:48] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:04:48] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:04:48] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:05:48] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:05:48] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:06:48] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:06:48] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:07:48] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:07:48] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:08:48] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:08:48] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:09:48] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:09:48] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:09:48] 📊 === ESTADÍSTICAS ===
+[2025-07-28 18:09:48]    Ejecuciones: 81
+[2025-07-28 18:09:48]    Errores: 30
+[2025-07-28 18:09:48]    Notificaciones enviadas: 0
+[2025-07-28 18:09:48]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-28 18:09:48]    Último mantenimiento: 16:50:35
+[2025-07-28 18:09:48] ==================
+[2025-07-28 18:10:48] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:10:48] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:11:48] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:11:48] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:12:49] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:12:49] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:13:49] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:13:49] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:14:49] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:14:49] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:15:49] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:15:49] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:16:49] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:16:49] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:17:49] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:17:49] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:18:49] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:18:49] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:19:49] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:19:49] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:19:49] 📊 === ESTADÍSTICAS ===
+[2025-07-28 18:19:49]    Ejecuciones: 91
+[2025-07-28 18:19:49]    Errores: 40
+[2025-07-28 18:19:49]    Notificaciones enviadas: 0
+[2025-07-28 18:19:49]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-28 18:19:49]    Último mantenimiento: 16:50:35
+[2025-07-28 18:19:49] ==================
+[2025-07-28 18:20:49] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:20:49] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:21:49] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:21:49] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:22:49] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:22:49] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:23:50] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:23:50] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:24:50] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:24:50] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:25:50] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:25:50] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:26:50] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:26:50] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:27:50] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:27:50] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:28:50] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:28:50] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:29:50] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:29:50] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:29:50] 📊 === ESTADÍSTICAS ===
+[2025-07-28 18:29:50]    Ejecuciones: 101
+[2025-07-28 18:29:50]    Errores: 50
+[2025-07-28 18:29:50]    Notificaciones enviadas: 0
+[2025-07-28 18:29:50]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-28 18:29:50]    Último mantenimiento: 16:50:35
+[2025-07-28 18:29:50] ==================
+[2025-07-28 18:30:50] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:30:50] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:31:50] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:31:50] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:32:50] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:32:50] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:33:51] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:33:51] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:34:51] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:34:51] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:35:51] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:35:51] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:36:51] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:36:51] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:37:51] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:37:51] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:38:51] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:38:51] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:39:51] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:39:51] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:39:51] 📊 === ESTADÍSTICAS ===
+[2025-07-28 18:39:51]    Ejecuciones: 111
+[2025-07-28 18:39:51]    Errores: 60
+[2025-07-28 18:39:51]    Notificaciones enviadas: 0
+[2025-07-28 18:39:51]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-28 18:39:51]    Último mantenimiento: 16:50:35
+[2025-07-28 18:39:51] ==================
+[2025-07-28 18:40:51] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:40:51] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:41:51] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:41:51] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:42:51] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:42:51] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:43:52] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:43:52] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:44:52] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:44:52] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:45:52] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:45:52] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:46:52] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:46:52] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:47:52] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:47:52] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:48:52] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:48:52] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:49:52] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:49:52] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:49:52] 📊 === ESTADÍSTICAS ===
+[2025-07-28 18:49:52]    Ejecuciones: 121
+[2025-07-28 18:49:52]    Errores: 70
+[2025-07-28 18:49:52]    Notificaciones enviadas: 0
+[2025-07-28 18:49:52]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-28 18:49:52]    Último mantenimiento: 16:50:35
+[2025-07-28 18:49:52] ==================
+[2025-07-28 18:50:52] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:50:52] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:51:52] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:51:52] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:52:53] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:52:53] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:53:53] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:53:53] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:54:53] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:54:53] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:55:53] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:55:53] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:56:53] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:56:53] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:57:53] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:57:53] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:58:53] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:58:53] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:59:53] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 18:59:53] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 18:59:53] 📊 === ESTADÍSTICAS ===
+[2025-07-28 18:59:53]    Ejecuciones: 131
+[2025-07-28 18:59:53]    Errores: 80
+[2025-07-28 18:59:53]    Notificaciones enviadas: 0
+[2025-07-28 18:59:53]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-28 18:59:53]    Último mantenimiento: 16:50:35
+[2025-07-28 18:59:53] ==================
+[2025-07-28 19:00:53] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:00:53] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:01:53] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:01:53] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:02:54] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:02:54] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:03:54] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:03:54] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:04:54] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:04:54] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:05:54] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:05:54] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:06:54] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:06:54] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:07:54] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:07:54] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:08:54] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:08:54] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:09:54] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:09:54] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:09:54] 📊 === ESTADÍSTICAS ===
+[2025-07-28 19:09:54]    Ejecuciones: 141
+[2025-07-28 19:09:54]    Errores: 90
+[2025-07-28 19:09:54]    Notificaciones enviadas: 0
+[2025-07-28 19:09:54]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-28 19:09:54]    Último mantenimiento: 16:50:35
+[2025-07-28 19:09:54] ==================
+[2025-07-28 19:10:54] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:10:54] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:11:54] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:11:54] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:12:55] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:12:55] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:13:55] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:13:55] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:14:55] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:14:55] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:15:55] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:15:55] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:16:55] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:16:55] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:17:55] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:17:55] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:18:55] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:18:55] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:19:55] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:19:55] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:19:55] 📊 === ESTADÍSTICAS ===
+[2025-07-28 19:19:55]    Ejecuciones: 151
+[2025-07-28 19:19:55]    Errores: 100
+[2025-07-28 19:19:55]    Notificaciones enviadas: 0
+[2025-07-28 19:19:55]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-28 19:19:55]    Último mantenimiento: 16:50:35
+[2025-07-28 19:19:55] ==================
+[2025-07-28 19:20:55] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:20:55] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:21:55] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:21:55] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:22:56] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:22:56] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:23:56] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:23:56] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:24:56] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:24:56] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:25:56] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:25:56] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:26:56] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:26:56] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:27:56] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:27:56] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:28:56] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:28:56] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:29:56] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:29:56] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:29:56] 📊 === ESTADÍSTICAS ===
+[2025-07-28 19:29:56]    Ejecuciones: 161
+[2025-07-28 19:29:56]    Errores: 110
+[2025-07-28 19:29:56]    Notificaciones enviadas: 0
+[2025-07-28 19:29:56]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-28 19:29:56]    Último mantenimiento: 16:50:35
+[2025-07-28 19:29:56] ==================
+[2025-07-28 19:30:56] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:30:56] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:31:56] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:31:56] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:32:57] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:32:57] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:33:57] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:33:57] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:34:57] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:34:57] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:35:57] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:35:57] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:36:57] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:36:57] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:37:57] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:37:57] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:38:57] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:38:57] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:39:57] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:39:57] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:39:57] 📊 === ESTADÍSTICAS ===
+[2025-07-28 19:39:57]    Ejecuciones: 171
+[2025-07-28 19:39:57]    Errores: 120
+[2025-07-28 19:39:57]    Notificaciones enviadas: 0
+[2025-07-28 19:39:57]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-28 19:39:57]    Último mantenimiento: 16:50:35
+[2025-07-28 19:39:57] ==================
+[2025-07-28 19:40:57] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:40:57] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:41:57] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:41:57] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:42:58] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:42:58] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:43:58] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:43:58] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:44:58] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:44:58] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:45:58] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:45:58] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:46:58] 🚀 Ejecutando bot_sender.py...
+Error obteniendo estadísticas: no such table: turnos
+Error en limpieza de turnos: no such table: turnos
+[2025-07-28 19:46:58] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:47:58] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:47:58] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:48:58] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:48:58] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:49:58] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:49:58] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:49:58] 📊 === ESTADÍSTICAS ===
+[2025-07-28 19:49:58]    Ejecuciones: 181
+[2025-07-28 19:49:58]    Errores: 130
+[2025-07-28 19:49:58]    Notificaciones enviadas: 0
+[2025-07-28 19:49:58]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-28 19:49:58]    Último mantenimiento: 16:50:35
+[2025-07-28 19:49:58] ==================
+[2025-07-28 19:50:58] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:50:58] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:51:58] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:51:58] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:52:59] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:52:59] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:53:59] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:53:59] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:54:59] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:54:59] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:55:59] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:55:59] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:56:59] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:56:59] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:57:59] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:57:59] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:58:59] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:58:59] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:59:59] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 19:59:59] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 19:59:59] 📊 === ESTADÍSTICAS ===
+[2025-07-28 19:59:59]    Ejecuciones: 191
+[2025-07-28 19:59:59]    Errores: 140
+[2025-07-28 19:59:59]    Notificaciones enviadas: 0
+[2025-07-28 19:59:59]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-28 19:59:59]    Último mantenimiento: 16:50:35
+[2025-07-28 19:59:59] ==================
+[2025-07-28 20:00:59] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 20:00:59] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 20:01:59] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 20:01:59] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 20:03:00] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 20:03:00] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-28 20:04:00] 🚀 Ejecutando bot_sender.py...
+[2025-07-28 20:04:00] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:01:53] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:01:53] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:01:53] 🔧 Ejecutando mantenimiento de base de datos...
+[2025-07-30 17:01:53] ✅ Mantenimiento de BD completado
+[2025-07-30 17:02:53] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:02:53] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:03:54] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:03:54] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:04:54] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:04:54] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:05:54] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:05:54] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:06:54] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:06:54] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:06:54] 📊 === ESTADÍSTICAS ===
+[2025-07-30 17:06:54]    Ejecuciones: 201
+[2025-07-30 17:06:54]    Errores: 150
+[2025-07-30 17:06:54]    Notificaciones enviadas: 0
+[2025-07-30 17:06:54]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-30 17:06:54]    Último mantenimiento: 17:01:53
+[2025-07-30 17:06:54] ==================
+[2025-07-30 17:07:54] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:07:54] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:08:54] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:08:54] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:09:54] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:09:54] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:10:54] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:10:54] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:11:54] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:11:54] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:12:54] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:12:54] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:13:55] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:13:55] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:14:55] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:14:55] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:15:55] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:15:55] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:16:55] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:16:55] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:16:55] 📊 === ESTADÍSTICAS ===
+[2025-07-30 17:16:55]    Ejecuciones: 211
+[2025-07-30 17:16:55]    Errores: 160
+[2025-07-30 17:16:55]    Notificaciones enviadas: 0
+[2025-07-30 17:16:55]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-30 17:16:55]    Último mantenimiento: 17:01:53
+[2025-07-30 17:16:55] ==================
+[2025-07-30 17:17:55] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:17:55] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:18:55] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:18:55] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:19:55] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:19:55] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:20:55] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:20:55] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:21:55] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:21:55] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:22:55] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:22:55] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:23:56] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:23:56] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:24:56] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:24:56] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:25:56] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:25:56] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:26:56] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:26:56] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:26:56] 📊 === ESTADÍSTICAS ===
+[2025-07-30 17:26:56]    Ejecuciones: 221
+[2025-07-30 17:26:56]    Errores: 170
+[2025-07-30 17:26:56]    Notificaciones enviadas: 0
+[2025-07-30 17:26:56]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-30 17:26:56]    Último mantenimiento: 17:01:53
+[2025-07-30 17:26:56] ==================
+[2025-07-30 17:27:56] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:27:56] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:28:56] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:28:56] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:29:56] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:29:56] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:30:56] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:30:56] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:31:56] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:31:56] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:32:57] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:32:57] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:33:57] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:33:57] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:34:57] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:34:57] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:35:57] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:35:57] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:36:57] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:36:57] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:36:57] 📊 === ESTADÍSTICAS ===
+[2025-07-30 17:36:57]    Ejecuciones: 231
+[2025-07-30 17:36:57]    Errores: 180
+[2025-07-30 17:36:57]    Notificaciones enviadas: 0
+[2025-07-30 17:36:57]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-30 17:36:57]    Último mantenimiento: 17:01:53
+[2025-07-30 17:36:57] ==================
+[2025-07-30 17:37:57] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:37:57] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:38:57] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:38:57] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:39:57] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:39:57] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:40:57] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:40:57] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:41:57] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:41:58] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:42:58] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:42:58] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:43:58] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:43:58] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:44:58] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:44:58] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:45:58] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:45:58] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:46:58] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:46:58] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:46:58] 📊 === ESTADÍSTICAS ===
+[2025-07-30 17:46:58]    Ejecuciones: 241
+[2025-07-30 17:46:58]    Errores: 190
+[2025-07-30 17:46:58]    Notificaciones enviadas: 0
+[2025-07-30 17:46:58]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-30 17:46:58]    Último mantenimiento: 17:01:53
+[2025-07-30 17:46:58] ==================
+[2025-07-30 17:47:58] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:47:58] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:48:58] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:48:58] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:49:58] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:49:58] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:50:58] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:50:58] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:51:58] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:51:59] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:52:59] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:52:59] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:53:59] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:53:59] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:54:59] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:54:59] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:55:59] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:55:59] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:56:59] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:56:59] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:56:59] 📊 === ESTADÍSTICAS ===
+[2025-07-30 17:56:59]    Ejecuciones: 251
+[2025-07-30 17:56:59]    Errores: 200
+[2025-07-30 17:56:59]    Notificaciones enviadas: 0
+[2025-07-30 17:56:59]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-30 17:56:59]    Último mantenimiento: 17:01:53
+[2025-07-30 17:56:59] ==================
+[2025-07-30 17:57:59] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:57:59] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:58:59] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:58:59] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 17:59:59] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 17:59:59] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:00:59] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:01:00] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:02:00] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:02:00] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:03:00] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:03:00] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:04:00] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:04:00] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:05:00] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:05:00] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:06:00] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:06:00] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:07:00] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:07:00] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:07:00] 📊 === ESTADÍSTICAS ===
+[2025-07-30 18:07:00]    Ejecuciones: 261
+[2025-07-30 18:07:00]    Errores: 210
+[2025-07-30 18:07:00]    Notificaciones enviadas: 0
+[2025-07-30 18:07:00]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-30 18:07:00]    Último mantenimiento: 17:01:53
+[2025-07-30 18:07:00] ==================
+[2025-07-30 18:08:00] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:08:00] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:09:00] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:09:00] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:10:01] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:10:01] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:11:01] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:11:01] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:12:01] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:12:01] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:13:01] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:13:01] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:14:01] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:14:01] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:15:01] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:15:01] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:16:01] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:16:01] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:17:01] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:17:01] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:17:01] 📊 === ESTADÍSTICAS ===
+[2025-07-30 18:17:01]    Ejecuciones: 271
+[2025-07-30 18:17:01]    Errores: 220
+[2025-07-30 18:17:01]    Notificaciones enviadas: 0
+[2025-07-30 18:17:01]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-30 18:17:01]    Último mantenimiento: 17:01:53
+[2025-07-30 18:17:01] ==================
+[2025-07-30 18:18:01] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:18:01] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:19:01] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:19:02] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:20:02] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:20:02] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:21:02] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:21:02] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:22:02] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:22:02] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:23:02] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:23:02] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:24:02] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:24:02] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:25:02] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:25:02] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:26:02] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:26:02] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:27:02] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:27:02] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:27:02] 📊 === ESTADÍSTICAS ===
+[2025-07-30 18:27:02]    Ejecuciones: 281
+[2025-07-30 18:27:02]    Errores: 230
+[2025-07-30 18:27:02]    Notificaciones enviadas: 0
+[2025-07-30 18:27:02]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-30 18:27:02]    Último mantenimiento: 17:01:53
+[2025-07-30 18:27:02] ==================
+[2025-07-30 18:28:02] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:28:02] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:29:03] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:29:03] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:30:03] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:30:03] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:31:03] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:31:03] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:32:03] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:32:03] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:33:03] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:33:03] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:34:03] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:34:03] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:35:03] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:35:03] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:36:03] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:36:03] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:37:03] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:37:04] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:37:04] 📊 === ESTADÍSTICAS ===
+[2025-07-30 18:37:04]    Ejecuciones: 291
+[2025-07-30 18:37:04]    Errores: 240
+[2025-07-30 18:37:04]    Notificaciones enviadas: 0
+[2025-07-30 18:37:04]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-30 18:37:04]    Último mantenimiento: 17:01:53
+[2025-07-30 18:37:04] ==================
+[2025-07-30 18:42:12] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:42:12] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:43:12] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:43:12] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:44:12] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:44:12] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:45:12] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:45:12] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:46:13] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:46:13] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:47:13] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:47:13] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:48:13] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:48:13] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:49:13] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:49:13] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:50:13] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:50:13] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:51:13] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:51:13] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:51:13] 📊 === ESTADÍSTICAS ===
+[2025-07-30 18:51:13]    Ejecuciones: 301
+[2025-07-30 18:51:13]    Errores: 250
+[2025-07-30 18:51:13]    Notificaciones enviadas: 0
+[2025-07-30 18:51:13]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-30 18:51:13]    Último mantenimiento: 17:01:53
+[2025-07-30 18:51:13] ==================
+[2025-07-30 18:52:13] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:52:13] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:53:13] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:53:13] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:54:13] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:54:13] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:55:14] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:55:14] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:56:14] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:56:14] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-30 18:57:14] 🚀 Ejecutando bot_sender.py...
+[2025-07-30 18:57:14] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:13:11] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:13:11] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:14:11] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:14:11] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:15:12] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:15:12] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:16:12] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:16:12] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:16:12] 📊 === ESTADÍSTICAS ===
+[2025-07-31 11:16:12]    Ejecuciones: 311
+[2025-07-31 11:16:12]    Errores: 260
+[2025-07-31 11:16:12]    Notificaciones enviadas: 0
+[2025-07-31 11:16:12]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-31 11:16:12]    Último mantenimiento: 17:01:53
+[2025-07-31 11:16:12] ==================
+[2025-07-31 11:17:12] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:17:12] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:18:12] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:18:12] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:19:12] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:19:12] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:20:12] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:20:12] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:21:12] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:21:12] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:22:12] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:22:12] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:23:12] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:23:12] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:24:12] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:24:12] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:25:12] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:25:12] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:26:13] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:26:13] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:26:13] 📊 === ESTADÍSTICAS ===
+[2025-07-31 11:26:13]    Ejecuciones: 321
+[2025-07-31 11:26:13]    Errores: 270
+[2025-07-31 11:26:13]    Notificaciones enviadas: 0
+[2025-07-31 11:26:13]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-31 11:26:13]    Último mantenimiento: 17:01:53
+[2025-07-31 11:26:13] ==================
+[2025-07-31 11:27:13] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:27:13] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:28:13] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:28:13] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:29:13] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:29:13] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:30:13] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:30:13] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:31:13] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:31:13] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:32:13] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:32:13] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:33:14] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:33:14] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:34:14] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:34:14] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:35:14] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:35:14] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:36:14] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:36:14] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:36:14] 📊 === ESTADÍSTICAS ===
+[2025-07-31 11:36:14]    Ejecuciones: 331
+[2025-07-31 11:36:14]    Errores: 280
+[2025-07-31 11:36:14]    Notificaciones enviadas: 0
+[2025-07-31 11:36:14]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-31 11:36:14]    Último mantenimiento: 17:01:53
+[2025-07-31 11:36:14] ==================
+[2025-07-31 11:37:14] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:37:14] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:38:14] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:38:14] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:39:14] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:39:14] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:40:14] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:40:14] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:41:14] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:41:14] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:42:14] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:42:14] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:43:14] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:43:14] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:44:15] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:44:15] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:45:15] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:45:15] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:46:15] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:46:15] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:46:15] 📊 === ESTADÍSTICAS ===
+[2025-07-31 11:46:15]    Ejecuciones: 341
+[2025-07-31 11:46:15]    Errores: 290
+[2025-07-31 11:46:15]    Notificaciones enviadas: 0
+[2025-07-31 11:46:15]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-31 11:46:15]    Último mantenimiento: 17:01:53
+[2025-07-31 11:46:15] ==================
+[2025-07-31 11:47:15] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:47:15] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:48:15] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:48:15] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:49:15] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:49:15] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:50:15] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:50:15] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:51:15] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:51:15] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:52:15] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:52:15] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:53:15] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:53:15] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:54:16] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:54:16] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:55:16] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:55:16] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:56:16] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:56:16] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:56:16] 📊 === ESTADÍSTICAS ===
+[2025-07-31 11:56:16]    Ejecuciones: 351
+[2025-07-31 11:56:16]    Errores: 300
+[2025-07-31 11:56:16]    Notificaciones enviadas: 0
+[2025-07-31 11:56:16]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-31 11:56:16]    Último mantenimiento: 17:01:53
+[2025-07-31 11:56:16] ==================
+[2025-07-31 11:57:16] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:57:16] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:58:16] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:58:16] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 11:59:16] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 11:59:16] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:00:16] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:00:16] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:01:16] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:01:16] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:02:16] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:02:16] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:03:16] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:03:16] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:04:17] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:04:17] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:05:17] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:05:17] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:06:17] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:06:17] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:06:17] 📊 === ESTADÍSTICAS ===
+[2025-07-31 12:06:17]    Ejecuciones: 361
+[2025-07-31 12:06:17]    Errores: 310
+[2025-07-31 12:06:17]    Notificaciones enviadas: 0
+[2025-07-31 12:06:17]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-31 12:06:17]    Último mantenimiento: 17:01:53
+[2025-07-31 12:06:17] ==================
+[2025-07-31 12:07:17] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:07:17] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:08:17] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:08:17] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:09:17] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:09:17] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:10:17] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:10:17] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:11:17] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:11:17] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:12:17] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:12:17] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:13:17] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:13:17] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:14:18] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:14:18] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:15:18] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:15:18] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:16:18] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:16:18] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:16:18] 📊 === ESTADÍSTICAS ===
+[2025-07-31 12:16:18]    Ejecuciones: 371
+[2025-07-31 12:16:18]    Errores: 320
+[2025-07-31 12:16:18]    Notificaciones enviadas: 0
+[2025-07-31 12:16:18]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-31 12:16:18]    Último mantenimiento: 17:01:53
+[2025-07-31 12:16:18] ==================
+[2025-07-31 12:17:18] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:17:18] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:18:18] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:18:18] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:19:18] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:19:18] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:20:18] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:20:18] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:21:18] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:21:18] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:22:18] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:22:18] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:23:18] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:23:18] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:24:19] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:24:19] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:25:19] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:25:19] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:26:19] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:26:19] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:26:19] 📊 === ESTADÍSTICAS ===
+[2025-07-31 12:26:19]    Ejecuciones: 381
+[2025-07-31 12:26:19]    Errores: 330
+[2025-07-31 12:26:19]    Notificaciones enviadas: 0
+[2025-07-31 12:26:19]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-31 12:26:19]    Último mantenimiento: 17:01:53
+[2025-07-31 12:26:19] ==================
+[2025-07-31 12:27:19] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:27:19] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:28:19] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:28:19] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:29:19] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:29:19] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:30:19] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:30:19] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:31:19] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:31:19] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:32:19] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:32:19] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:33:20] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:33:20] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:34:20] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:34:20] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:35:20] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:35:20] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:36:20] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:36:20] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:36:20] 📊 === ESTADÍSTICAS ===
+[2025-07-31 12:36:20]    Ejecuciones: 391
+[2025-07-31 12:36:20]    Errores: 340
+[2025-07-31 12:36:20]    Notificaciones enviadas: 0
+[2025-07-31 12:36:20]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-31 12:36:20]    Último mantenimiento: 17:01:53
+[2025-07-31 12:36:20] ==================
+[2025-07-31 12:37:20] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:37:20] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:38:20] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:38:20] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:39:20] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:39:20] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:40:20] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:40:20] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:41:20] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:41:20] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:42:20] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:42:20] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:43:21] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:43:21] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:44:21] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:44:21] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:45:21] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:45:21] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:46:21] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:46:21] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:46:21] 📊 === ESTADÍSTICAS ===
+[2025-07-31 12:46:21]    Ejecuciones: 401
+[2025-07-31 12:46:21]    Errores: 350
+[2025-07-31 12:46:21]    Notificaciones enviadas: 0
+[2025-07-31 12:46:21]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-31 12:46:21]    Último mantenimiento: 17:01:53
+[2025-07-31 12:46:21] ==================
+[2025-07-31 12:47:21] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:47:21] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:48:21] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:48:21] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:49:21] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:49:21] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:50:21] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:50:21] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:51:21] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:51:21] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:52:21] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:52:21] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:53:21] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:53:21] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:54:22] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:54:22] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 12:55:22] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 12:55:22] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:34:22] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:34:22] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:34:22] 📊 === ESTADÍSTICAS ===
+[2025-07-31 15:34:22]    Ejecuciones: 411
+[2025-07-31 15:34:22]    Errores: 360
+[2025-07-31 15:34:22]    Notificaciones enviadas: 0
+[2025-07-31 15:34:22]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-31 15:34:22]    Último mantenimiento: 17:01:53
+[2025-07-31 15:34:22] ==================
+[2025-07-31 15:35:22] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:35:22] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:36:22] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:36:22] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:37:22] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:37:22] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:38:22] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:38:22] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:39:23] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:39:23] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:40:23] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:40:23] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:41:23] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:41:23] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:42:23] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:42:23] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:43:23] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:43:23] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:44:23] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:44:23] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:44:23] 📊 === ESTADÍSTICAS ===
+[2025-07-31 15:44:23]    Ejecuciones: 421
+[2025-07-31 15:44:23]    Errores: 370
+[2025-07-31 15:44:23]    Notificaciones enviadas: 0
+[2025-07-31 15:44:23]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-31 15:44:23]    Último mantenimiento: 17:01:53
+[2025-07-31 15:44:23] ==================
+[2025-07-31 15:45:23] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:45:23] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:46:23] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:46:23] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:47:23] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:47:23] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:48:23] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:48:23] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:49:23] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:49:24] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:50:24] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:50:24] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:51:24] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:51:24] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:52:24] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:52:24] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:53:24] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:53:24] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:54:24] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:54:24] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:54:24] 📊 === ESTADÍSTICAS ===
+[2025-07-31 15:54:24]    Ejecuciones: 431
+[2025-07-31 15:54:24]    Errores: 380
+[2025-07-31 15:54:24]    Notificaciones enviadas: 0
+[2025-07-31 15:54:24]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-31 15:54:24]    Último mantenimiento: 17:01:53
+[2025-07-31 15:54:24] ==================
+[2025-07-31 15:55:24] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:55:24] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:56:24] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:56:24] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:57:24] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:57:24] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:58:24] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:58:24] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 15:59:24] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 15:59:24] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:00:25] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:00:25] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:01:25] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:01:25] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:02:25] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:02:25] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:03:25] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:03:25] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:04:25] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:04:25] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:04:25] 📊 === ESTADÍSTICAS ===
+[2025-07-31 16:04:25]    Ejecuciones: 441
+[2025-07-31 16:04:25]    Errores: 390
+[2025-07-31 16:04:25]    Notificaciones enviadas: 0
+[2025-07-31 16:04:25]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-31 16:04:25]    Último mantenimiento: 17:01:53
+[2025-07-31 16:04:25] ==================
+[2025-07-31 16:05:25] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:05:25] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:06:25] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:06:25] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:07:25] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:07:25] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:08:25] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:08:25] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:09:25] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:09:25] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:10:26] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:10:26] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:11:26] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:11:26] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:12:26] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:12:26] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:13:26] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:13:26] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:14:26] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:14:26] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:14:26] 📊 === ESTADÍSTICAS ===
+[2025-07-31 16:14:26]    Ejecuciones: 451
+[2025-07-31 16:14:26]    Errores: 400
+[2025-07-31 16:14:26]    Notificaciones enviadas: 0
+[2025-07-31 16:14:26]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-31 16:14:26]    Último mantenimiento: 17:01:53
+[2025-07-31 16:14:26] ==================
+[2025-07-31 16:15:26] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:15:26] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:16:26] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:16:26] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:17:26] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:17:26] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:18:26] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:18:26] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:19:26] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:19:26] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:20:26] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:20:27] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:21:27] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:21:27] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:22:27] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:22:27] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:23:27] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:23:27] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:24:27] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:24:27] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:24:27] 📊 === ESTADÍSTICAS ===
+[2025-07-31 16:24:27]    Ejecuciones: 461
+[2025-07-31 16:24:27]    Errores: 410
+[2025-07-31 16:24:27]    Notificaciones enviadas: 0
+[2025-07-31 16:24:27]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-31 16:24:27]    Último mantenimiento: 17:01:53
+[2025-07-31 16:24:27] ==================
+[2025-07-31 16:25:27] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:25:27] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:26:27] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:26:27] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:27:27] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:27:27] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:28:27] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:28:27] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:29:27] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:29:27] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:30:27] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:30:27] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:31:28] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:31:28] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:32:28] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:32:28] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:33:28] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:33:28] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:34:28] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:34:28] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:34:28] 📊 === ESTADÍSTICAS ===
+[2025-07-31 16:34:28]    Ejecuciones: 471
+[2025-07-31 16:34:28]    Errores: 420
+[2025-07-31 16:34:28]    Notificaciones enviadas: 0
+[2025-07-31 16:34:28]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-31 16:34:28]    Último mantenimiento: 17:01:53
+[2025-07-31 16:34:28] ==================
+[2025-07-31 16:35:28] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:35:28] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:36:28] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:36:28] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:37:28] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:37:28] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:38:28] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:38:28] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:39:28] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:39:28] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:40:28] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:40:28] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:41:28] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:41:28] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:42:29] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:42:29] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:43:29] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:43:29] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:44:29] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:44:29] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:44:29] 📊 === ESTADÍSTICAS ===
+[2025-07-31 16:44:29]    Ejecuciones: 481
+[2025-07-31 16:44:29]    Errores: 430
+[2025-07-31 16:44:29]    Notificaciones enviadas: 0
+[2025-07-31 16:44:29]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-31 16:44:29]    Último mantenimiento: 17:01:53
+[2025-07-31 16:44:29] ==================
+[2025-07-31 16:45:29] 🚀 Ejecutando bot_sender.py...
+Error obteniendo estadísticas: no such table: turnos
+Error en limpieza de turnos: no such table: turnos
+[2025-07-31 16:45:29] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:46:29] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:46:29] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:47:29] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:47:29] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:48:29] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:48:29] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:49:29] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:49:29] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:50:29] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:50:29] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:51:29] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:51:29] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:52:30] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:52:30] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:53:30] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:53:30] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:54:30] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:54:30] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:54:30] 📊 === ESTADÍSTICAS ===
+[2025-07-31 16:54:30]    Ejecuciones: 491
+[2025-07-31 16:54:30]    Errores: 440
+[2025-07-31 16:54:30]    Notificaciones enviadas: 0
+[2025-07-31 16:54:30]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-31 16:54:30]    Último mantenimiento: 17:01:53
+[2025-07-31 16:54:30] ==================
+[2025-07-31 16:55:30] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:55:30] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:56:30] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:56:30] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:57:30] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:57:30] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:58:30] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:58:30] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 16:59:30] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 16:59:30] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 17:00:30] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 17:00:30] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 17:01:30] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 17:01:30] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 17:02:31] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 17:02:31] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 17:02:31] 🔧 Ejecutando mantenimiento de base de datos...
+[2025-07-31 17:02:31] ✅ Mantenimiento de BD completado
+[2025-07-31 17:03:31] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 17:03:31] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 17:04:31] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 17:04:31] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 17:04:31] 📊 === ESTADÍSTICAS ===
+[2025-07-31 17:04:31]    Ejecuciones: 501
+[2025-07-31 17:04:31]    Errores: 450
+[2025-07-31 17:04:31]    Notificaciones enviadas: 0
+[2025-07-31 17:04:31]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-31 17:04:31]    Último mantenimiento: 17:02:31
+[2025-07-31 17:04:31] ==================
+[2025-07-31 17:05:31] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 17:05:31] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 17:06:31] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 17:06:31] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 17:07:31] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 17:07:31] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 17:08:31] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 17:08:31] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 17:09:31] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 17:09:31] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 17:10:31] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 17:10:32] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 17:11:32] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 17:11:32] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 17:12:32] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 17:12:32] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 17:13:32] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 17:13:32] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 17:14:32] 🚀 Ejecutando bot_sender.py...
+[2025-07-31 17:14:32] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-07-31 17:14:32] 📊 === ESTADÍSTICAS ===
+[2025-07-31 17:14:32]    Ejecuciones: 511
+[2025-07-31 17:14:32]    Errores: 460
+[2025-07-31 17:14:32]    Notificaciones enviadas: 0
+[2025-07-31 17:14:32]    Último envío: 2025-07-28 17:39:46.032433
+[2025-07-31 17:14:32]    Último mantenimiento: 17:02:31
+[2025-07-31 17:14:32] ==================
+[2025-08-01 14:10:38] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:10:38] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:11:38] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:11:38] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:12:38] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:12:38] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:13:38] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:13:38] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:14:38] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:14:38] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:15:38] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:15:38] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:16:39] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:16:39] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:17:39] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:17:39] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:18:39] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:18:39] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:19:39] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:19:39] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:19:39] 📊 === ESTADÍSTICAS ===
+[2025-08-01 14:19:39]    Ejecuciones: 521
+[2025-08-01 14:19:39]    Errores: 470
+[2025-08-01 14:19:39]    Notificaciones enviadas: 0
+[2025-08-01 14:19:39]    Último envío: 2025-07-28 17:39:46.032433
+[2025-08-01 14:19:39]    Último mantenimiento: 17:02:31
+[2025-08-01 14:19:39] ==================
+[2025-08-01 14:20:39] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:20:39] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:21:39] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:21:39] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:22:39] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:22:39] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:23:39] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:23:39] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:24:39] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:24:39] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:25:40] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:25:40] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:26:40] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:26:40] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:27:40] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:27:40] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:28:40] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:28:40] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:29:40] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:29:40] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:29:40] 📊 === ESTADÍSTICAS ===
+[2025-08-01 14:29:40]    Ejecuciones: 531
+[2025-08-01 14:29:40]    Errores: 480
+[2025-08-01 14:29:40]    Notificaciones enviadas: 0
+[2025-08-01 14:29:40]    Último envío: 2025-07-28 17:39:46.032433
+[2025-08-01 14:29:40]    Último mantenimiento: 17:02:31
+[2025-08-01 14:29:40] ==================
+[2025-08-01 14:30:40] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:30:40] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:31:40] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:31:40] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:32:40] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:32:40] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:33:40] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:33:40] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:34:41] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:34:41] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:35:41] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:35:41] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:36:41] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:36:41] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:37:41] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:37:41] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:38:41] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:38:41] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:39:41] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:39:41] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:39:41] 📊 === ESTADÍSTICAS ===
+[2025-08-01 14:39:41]    Ejecuciones: 541
+[2025-08-01 14:39:41]    Errores: 490
+[2025-08-01 14:39:41]    Notificaciones enviadas: 0
+[2025-08-01 14:39:41]    Último envío: 2025-07-28 17:39:46.032433
+[2025-08-01 14:39:41]    Último mantenimiento: 17:02:31
+[2025-08-01 14:39:41] ==================
+[2025-08-01 14:40:41] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:40:41] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:41:41] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:41:41] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:42:41] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:42:41] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:43:42] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:43:42] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:44:42] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:44:42] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:45:42] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:45:42] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:46:42] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:46:42] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:47:42] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:47:42] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:48:42] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:48:42] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:49:42] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:49:42] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:49:42] 📊 === ESTADÍSTICAS ===
+[2025-08-01 14:49:42]    Ejecuciones: 551
+[2025-08-01 14:49:42]    Errores: 500
+[2025-08-01 14:49:42]    Notificaciones enviadas: 0
+[2025-08-01 14:49:42]    Último envío: 2025-07-28 17:39:46.032433
+[2025-08-01 14:49:42]    Último mantenimiento: 17:02:31
+[2025-08-01 14:49:42] ==================
+[2025-08-01 14:50:42] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:50:42] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:51:42] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:51:42] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:52:42] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:52:42] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:53:43] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:53:43] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:54:43] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:54:43] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:55:47] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:55:47] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:56:47] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:56:47] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:57:47] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:57:47] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:58:47] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:58:47] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:59:47] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 14:59:47] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 14:59:47] 📊 === ESTADÍSTICAS ===
+[2025-08-01 14:59:47]    Ejecuciones: 561
+[2025-08-01 14:59:47]    Errores: 510
+[2025-08-01 14:59:47]    Notificaciones enviadas: 0
+[2025-08-01 14:59:47]    Último envío: 2025-07-28 17:39:46.032433
+[2025-08-01 14:59:47]    Último mantenimiento: 17:02:31
+[2025-08-01 14:59:47] ==================
+[2025-08-01 15:00:48] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:00:48] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:01:48] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:01:48] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:02:48] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:02:48] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:33:45] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:33:45] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:34:45] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:34:45] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:35:45] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:35:45] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:36:45] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:36:45] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:37:45] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:37:45] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:38:46] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:38:46] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:39:46] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:39:46] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:39:46] 📊 === ESTADÍSTICAS ===
+[2025-08-01 15:39:46]    Ejecuciones: 571
+[2025-08-01 15:39:46]    Errores: 520
+[2025-08-01 15:39:46]    Notificaciones enviadas: 0
+[2025-08-01 15:39:46]    Último envío: 2025-07-28 17:39:46.032433
+[2025-08-01 15:39:46]    Último mantenimiento: 17:02:31
+[2025-08-01 15:39:46] ==================
+[2025-08-01 15:40:46] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:40:46] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:41:46] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:41:46] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:42:46] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:42:46] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:43:46] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:43:46] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:44:46] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:44:46] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:45:46] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:45:46] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:46:46] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:46:46] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:47:46] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:47:46] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:48:47] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:48:47] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:49:47] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:49:47] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:49:47] 📊 === ESTADÍSTICAS ===
+[2025-08-01 15:49:47]    Ejecuciones: 581
+[2025-08-01 15:49:47]    Errores: 530
+[2025-08-01 15:49:47]    Notificaciones enviadas: 0
+[2025-08-01 15:49:47]    Último envío: 2025-07-28 17:39:46.032433
+[2025-08-01 15:49:47]    Último mantenimiento: 17:02:31
+[2025-08-01 15:49:47] ==================
+[2025-08-01 15:50:47] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:50:47] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:51:47] 🚀 Ejecutando bot_sender.py...
+[2025-08-01 15:51:47] ❌ Error al ejecutar bot_sender.py: /home/santi/Documents/personal/turnosBot/.venv/bin/python3: can't open file '/home/santi/Documents/personal/turnosBot/bot_sender.py': [Errno 2] No such file or directory
+
+[2025-08-01 15:52:47] 🚀 Ejecutando bot_sender.py...
