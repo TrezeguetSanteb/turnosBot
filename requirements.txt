@@ -8,9 +8,6 @@ python-telegram-bot==20.7
 Flask==3.0.0
 requests==2.31.0
 
-# Base de datos
-sqlite3  # Incluido en Python estándar, no necesita instalación
-
 # Manejo de fechas y tiempo
 python-dateutil==2.8.2
 
