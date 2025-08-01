@@ -410,6 +410,73 @@ def api_mantenimiento():
         }), 500
 
 
+# Webhook de WhatsApp - Agregado al panel admin para accesibilidad
+@app.route('/webhook', methods=['GET'])
+def verify_webhook():
+    """Verificación del webhook de WhatsApp"""
+    import logging
+    logger = logging.getLogger(__name__)
+
+    verify_token = request.args.get('hub.verify_token')
+    challenge = request.args.get('hub.challenge')
+
+    # Token de verificación desde variable de entorno
+    expected_token = os.environ.get(
+        'WHATSAPP_VERIFY_TOKEN', 'mi_token_verificacion_whatsapp')
+
+    if verify_token == expected_token:
+        logger.info("Webhook verificado exitosamente")
+        return challenge
+    else:
+        logger.error(f"Token de verificación incorrecto: {verify_token}")
+        return "Token incorrecto", 403
+
+
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    """Recibir mensajes de WhatsApp y procesarlos"""
+    import logging
+    from src.core.bot_core import handle_message
+
+    logger = logging.getLogger(__name__)
+
+    try:
+        data = request.get_json()
+        logger.info(f"Mensaje recibido: {data}")
+
+        # Verificar que el mensaje es válido
+        if not data or 'entry' not in data:
+            return jsonify({'status': 'ok'})
+
+        for entry in data['entry']:
+            for change in entry.get('changes', []):
+                if change.get('field') == 'messages':
+                    value = change.get('value', {})
+
+                    # Procesar mensajes entrantes
+                    for message in value.get('messages', []):
+                        phone_number = message['from']
+                        message_text = message.get('text', {}).get('body', '')
+                        message_id = message['id']
+
+                        logger.info(
+                            f"Procesando mensaje de {phone_number}: {message_text}")
+
+                        # Usar el sistema de bot core
+                        response = handle_message(phone_number, message_text)
+
+                        if response:
+                            logger.info(f"Respuesta generada: {response}")
+                            # Aquí se podría enviar la respuesta usando la API de WhatsApp
+                            # pero eso lo maneja el bot_core internamente
+
+        return jsonify({'status': 'ok'})
+
+    except Exception as e:
+        logger.error(f"Error procesando webhook: {e}")
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
+
 if __name__ == '__main__':
     # El puerto lo asigna automáticamente la plataforma cloud
     port = int(os.environ.get('PORT', 9000))
