@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify, send_from_directory
 import os
 import json
+import requests
 from datetime import datetime, timedelta
 
 # Importar el nuevo módulo de base de datos
@@ -442,16 +443,23 @@ def webhook():
 
     try:
         data = request.get_json()
-        logger.info(f"Mensaje recibido: {data}")
+        logger.info(
+            f"🔍 Datos completos recibidos en webhook: {json.dumps(data, indent=2)}")
 
         # Verificar que el mensaje es válido
         if not data or 'entry' not in data:
+            logger.warning("⚠️ Datos inválidos o sin 'entry'")
             return jsonify({'status': 'ok'})
 
         for entry in data['entry']:
+            logger.info(f"📨 Procesando entry: {entry}")
+
             for change in entry.get('changes', []):
+                logger.info(f"🔄 Procesando change: {change}")
+
                 if change.get('field') == 'messages':
                     value = change.get('value', {})
+                    logger.info(f"📱 Value de mensajes: {value}")
 
                     # Procesar mensajes entrantes
                     for message in value.get('messages', []):
@@ -460,21 +468,140 @@ def webhook():
                         message_id = message['id']
 
                         logger.info(
-                            f"Procesando mensaje de {phone_number}: {message_text}")
+                            f"📞 Mensaje de {phone_number}: '{message_text}' (ID: {message_id})")
 
-                        # Usar el sistema de bot core
-                        response = handle_message(phone_number, message_text)
+                        # Usar el sistema de bot core con los parámetros correctos
+                        try:
+                            # Importar estados globales del bot_core
+                            from src.core.bot_core import user_states, user_data
 
-                        if response:
-                            logger.info(f"Respuesta generada: {response}")
-                            # Aquí se podría enviar la respuesta usando la API de WhatsApp
-                            # pero eso lo maneja el bot_core internamente
+                            response = handle_message(
+                                message_text, phone_number, user_states, user_data)
+                            logger.info(
+                                f"✅ Respuesta del bot_core: {response}")
+
+                            if response:
+                                logger.info(
+                                    f"📤 Bot generó respuesta: {response}")
+                                # Enviar respuesta inmediata por WhatsApp
+                                try:
+                                    enviado = enviar_respuesta_whatsapp(
+                                        phone_number, response)
+                                    if enviado:
+                                        logger.info(
+                                            f"✅ Respuesta enviada por WhatsApp a {phone_number}")
+                                    else:
+                                        logger.error(
+                                            f"❌ No se pudo enviar respuesta a {phone_number}")
+                                except Exception as send_error:
+                                    logger.error(
+                                        f"💥 Error enviando respuesta WhatsApp: {send_error}")
+                            else:
+                                logger.warning(
+                                    f"⚠️ Bot no generó respuesta para: {message_text}")
+
+                        except Exception as e:
+                            logger.error(f"❌ Error en handle_message: {e}")
+                            import traceback
+                            logger.error(
+                                f"🔍 Traceback completo: {traceback.format_exc()}")
 
         return jsonify({'status': 'ok'})
 
     except Exception as e:
-        logger.error(f"Error procesando webhook: {e}")
+        logger.error(f"💥 Error crítico procesando webhook: {e}")
+        import traceback
+        logger.error(f"🔍 Traceback: {traceback.format_exc()}")
         return jsonify({'status': 'error', 'message': str(e)}), 500
+
+
+@app.route('/test_webhook', methods=['POST'])
+def test_webhook():
+    """Endpoint para probar el webhook manualmente"""
+    data = request.get_json()
+
+    if not data:
+        return jsonify({'error': 'No data provided'}), 400
+
+    # Estructura de prueba mínima
+    test_data = {
+        'entry': [{
+            'changes': [{
+                'field': 'messages',
+                'value': {
+                    'messages': [{
+                        'from': data.get('phone', '5491123456789'),
+                        'text': {'body': data.get('message', 'hola')},
+                        'id': 'test_message_id'
+                    }]
+                }
+            }]
+        }]
+    }
+
+    # Procesar como webhook normal
+    original_request = request
+    try:
+        # Simular request con test_data
+        result = webhook()  # Esto procesará usando los datos de prueba
+        return jsonify({
+            'status': 'test_completed',
+            'message': 'Webhook test executed',
+            'test_data': test_data
+        })
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+
+
+def enviar_respuesta_whatsapp(phone_number, message):
+    """Enviar respuesta inmediata de WhatsApp"""
+    try:
+        # Obtener configuración de WhatsApp
+        access_token = os.environ.get('WHATSAPP_ACCESS_TOKEN')
+        phone_number_id = os.environ.get('WHATSAPP_PHONE_NUMBER_ID')
+
+        if not access_token or not phone_number_id:
+            print("⚠️ Variables de WhatsApp no configuradas para envío")
+            return False
+
+        # Limpiar número de teléfono (remover prefijos si es necesario)
+        clean_number = phone_number
+        if phone_number.startswith('+'):
+            clean_number = phone_number[1:]
+
+        # API endpoint
+        url = f"https://graph.facebook.com/v18.0/{phone_number_id}/messages"
+
+        headers = {
+            'Authorization': f'Bearer {access_token}',
+            'Content-Type': 'application/json'
+        }
+
+        payload = {
+            "messaging_product": "whatsapp",
+            "to": clean_number,
+            "type": "text",
+            "text": {
+                "body": message
+            }
+        }
+
+        response = requests.post(url, headers=headers, json=payload)
+
+        if response.status_code == 200:
+            print(f"✅ Respuesta enviada a {phone_number}")
+            return True
+        else:
+            print(
+                f"❌ Error enviando respuesta: {response.status_code} - {response.text}")
+            return False
+
+    except Exception as e:
+        print(f"❌ Error crítico enviando respuesta: {e}")
+        return False
 
 
 if __name__ == '__main__':
