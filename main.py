@@ -47,14 +47,29 @@ def verificar_configuracion():
         log("⚠️ Variables de WhatsApp incompletas")
         log("🔧 Configúralas en Railway Dashboard > Variables")
 
-    # Entorno
-    is_railway = bool(os.environ.get('RAILWAY_STATIC_URL'))
+    # Entorno - Railway usa diferentes variables según el plan
+    railway_vars = [
+        'RAILWAY_STATIC_URL',  # URL pública del servicio
+        'RAILWAY_ENVIRONMENT',  # Entorno (production, etc)
+        'RAILWAY_SERVICE_NAME',  # Nombre del servicio
+        'RAILWAY_PROJECT_NAME',  # Nombre del proyecto
+        'RAILWAY_GIT_COMMIT_SHA'  # SHA del commit
+    ]
+
+    is_railway = any(os.environ.get(var) for var in railway_vars)
     railway_url = os.environ.get('RAILWAY_STATIC_URL')
 
-    if is_railway and railway_url:
-        log(f"🚂 Railway URL: {railway_url}")
-    elif is_railway:
-        log("🚂 Ejecutando en Railway")
+    if is_railway:
+        if railway_url:
+            log(f"🚂 Railway URL: {railway_url}")
+        else:
+            log("🚂 Ejecutando en Railway (sin URL pública)")
+
+        # Mostrar variables de Railway disponibles
+        for var in railway_vars:
+            value = os.environ.get(var)
+            if value:
+                log(f"   {var}: {value}")
     else:
         log("💻 Ejecutando localmente")
 
@@ -163,7 +178,9 @@ def main():
     inicializar_base_datos()
 
     # Obtener configuración del entorno
-    is_railway = bool(os.environ.get('RAILWAY_STATIC_URL'))
+    railway_vars = ['RAILWAY_STATIC_URL', 'RAILWAY_ENVIRONMENT',
+                    'RAILWAY_SERVICE_NAME', 'RAILWAY_PROJECT_NAME']
+    is_railway = any(os.environ.get(var) for var in railway_vars)
     port = int(os.environ.get('PORT', 9000))
 
     log(f"🌐 Entorno: {'Railway' if is_railway else 'Local'}")
