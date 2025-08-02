@@ -472,17 +472,8 @@ def handle_message(incoming_msg, from_number, user_states, user_data):
                         return f"❌ El horario {datos['hora']} ya fue reservado por otro usuario.\n\nPor favor selecciona otro horario:"
 
                     if crear_turno(datos['nombre'], datos['fecha'], datos['hora'], from_number):
-                        # Notificar al admin sobre el nuevo turno
-                        try:
-                            try:
-                                from ..admin.notifications import notificar_nuevo_turno
-                            except ImportError:
-                                from admin.notifications import notificar_nuevo_turno
-                            notificar_nuevo_turno(
-                                datos['nombre'], from_number, datos['fecha'], datos['hora'])
-                        except Exception as e:
-                            print(
-                                f"⚠️ Error enviando notificación de admin: {e}")
+                        # Notificación al admin removida por solicitud del usuario
+                        # Antes se enviaba notificar_nuevo_turno() pero se decidió quitarla
 
                         user_states[from_number] = 'inicio'
                         user_data.pop(from_number)
