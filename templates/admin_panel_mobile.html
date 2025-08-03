@@ -127,30 +127,40 @@
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         @keyframes slideInRight {
-            from { 
-                transform: translateX(100%); 
-                opacity: 0; 
+            from {
+                transform: translateX(100%);
+                opacity: 0;
             }
-            to { 
-                transform: translateX(0); 
-                opacity: 1; 
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
             }
         }
 
         @keyframes slideOutRight {
-            from { 
-                transform: translateX(0); 
-                opacity: 1; 
+            from {
+                transform: translateX(0);
+                opacity: 1;
             }
-            to { 
-                transform: translateX(100%); 
-                opacity: 0; 
+
+            to {
+                transform: translateX(100%);
+                opacity: 0;
             }
         }
 
@@ -1353,17 +1363,17 @@
         let notificationCheckInterval = null;
 
         // Inicializar sistema de notificaciones
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             notificationsPanel = document.getElementById('notificationsPanel');
             notificationsOverlay = document.getElementById('notificationsOverlay');
             notificationBadge = document.getElementById('notificationBadge');
-            
+
             // Cargar notificaciones iniciales
             loadNotifications();
-            
+
             // Configurar polling para nuevas notificaciones cada 30 segundos
             notificationCheckInterval = setInterval(loadNotifications, 30000);
-            
+
             // Solicitar permisos para notificaciones push
             requestNotificationPermission();
         });
@@ -1371,7 +1381,7 @@
         // Solicitar permisos para notificaciones push
         function requestNotificationPermission() {
             if ('Notification' in window && Notification.permission === 'default') {
-                Notification.requestPermission().then(function(permission) {
+                Notification.requestPermission().then(function (permission) {
                     if (permission === 'granted') {
                         console.log('✅ Permisos de notificación concedidos');
                     }
@@ -1391,7 +1401,7 @@
                     vibrate: [200, 100, 200]
                 });
 
-                notification.onclick = function() {
+                notification.onclick = function () {
                     window.focus();
                     toggleNotifications();
                     notification.close();
@@ -1518,20 +1528,20 @@
                     'Content-Type': 'application/json'
                 }
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    loadNotifications(); // Recargar lista
-                    updateNotificationBadge(0);
-                    showToast('Notificaciones marcadas como leídas', 'success');
-                } else {
-                    showToast('Error al marcar notificaciones', 'error');
-                }
-            })
-            .catch(error => {
-                console.error('Error marking notifications as read:', error);
-                showToast('Error de conexión', 'error');
-            });
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        loadNotifications(); // Recargar lista
+                        updateNotificationBadge(0);
+                        showToast('Notificaciones marcadas como leídas', 'success');
+                    } else {
+                        showToast('Error al marcar notificaciones', 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error marking notifications as read:', error);
+                    showToast('Error de conexión', 'error');
+                });
         }
 
         // Mostrar toast notification
@@ -1560,7 +1570,7 @@
         }
 
         // Limpiar interval al cerrar la página
-        window.addEventListener('beforeunload', function() {
+        window.addEventListener('beforeunload', function () {
             if (notificationCheckInterval) {
                 clearInterval(notificationCheckInterval);
             }
