@@ -72,7 +72,7 @@ def ejecutar_bot_sender():
                     stats['notificaciones_enviadas'] += 1
 
             stats['ultimo_envio'] = datetime.now()
-            
+
             # Mostrar output relevante
             if '📭 No hay notificaciones pendientes' in resultado.stdout:
                 log_mensaje("📭 No hay notificaciones pendientes")

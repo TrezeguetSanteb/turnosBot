@@ -129,13 +129,14 @@ def obtener_notificaciones_pendientes():
         from datetime import datetime, timedelta
         ahora = datetime.now()
         limite_tiempo = ahora - timedelta(hours=24)
-        
+
         pendientes = []
         for n in notifications:
             if not n.get('enviada', False):
                 # Verificar si la notificación es reciente
                 try:
-                    timestamp_notif = datetime.fromisoformat(n['timestamp'].replace('Z', '+00:00'))
+                    timestamp_notif = datetime.fromisoformat(
+                        n['timestamp'].replace('Z', '+00:00'))
                     if timestamp_notif >= limite_tiempo:
                         pendientes.append(n)
                     else:
@@ -146,12 +147,12 @@ def obtener_notificaciones_pendientes():
                 except:
                     # Si hay error parseando fecha, incluir la notificación
                     pendientes.append(n)
-        
+
         # Guardar cambios si se marcaron notificaciones como expiradas
         if any(n.get('motivo_marcado') for n in notifications):
             with open(log_file, 'w', encoding='utf-8') as f:
                 json.dump(notifications, f, ensure_ascii=False, indent=2)
-        
+
         return pendientes
 
     except Exception as e:
@@ -385,13 +386,14 @@ def limpiar_notificaciones_viejas(dias_antiguedad=7):
         from datetime import datetime, timedelta
         ahora = datetime.now()
         limite_tiempo = ahora - timedelta(days=dias_antiguedad)
-        
+
         notificaciones_limpias = []
         eliminadas = 0
-        
+
         for notif in notifications:
             try:
-                timestamp_notif = datetime.fromisoformat(notif['timestamp'].replace('Z', '+00:00'))
+                timestamp_notif = datetime.fromisoformat(
+                    notif['timestamp'].replace('Z', '+00:00'))
                 if timestamp_notif >= limite_tiempo:
                     notificaciones_limpias.append(notif)
                 else:
@@ -399,12 +401,13 @@ def limpiar_notificaciones_viejas(dias_antiguedad=7):
             except:
                 # Si hay error parseando fecha, conservar la notificación
                 notificaciones_limpias.append(notif)
-        
+
         if eliminadas > 0:
             with open(log_file, 'w', encoding='utf-8') as f:
-                json.dump(notificaciones_limpias, f, ensure_ascii=False, indent=2)
+                json.dump(notificaciones_limpias, f,
+                          ensure_ascii=False, indent=2)
             print(f"🧹 Limpiadas {eliminadas} notificaciones viejas")
-        
+
         return eliminadas
 
     except Exception as e:
@@ -423,7 +426,8 @@ def contar_notificaciones_pendientes():
         with open(log_file, 'r', encoding='utf-8') as f:
             notifications = json.load(f)
 
-        pendientes = len([n for n in notifications if not n.get('enviada', False)])
+        pendientes = len(
+            [n for n in notifications if not n.get('enviada', False)])
         return pendientes
 
     except Exception as e:

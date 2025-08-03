@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Script universal para enviar notificaciones por múltiples canales.
-Soporta Telegram y WhatsApp automáticamente según la configuración en .env
+Script para enviar notificaciones por WhatsApp.
+Sistema optimizado exclusivamente para WhatsApp Business API.
 """
 
 import asyncio
@@ -26,58 +26,6 @@ logging.basicConfig(
 )
 
 
-async def enviar_telegram(notificaciones):
-    """Envía notificaciones por Telegram"""
-    if not config.has_telegram():
-        print("⚠️ Telegram no está configurado")
-        return 0
-
-    try:
-        from telegram import Bot
-        token = config.get_telegram_token()
-        bot = Bot(token=token)
-
-        telegram_notifications = [
-            n for n in notificaciones
-            # Excluir números de WhatsApp
-            if not n['telefono'].startswith('549')
-        ]
-
-        print(f"📱 Notificaciones Telegram: {len(telegram_notifications)}")
-
-        enviadas = 0
-        for notificacion in telegram_notifications:
-            try:
-                chat_id = notificacion['telefono']
-                mensaje = notificacion['mensaje']
-
-                print(f"📨 Enviando a {chat_id}: {notificacion['tipo']}")
-
-                await bot.send_message(
-                    chat_id=chat_id,
-                    text=mensaje,
-                    parse_mode='Markdown'
-                )
-
-                marcar_notificacion_enviada(notificacion)
-                print(f"✅ Telegram enviado a {chat_id}")
-                enviadas += 1
-
-                await asyncio.sleep(0.5)  # Rate limiting
-
-            except Exception as e:
-                print(f"❌ Error Telegram a {notificacion['telefono']}: {e}")
-
-        return enviadas
-
-    except ImportError:
-        print("⚠️ python-telegram-bot no disponible")
-        return 0
-    except Exception as e:
-        print(f"❌ Error general Telegram: {e}")
-        return 0
-
-
 async def enviar_whatsapp(notificaciones):
     """Envía notificaciones por WhatsApp"""
     if not config.has_whatsapp():
@@ -87,16 +35,10 @@ async def enviar_whatsapp(notificaciones):
     try:
         from bots.senders.whatsapp_sender import whatsapp_sender
 
-        # WhatsApp maneja números de teléfono argentinos (que empiecen con 549)
-        whatsapp_notifications = [
-            n for n in notificaciones
-            if n['telefono'].startswith('549')
-        ]
-
-        print(f"📱 Notificaciones WhatsApp: {len(whatsapp_notifications)}")
+        print(f"📱 Notificaciones WhatsApp: {len(notificaciones)}")
 
         enviadas = 0
-        for notificacion in whatsapp_notifications:
+        for notificacion in notificaciones:
             try:
                 telefono = notificacion['telefono']
                 mensaje = notificacion['mensaje']
@@ -114,7 +56,7 @@ async def enviar_whatsapp(notificaciones):
                 else:
                     print(f"❌ Error WhatsApp a {telefono}")
 
-                await asyncio.sleep(1)  # Rate limiting más conservador
+                await asyncio.sleep(1)  # Rate limiting
 
             except Exception as e:
                 print(f"❌ Error WhatsApp a {notificacion['telefono']}: {e}")
@@ -131,7 +73,7 @@ async def enviar_whatsapp(notificaciones):
 
 async def main():
     """Función principal"""
-    print("🚀 Iniciando envío universal de notificaciones...")
+    print("🚀 Iniciando envío de notificaciones WhatsApp...")
 
     # Verificar notificaciones pendientes
     notificaciones = obtener_notificaciones_pendientes()
@@ -141,25 +83,15 @@ async def main():
 
     print(f"📊 Notificaciones pendientes: {len(notificaciones)}")
 
-    # Mostrar canales disponibles
-    canales = []
-    if config.has_telegram():
-        canales.append("Telegram")
-    if config.has_whatsapp():
-        canales.append("WhatsApp")
+    # Verificar configuración de WhatsApp
+    if not config.has_whatsapp():
+        print("❌ WhatsApp no está configurado")
+        return 0
 
-    print(f"🔗 Canales disponibles: {', '.join(canales)}")
+    print("🔗 Canal: WhatsApp Business API")
 
-    # Enviar por todos los canales disponibles
-    total_enviadas = 0
-
-    if config.has_telegram():
-        enviadas_telegram = await enviar_telegram(notificaciones)
-        total_enviadas += enviadas_telegram
-
-    if config.has_whatsapp():
-        enviadas_whatsapp = await enviar_whatsapp(notificaciones)
-        total_enviadas += enviadas_whatsapp
+    # Enviar notificaciones
+    total_enviadas = await enviar_whatsapp(notificaciones)
 
     # Limpiar notificaciones enviadas
     print("🧹 Limpiando notificaciones enviadas...")

@@ -1,8 +1,5 @@
-# Sistema de Turnos Multi-Canal - Dependencias Python
+# Sistema de Turnos WhatsApp - Dependencias Python
 # Instalación: pip install -r requirements.txt
-
-# Telegram Bot
-python-telegram-bot==20.7
 
 # WhatsApp Bot y API Web
 Flask==3.0.0
