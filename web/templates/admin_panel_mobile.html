@@ -579,8 +579,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         @keyframes modalSlideIn {
@@ -967,7 +972,8 @@
                                 </div>
                                 <div class="input-group">
                                     <label>Intervalo (min)</label>
-                                    <input type="number" id="global_manana_intervalo" min="15" max="60" step="15" value="30">
+                                    <input type="number" id="global_manana_intervalo" min="15" max="60" step="15"
+                                        value="30">
                                 </div>
                             </div>
                         </div>
@@ -985,7 +991,8 @@
                                 </div>
                                 <div class="input-group">
                                     <label>Intervalo (min)</label>
-                                    <input type="number" id="global_tarde_intervalo" min="15" max="60" step="15" value="30">
+                                    <input type="number" id="global_tarde_intervalo" min="15" max="60" step="15"
+                                        value="30">
                                 </div>
                             </div>
                         </div>
@@ -997,7 +1004,7 @@
             <div id="tab-dias" class="config-tab-content">
                 <div class="apply-to-days">
                     <div class="section-title">📅 Aplicar configuración global a:</div>
-                    
+
                     <div class="days-selector">
                         <div class="day-checkbox">
                             <input type="checkbox" id="apply-lunes" value="Lunes">
@@ -1186,7 +1193,7 @@
                 // Mostrar indicador de carga
                 const loadingContainer = document.getElementById('loadingContainer');
                 const diasContainer = document.getElementById('diasContainer');
-                
+
                 if (loadingContainer) {
                     loadingContainer.style.display = 'flex';
                 }
@@ -1198,17 +1205,17 @@
                 const datos = await response.json();
 
                 datosCache = datos;
-                
+
                 // Ocultar indicador de carga
                 if (loadingContainer) {
                     loadingContainer.style.display = 'none';
                 }
-                
+
                 mostrarDatos(datos);
                 actualizarTituloSemana(inicioSemana);
             } catch (error) {
                 console.error('Error al cargar datos:', error);
-                
+
                 // Ocultar carga y mostrar error
                 const loadingContainer = document.getElementById('loadingContainer');
                 if (loadingContainer) {
@@ -1268,7 +1275,7 @@
                 if (turnos.length === 0) {
                     return '<div class="empty-state"><div class="empty-state-icon">📅</div><div>Sin turnos</div></div>';
                 }
-                
+
                 return turnos.map(turno => `
                     <div class="turno-item ${turno[5] ? 'nuevo' : ''} ${periodo}">
                         <div class="turno-info">
@@ -1531,11 +1538,11 @@
         // Cambiar período (mañana/tarde) en turnos
         function cambiarPeriodo(button, periodo) {
             const dayCard = button.closest('.day-card');
-            
+
             // Actualizar botones
             dayCard.querySelectorAll('.turno-tab').forEach(tab => tab.classList.remove('active'));
             button.classList.add('active');
-            
+
             // Actualizar contenido
             dayCard.querySelectorAll('.turnos-period').forEach(period => period.classList.remove('active'));
             dayCard.querySelector(`[data-period="${periodo}"]`).classList.add('active');
@@ -1561,7 +1568,7 @@
             // Actualizar botones
             document.querySelectorAll('.config-tab').forEach(t => t.classList.remove('active'));
             document.querySelector(`[onclick="cambiarTabGlobal('${tab}')"]`).classList.add('active');
-            
+
             // Actualizar contenido
             document.querySelectorAll('.config-tab-content').forEach(content => content.classList.remove('active'));
             document.getElementById(`tab-${tab}`).classList.add('active');
@@ -1576,7 +1583,7 @@
                 document.getElementById('global_manana_inicio').value = primerDia.horario.manana?.hora_inicio || 8;
                 document.getElementById('global_manana_fin').value = primerDia.horario.manana?.hora_fin || 12;
                 document.getElementById('global_manana_intervalo').value = primerDia.horario.manana?.intervalo || 30;
-                
+
                 // Tarde
                 document.getElementById('global_tarde_inicio').value = primerDia.horario.tarde?.hora_inicio || 15;
                 document.getElementById('global_tarde_fin').value = primerDia.horario.tarde?.hora_fin || 18;
@@ -1654,7 +1661,7 @@
                 // Cerrar modal y recargar
                 cerrarModalGlobal();
                 mostrarNotificacion(`✅ Configuración aplicada a ${diasSeleccionados.length} días`, 'success');
-                
+
                 // Recargar datos
                 setTimeout(() => {
                     cargarSemana();
