@@ -17,8 +17,8 @@ from src.admin.notifications import notificar_admin
 PROJECT_ROOT = os.path.abspath(os.path.join(
     os.path.dirname(__file__), '..', '..'))
 CONFIG_PATH = os.path.join(PROJECT_ROOT, 'config', 'config.json')
-TEMPLATES_DIR = os.path.join(PROJECT_ROOT, 'web', 'templates')
-STATIC_DIR = os.path.join(PROJECT_ROOT, 'web', 'static')
+TEMPLATES_DIR = os.path.join(PROJECT_ROOT, 'templates')
+STATIC_DIR = os.path.join(PROJECT_ROOT, 'static')
 
 # Asegurar que los directorios existen
 os.makedirs(os.path.join(PROJECT_ROOT, 'config'), exist_ok=True)

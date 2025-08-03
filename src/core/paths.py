@@ -37,15 +37,15 @@ def get_logs_path(filename=''):
 
 
 def get_templates_path(filename=''):
-    """Obtiene ruta en la carpeta web/templates/"""
-    templates_dir = os.path.join(PROJECT_ROOT, 'web', 'templates')
+    """Obtiene ruta en la carpeta templates/"""
+    templates_dir = os.path.join(PROJECT_ROOT, 'templates')
     os.makedirs(templates_dir, exist_ok=True)
     return os.path.join(templates_dir, filename) if filename else templates_dir
 
 
 def get_static_path(filename=''):
-    """Obtiene ruta en la carpeta web/static/"""
-    static_dir = os.path.join(PROJECT_ROOT, 'web', 'static')
+    """Obtiene ruta en la carpeta static/"""
+    static_dir = os.path.join(PROJECT_ROOT, 'static')
     os.makedirs(static_dir, exist_ok=True)
     return os.path.join(static_dir, filename) if filename else static_dir
 
