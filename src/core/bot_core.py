@@ -425,15 +425,10 @@ def handle_message(incoming_msg, from_number, user_states, user_data):
                 if cancelar_turno_por_usuario(turno_id, from_number):
                     # Notificar al admin sobre la cancelación
                     try:
-                        try:
-                            from ..admin.notifications import notificar_cancelacion_turno
-                        except ImportError:
-                            from admin.notifications import notificar_cancelacion_turno
-                        notificar_cancelacion_turno(
-                            turno_info[1], turno_info[2], turno_info[3])
+                        from admin.notifications import notificar_admin
+                        notificar_admin('cancelacion_turno', turno_info[1], turno_info[2], turno_info[3], canal='WhatsApp')
                     except Exception as e:
-                        print(
-                            f"⚠️ Error enviando notificación de cancelación: {e}")
+                        print(f"⚠️ Error enviando notificación de cancelación: {e}")
 
                     user_states[from_number] = 'inicio'
                     user_data.pop(from_number, None)
@@ -517,8 +512,12 @@ def handle_message(incoming_msg, from_number, user_states, user_data):
                         return f"❌ El horario {datos['hora']} ya fue reservado por otro usuario.\n\nPor favor selecciona otro horario:"
 
                     if crear_turno(datos['nombre'], datos['fecha'], datos['hora'], from_number):
-                        # Notificación al admin removida por solicitud del usuario
-                        # Antes se enviaba notificar_nuevo_turno() pero se decidió quitarla
+                        # Notificar al admin sobre el nuevo turno
+                        try:
+                            from admin.notifications import notificar_admin
+                            notificar_admin('nuevo_turno', datos['nombre'], from_number, datos['fecha'], datos['hora'], canal='WhatsApp')
+                        except Exception as e:
+                            print(f"Error enviando notificación de nuevo turno: {e}")
 
                         user_states[from_number] = 'inicio'
                         user_data.pop(from_number)

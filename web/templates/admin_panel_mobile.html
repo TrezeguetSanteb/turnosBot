@@ -1361,6 +1361,7 @@
         let notificationsOverlay = null;
         let notificationBadge = null;
         let notificationCheckInterval = null;
+        let eventSource = null;
 
         // Inicializar sistema de notificaciones
         document.addEventListener('DOMContentLoaded', function () {
@@ -1369,14 +1370,64 @@
             notificationBadge = document.getElementById('notificationBadge');
 
             // Cargar notificaciones iniciales
+            console.log('🚀 Iniciando sistema de notificaciones...');
             loadNotifications();
 
-            // Configurar polling para nuevas notificaciones cada 30 segundos
-            notificationCheckInterval = setInterval(loadNotifications, 30000);
+            // Intentar usar SSE para notificaciones en tiempo real
+            if (typeof(EventSource) !== "undefined") {
+                console.log('📡 Configurando Server-Sent Events...');
+                setupSSE();
+            } else {
+                // Fallback a polling si SSE no está disponible
+                console.log('⏰ SSE no disponible, usando polling cada 30 segundos...');
+                notificationCheckInterval = setInterval(loadNotifications, 30000);
+            }
 
             // Solicitar permisos para notificaciones push
             requestNotificationPermission();
         });
+
+        // Configurar Server-Sent Events para notificaciones en tiempo real
+        function setupSSE() {
+            eventSource = new EventSource('/api/notifications/stream');
+            
+            eventSource.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                console.log('📨 SSE recibido:', data);
+                
+                if (data.type === 'notification_update') {
+                    console.log(`🔔 Actualización de notificaciones: ${data.count}`);
+                    // Recargar notificaciones cuando hay cambios
+                    loadNotifications();
+                    
+                    // Mostrar notificación push si está permitido
+                    if (data.count > 0) {
+                        showPushNotification(
+                            '🔔 Nueva notificación',
+                            'Hay nuevas notificaciones en el panel de administración'
+                        );
+                    }
+                }
+            };
+            
+            eventSource.onerror = function(event) {
+                console.error('❌ Error en SSE:', event);
+                // Fallback a polling en caso de error
+                if (!notificationCheckInterval) {
+                    console.log('🔄 Activando fallback a polling...');
+                    notificationCheckInterval = setInterval(loadNotifications, 30000);
+                }
+            };
+            
+            eventSource.onopen = function(event) {
+                console.log('✅ Conexión SSE establecida');
+                // Limpiar polling si SSE funciona
+                if (notificationCheckInterval) {
+                    clearInterval(notificationCheckInterval);
+                    notificationCheckInterval = null;
+                }
+            };
+        }
 
         // Solicitar permisos para notificaciones push
         function requestNotificationPermission() {
@@ -1438,10 +1489,16 @@
 
         // Cargar notificaciones desde la API
         function loadNotifications() {
+            console.log('🔄 Cargando notificaciones...');
             fetch('/api/notifications')
-                .then(response => response.json())
+                .then(response => {
+                    console.log('📡 Respuesta recibida:', response.status);
+                    return response.json();
+                })
                 .then(data => {
+                    console.log('📋 Datos de notificaciones:', data);
                     if (data.success) {
+                        console.log(`✅ ${data.count} notificaciones encontradas`);
                         updateNotificationBadge(data.count);
                         renderNotifications(data.notifications);
                     } else {
@@ -1455,11 +1512,14 @@
 
         // Actualizar badge de contador
         function updateNotificationBadge(count) {
+            console.log(`🔢 Actualizando badge con contador: ${count}`);
             if (count > 0) {
                 notificationBadge.textContent = count > 99 ? '99+' : count;
                 notificationBadge.style.display = 'flex';
+                console.log('✅ Badge mostrado');
             } else {
                 notificationBadge.style.display = 'none';
+                console.log('❌ Badge ocultado');
             }
         }
 

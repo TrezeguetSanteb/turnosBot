@@ -1,10 +1,12 @@
 from src.admin.notifications import notificar_admin
 from src.services.notifications import notificar_cancelacion_turno, notificar_dia_bloqueado
-from flask import Flask, render_template, request, redirect, url_for, jsonify, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, jsonify, send_from_directory, Response
 import os
 import json
 import requests
 from datetime import datetime, timedelta
+import threading
+import time
 
 # Importar el nuevo módulo de base de datos
 from src.core.database import obtener_turnos_por_fecha, eliminar_turno_admin, obtener_todos_los_turnos
@@ -742,6 +744,95 @@ def get_notifications_count():
             'error': str(e),
             'count': 0
         }), 500
+
+
+# Variables globales para notificaciones en tiempo real
+clients_sse = []
+last_notification_count = 0
+
+def add_sse_client(client):
+    """Agregar cliente SSE"""
+    clients_sse.append(client)
+
+def remove_sse_client(client):
+    """Remover cliente SSE"""
+    if client in clients_sse:
+        clients_sse.remove(client)
+
+def send_sse_notification(data):
+    """Enviar notificación SSE a todos los clientes conectados"""
+    global clients_sse
+    dead_clients = []
+    
+    for client in clients_sse[:]:  # Copia para evitar modificación durante iteración
+        try:
+            client.put(f"data: {json.dumps(data)}\n\n")
+        except:
+            dead_clients.append(client)
+    
+    # Remover clientes desconectados
+    for client in dead_clients:
+        remove_sse_client(client)
+
+def notification_monitor():
+    """Monitor de notificaciones para envío en tiempo real"""
+    global last_notification_count
+    
+    while True:
+        try:
+            from src.admin.notifications import contar_notificaciones_pendientes
+            current_count = contar_notificaciones_pendientes()
+            
+            if current_count != last_notification_count:
+                # Hay cambios en las notificaciones
+                data = {
+                    'type': 'notification_update',
+                    'count': current_count,
+                    'timestamp': datetime.now().isoformat()
+                }
+                send_sse_notification(data)
+                last_notification_count = current_count
+                
+        except Exception as e:
+            print(f"Error en monitor de notificaciones: {e}")
+        
+        time.sleep(5)  # Revisar cada 5 segundos
+
+# Iniciar monitor en background
+notification_monitor_thread = threading.Thread(target=notification_monitor, daemon=True)
+notification_monitor_thread.start()
+
+# Endpoint SSE para notificaciones en tiempo real
+@app.route('/api/notifications/stream')
+def notification_stream():
+    """Stream de notificaciones en tiempo real usando Server-Sent Events"""
+    import queue
+    
+    def event_stream():
+        q = queue.Queue()
+        add_sse_client(q)
+        
+        try:
+            while True:
+                try:
+                    # Enviar heartbeat cada 30 segundos
+                    data = q.get(timeout=30)
+                    yield data
+                except queue.Empty:
+                    # Heartbeat para mantener conexión
+                    yield "data: {\"type\": \"heartbeat\"}\n\n"
+        except GeneratorExit:
+            remove_sse_client(q)
+    
+    return Response(
+        event_stream(),
+        mimetype='text/event-stream',
+        headers={
+            'Cache-Control': 'no-cache',
+            'Connection': 'keep-alive',
+            'Access-Control-Allow-Origin': '*'
+        }
+    )
 
 
 if __name__ == '__main__':
