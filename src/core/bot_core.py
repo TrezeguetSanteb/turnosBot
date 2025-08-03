@@ -46,6 +46,29 @@ STATE_TIMEOUT = 600  # 10 minutos
 user_last_active = {}
 
 
+def generar_domingos_proximos_meses(meses=6):
+    """Genera las fechas de todos los domingos de los próximos meses"""
+    domingos = []
+    hoy = datetime.now().date()
+
+    # Encontrar el próximo domingo
+    dias_hasta_domingo = (6 - hoy.weekday()) % 7
+    if dias_hasta_domingo == 0 and hoy.weekday() == 6:  # Si hoy es domingo
+        proximo_domingo = hoy
+    else:
+        proximo_domingo = hoy + timedelta(days=dias_hasta_domingo)
+
+    # Generar domingos para los próximos meses
+    fecha_limite = hoy + timedelta(days=meses * 30)  # Aproximadamente X meses
+    domingo_actual = proximo_domingo
+
+    while domingo_actual <= fecha_limite:
+        domingos.append(domingo_actual.strftime('%Y-%m-%d'))
+        domingo_actual += timedelta(days=7)  # Siguiente domingo
+
+    return domingos
+
+
 def cargar_config():
     config_default = {
         "hora_inicio": 8, "hora_fin": 18, "intervalo": 30, "dias_bloqueados": [],
@@ -70,8 +93,30 @@ def cargar_config():
                         "manana": val if isinstance(val, dict) else config_default["horarios_por_dia"][dia]["manana"],
                         "tarde": config_default["horarios_por_dia"][dia]["tarde"]
                     }
-            return config
-    return config_default
+    else:
+        config = config_default.copy()
+
+    # Agregar automáticamente todos los domingos como días bloqueados
+    domingos = generar_domingos_proximos_meses(6)  # 6 meses
+    dias_bloqueados_set = set(config["dias_bloqueados"])
+
+    # Agregar domingos que no estén ya en la lista
+    domingos_agregados = 0
+    for domingo in domingos:
+        if domingo not in dias_bloqueados_set:
+            config["dias_bloqueados"].append(domingo)
+            domingos_agregados += 1
+
+    # Solo guardar si se agregaron nuevos domingos para evitar escrituras innecesarias
+    if domingos_agregados > 0 and os.path.exists(os.path.dirname(CONFIG_PATH)):
+        try:
+            with open(CONFIG_PATH, 'w') as f:
+                json.dump(config, f)
+        except Exception as e:
+            print(
+                f"Warning: No se pudo guardar la configuración actualizada: {e}")
+
+    return config
 
 
 def parse_fecha(fecha_str):

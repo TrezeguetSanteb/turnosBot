@@ -18,13 +18,14 @@ class BotConfig:
         self.WHATSAPP_PHONE_NUMBER_ID = os.getenv('WHATSAPP_PHONE_NUMBER_ID')
         self.WHATSAPP_BUSINESS_ACCOUNT_ID = os.getenv(
             'WHATSAPP_BUSINESS_ACCOUNT_ID')
-        
+
         # Número del administrador
         self.ADMIN_PHONE_NUMBER = os.getenv('ADMIN_PHONE_NUMBER')
 
         # Configuración general
         self.NOTIFICATION_INTERVAL = int(
-            os.getenv('NOTIFICATION_INTERVAL', '1800'))  # 30 minutos por defecto
+            # 30 minutos por defecto
+            os.getenv('NOTIFICATION_INTERVAL', '1800'))
         self.LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
 
     def get_whatsapp_config(self):

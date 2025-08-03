@@ -29,7 +29,8 @@ def main():
         print("📊 Configuración:")
         print(
             f"   Intervalo daemon: {config.NOTIFICATION_INTERVAL} segundos ({config.NOTIFICATION_INTERVAL/60:.1f} min)")
-        print("   WhatsApp: ✅ Configurado" if config.has_whatsapp() else "   WhatsApp: ❌ No configurado")
+        print("   WhatsApp: ✅ Configurado" if config.has_whatsapp()
+              else "   WhatsApp: ❌ No configurado")
         print()
 
         # Estado de notificaciones

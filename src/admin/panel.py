@@ -1,3 +1,5 @@
+from src.admin.notifications import notificar_admin
+from src.services.notifications import notificar_cancelacion_turno, notificar_dia_bloqueado
 from flask import Flask, render_template, request, redirect, url_for, jsonify, send_from_directory
 import os
 import json
@@ -7,11 +9,33 @@ from datetime import datetime, timedelta
 # Importar el nuevo módulo de base de datos
 from src.core.database import obtener_turnos_por_fecha, eliminar_turno_admin, obtener_todos_los_turnos
 
+
+def generar_domingos_proximos_meses(meses=6):
+    """Genera las fechas de todos los domingos de los próximos meses"""
+    domingos = []
+    hoy = datetime.now().date()
+
+    # Encontrar el próximo domingo
+    dias_hasta_domingo = (6 - hoy.weekday()) % 7
+    if dias_hasta_domingo == 0 and hoy.weekday() == 6:  # Si hoy es domingo
+        proximo_domingo = hoy
+    else:
+        proximo_domingo = hoy + timedelta(days=dias_hasta_domingo)
+
+    # Generar domingos para los próximos meses
+    fecha_limite = hoy + timedelta(days=meses * 30)  # Aproximadamente X meses
+    domingo_actual = proximo_domingo
+
+    while domingo_actual <= fecha_limite:
+        domingos.append(domingo_actual.strftime('%Y-%m-%d'))
+        domingo_actual += timedelta(days=7)  # Siguiente domingo
+
+    return domingos
+
+
 # Importar el módulo de notificaciones
-from src.services.notifications import notificar_cancelacion_turno, notificar_dia_bloqueado
 
 # Importar notificaciones para admin
-from src.admin.notifications import notificar_admin
 
 # Obtener ruta raíz del proyecto y configuración
 PROJECT_ROOT = os.path.abspath(os.path.join(
@@ -52,8 +76,22 @@ def cargar_config():
                         "manana": val if isinstance(val, dict) else config_default["horarios_por_dia"][dia]["manana"],
                         "tarde": config_default["horarios_por_dia"][dia]["tarde"]
                     }
-            return config
-    return config_default
+    else:
+        config = config_default.copy()
+
+    # Agregar automáticamente todos los domingos como días bloqueados
+    domingos = generar_domingos_proximos_meses(6)  # 6 meses
+    dias_bloqueados_set = set(config["dias_bloqueados"])
+
+    # Agregar domingos que no estén ya en la lista
+    for domingo in domingos:
+        if domingo not in dias_bloqueados_set:
+            config["dias_bloqueados"].append(domingo)
+
+    # Guardar la configuración actualizada
+    guardar_config(config)
+
+    return config
 
 
 def guardar_config(config):
