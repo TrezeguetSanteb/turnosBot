@@ -749,6 +749,7 @@ def get_notifications_count():
 # Variables globales para notificaciones en tiempo real
 clients_sse = []
 last_notification_count = 0
+consecutive_no_change = 0
 
 def add_sse_client(client):
     """Agregar cliente SSE"""
@@ -775,8 +776,8 @@ def send_sse_notification(data):
         remove_sse_client(client)
 
 def notification_monitor():
-    """Monitor de notificaciones para envío en tiempo real"""
-    global last_notification_count
+    """Monitor de notificaciones para envío en tiempo real - optimizado para Railway Sleep"""
+    global last_notification_count, consecutive_no_change
     
     while True:
         try:
@@ -792,11 +793,29 @@ def notification_monitor():
                 }
                 send_sse_notification(data)
                 last_notification_count = current_count
+                consecutive_no_change = 0
+                
+                # Después de cambio, revisar más frecuentemente por si hay más
+                sleep_time = 2
+            else:
+                consecutive_no_change += 1
+                
+                # Usar intervalos progresivamente más largos cuando no hay cambios
+                if len(clients_sse) == 0:
+                    # Sin clientes conectados, dormir más tiempo
+                    sleep_time = 30
+                elif consecutive_no_change < 5:
+                    sleep_time = 5  # Normal
+                elif consecutive_no_change < 20:
+                    sleep_time = 10  # Menos frecuente
+                else:
+                    sleep_time = 30  # Muy poco frecuente para permitir sleep
                 
         except Exception as e:
             print(f"Error en monitor de notificaciones: {e}")
+            sleep_time = 10
         
-        time.sleep(5)  # Revisar cada 5 segundos
+        time.sleep(sleep_time)
 
 # Iniciar monitor en background
 notification_monitor_thread = threading.Thread(target=notification_monitor, daemon=True)
@@ -833,6 +852,38 @@ def notification_stream():
             'Access-Control-Allow-Origin': '*'
         }
     )
+
+
+# Health check endpoint para Railway Sleep optimization
+@app.route('/health')
+def health_check():
+    """Health check que indica el estado de actividad de la aplicación"""
+    try:
+        from src.admin.notifications import contar_notificaciones_pendientes
+        notification_count = contar_notificaciones_pendientes()
+        connected_clients = len(clients_sse)
+        
+        # Determinar si la app está "idle" (puede dormir)
+        is_idle = (
+            notification_count == 0 and 
+            connected_clients == 0 and 
+            consecutive_no_change > 10
+        )
+        
+        return jsonify({
+            'status': 'healthy',
+            'timestamp': datetime.now().isoformat(),
+            'metrics': {
+                'notifications_pending': notification_count,
+                'sse_clients_connected': connected_clients,
+                'can_sleep': is_idle
+            }
+        })
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'error': str(e)
+        }), 500
 
 
 if __name__ == '__main__':

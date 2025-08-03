@@ -28,6 +28,11 @@ class BotConfig:
             os.getenv('NOTIFICATION_INTERVAL', '1800'))
         self.LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
 
+        # Configuración específica para Railway Sleep/Idle
+        self.RAILWAY_SLEEP_OPTIMIZED = os.getenv('RAILWAY_SLEEP_OPTIMIZED', 'true').lower() == 'true'
+        self.IDLE_CHECK_INTERVAL = int(os.getenv('IDLE_CHECK_INTERVAL', '300'))  # 5 minutos cuando idle
+        self.ACTIVE_CHECK_INTERVAL = int(os.getenv('ACTIVE_CHECK_INTERVAL', '60'))  # 1 minuto cuando activo
+
     def get_whatsapp_config(self):
         """Obtiene la configuración de WhatsApp"""
         if not all([self.WHATSAPP_ACCESS_TOKEN, self.WHATSAPP_PHONE_NUMBER_ID]):
