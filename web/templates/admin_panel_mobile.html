@@ -47,6 +47,9 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .mobile-header h1 {
@@ -57,6 +60,24 @@
         .mobile-header .subtitle {
             font-size: 14px;
             opacity: 0.9;
+        }
+
+        .mobile-header .global-config-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: absolute;
+            right: 16px;
+        }
+
+        .global-config-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
         }
 
         /* Banner de instalación PWA */
@@ -276,13 +297,49 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
 
         .turnos-count {
             font-size: 14px;
             color: #666;
             font-weight: 500;
+        }
+
+        .turnos-tabs {
+            display: flex;
+            background: #f1f3f4;
+            border-radius: 8px;
+            padding: 2px;
+            margin-bottom: 12px;
+        }
+
+        .turno-tab {
+            flex: 1;
+            padding: 8px 12px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #666;
+        }
+
+        .turno-tab.active {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .turnos-period {
+            display: none;
+        }
+
+        .turnos-period.active {
+            display: block;
         }
 
         .turnos-list {
@@ -298,11 +355,25 @@
             background: #f8f9fa;
             border-radius: 8px;
             border-left: 4px solid #667eea;
+            transition: all 0.3s;
+        }
+
+        .turno-item:hover {
+            background: #e9ecef;
+            transform: translateX(2px);
         }
 
         .turno-item.nuevo {
             border-left-color: #28a745;
             background: #d4fff4;
+        }
+
+        .turno-item.manana {
+            border-left-color: #ffc107;
+        }
+
+        .turno-item.tarde {
+            border-left-color: #fd7e14;
         }
 
         .turno-info {
@@ -313,12 +384,20 @@
             font-weight: 600;
             font-size: 14px;
             color: #333;
+            margin-bottom: 2px;
         }
 
         .turno-detalles {
             font-size: 12px;
             color: #666;
             margin-top: 2px;
+        }
+
+        .turno-hora {
+            font-size: 13px;
+            color: #495057;
+            font-weight: 500;
+            margin-top: 1px;
         }
 
         .delete-btn {
@@ -370,6 +449,138 @@
             max-height: 80vh;
             overflow-y: auto;
             animation: modalSlideIn 0.3s ease-out;
+        }
+
+        .modal-content.large {
+            max-width: 500px;
+            max-height: 85vh;
+        }
+
+        /* Configuración Global */
+        .config-tabs {
+            display: flex;
+            background: #f1f3f4;
+            border-radius: 8px;
+            padding: 2px;
+            margin-bottom: 20px;
+        }
+
+        .config-tab {
+            flex: 1;
+            padding: 10px 12px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #666;
+        }
+
+        .config-tab.active {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .config-tab-content {
+            display: none;
+        }
+
+        .config-tab-content.active {
+            display: block;
+        }
+
+        .global-time-config {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .days-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .day-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        .day-checkbox:hover {
+            background: #e9ecef;
+        }
+
+        .day-checkbox input[type="checkbox"] {
+            margin: 0;
+            transform: scale(1.2);
+        }
+
+        .day-checkbox label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #495057;
+            cursor: pointer;
+        }
+
+        .select-all-buttons {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 16px;
+        }
+
+        .select-all-buttons .btn {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        /* Indicador de carga */
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 16px;
+        }
+
+        .loading-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: #495057;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         @keyframes modalSlideIn {
@@ -510,14 +721,107 @@
         /* Estado vacío */
         .empty-state {
             text-align: center;
-            padding: 24px;
+            padding: 32px 24px;
             color: #666;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 8px;
+            margin: 8px 0;
         }
 
         .empty-state-icon {
             font-size: 48px;
             margin-bottom: 12px;
-            opacity: 0.5;
+            opacity: 0.6;
+            filter: grayscale(50%);
+        }
+
+        .empty-state div:last-child {
+            font-size: 14px;
+            font-weight: 500;
+            color: #495057;
+        }
+
+        /* Mejoras visuales adicionales */
+        .day-card {
+            background: white;
+            margin-bottom: 16px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(230, 230, 230, 0.6);
+        }
+
+        .day-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-color: rgba(102, 126, 234, 0.2);
+        }
+
+        .day-header {
+            background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+            border-bottom: 1px solid rgba(230, 230, 230, 0.8);
+        }
+
+        .day-name {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .status-today {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(40, 167, 69, 0.3);
+        }
+
+        .status-blocked {
+            background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);
+        }
+
+        .turno-item {
+            background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+            border: 1px solid rgba(230, 230, 230, 0.6);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .turno-item:hover {
+            background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+            transform: translateX(4px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .turno-item.nuevo {
+            background: linear-gradient(135deg, #d4fff4 0%, #b8f5e5 100%);
+            border-left-color: #28a745;
+            box-shadow: 0 2px 8px rgba(40, 167, 69, 0.15);
+        }
+
+        .action-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1) translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .config-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .block-btn {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        }
+
+        .unblock-btn {
+            background: linear-gradient(135deg, #28a745 0%, #218838 100%);
         }
 
         /* Responsive */
@@ -539,6 +843,10 @@
     <div class="mobile-header">
         <h1>🗓️ Panel Admin</h1>
         <div class="subtitle">Gestión de Turnos</div>
+        <!-- Botón de configuración global -->
+        <button class="global-config-btn" onclick="abrirConfiguracionGlobal()" title="Configuración Global">
+            ⚙️
+        </button>
     </div>
 
     <!-- Botón de instalación PWA -->
@@ -561,6 +869,10 @@
 
     <div class="days-container" id="diasContainer">
         <!-- Los días se cargarán dinámicamente -->
+        <div class="loading-container" id="loadingContainer">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Cargando turnos...</div>
+        </div>
     </div>
 
     <!-- Modal para configurar horarios -->
@@ -618,6 +930,122 @@
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Modal para configuración global -->
+    <div id="globalConfigModal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <div class="modal-title">🌍 Configuración Global</div>
+                <button class="close-btn" onclick="cerrarModalGlobal()">&times;</button>
+            </div>
+
+            <div class="config-tabs">
+                <button class="config-tab active" onclick="cambiarTabGlobal('horarios')">
+                    ⏰ Horarios por Defecto
+                </button>
+                <button class="config-tab" onclick="cambiarTabGlobal('dias')">
+                    📅 Aplicar a Días
+                </button>
+            </div>
+
+            <!-- Tab de horarios por defecto -->
+            <div id="tab-horarios" class="config-tab-content active">
+                <form id="globalHorariosForm">
+                    <div class="global-time-config">
+                        <div class="time-range">
+                            <div class="time-range-title">🌅 Horarios de Mañana (Por Defecto)</div>
+                            <div class="time-inputs">
+                                <div class="input-group">
+                                    <label>Hora Inicio</label>
+                                    <input type="number" id="global_manana_inicio" min="6" max="12" value="8">
+                                </div>
+                                <div class="input-group">
+                                    <label>Hora Fin</label>
+                                    <input type="number" id="global_manana_fin" min="8" max="14" value="12">
+                                </div>
+                                <div class="input-group">
+                                    <label>Intervalo (min)</label>
+                                    <input type="number" id="global_manana_intervalo" min="15" max="60" step="15" value="30">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="time-range">
+                            <div class="time-range-title">🌇 Horarios de Tarde (Por Defecto)</div>
+                            <div class="time-inputs">
+                                <div class="input-group">
+                                    <label>Hora Inicio</label>
+                                    <input type="number" id="global_tarde_inicio" min="12" max="18" value="15">
+                                </div>
+                                <div class="input-group">
+                                    <label>Hora Fin</label>
+                                    <input type="number" id="global_tarde_fin" min="14" max="22" value="18">
+                                </div>
+                                <div class="input-group">
+                                    <label>Intervalo (min)</label>
+                                    <input type="number" id="global_tarde_intervalo" min="15" max="60" step="15" value="30">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Tab de aplicar a días -->
+            <div id="tab-dias" class="config-tab-content">
+                <div class="apply-to-days">
+                    <div class="section-title">📅 Aplicar configuración global a:</div>
+                    
+                    <div class="days-selector">
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="apply-lunes" value="Lunes">
+                            <label for="apply-lunes">Lunes</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="apply-martes" value="Martes">
+                            <label for="apply-martes">Martes</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="apply-miercoles" value="Miércoles">
+                            <label for="apply-miercoles">Miércoles</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="apply-jueves" value="Jueves">
+                            <label for="apply-jueves">Jueves</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="apply-viernes" value="Viernes">
+                            <label for="apply-viernes">Viernes</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="apply-sabado" value="Sábado">
+                            <label for="apply-sabado">Sábado</label>
+                        </div>
+                        <div class="day-checkbox">
+                            <input type="checkbox" id="apply-domingo" value="Domingo">
+                            <label for="apply-domingo">Domingo</label>
+                        </div>
+                    </div>
+
+                    <div class="select-all-buttons">
+                        <button type="button" class="btn btn-secondary" onclick="seleccionarTodosDias()">
+                            Seleccionar Todos
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="deseleccionarTodosDias()">
+                            Deseleccionar Todos
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="cerrarModalGlobal()">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="aplicarConfiguracionGlobal()">
+                    Aplicar Configuración
+                </button>
+            </div>
         </div>
     </div>
 
@@ -755,6 +1183,14 @@
         // Cargar datos de la semana
         async function cargarSemana() {
             try {
+                // Mostrar indicador de carga
+                const loadingContainer = document.getElementById('loadingContainer');
+                const diasContainer = document.getElementById('diasContainer');
+                
+                if (loadingContainer) {
+                    loadingContainer.style.display = 'flex';
+                }
+
                 const inicioSemana = getInicioSemana(semanaActual);
                 const fechaStr = formatearFechaAPI(inicioSemana);
 
@@ -762,11 +1198,28 @@
                 const datos = await response.json();
 
                 datosCache = datos;
+                
+                // Ocultar indicador de carga
+                if (loadingContainer) {
+                    loadingContainer.style.display = 'none';
+                }
+                
                 mostrarDatos(datos);
                 actualizarTituloSemana(inicioSemana);
             } catch (error) {
                 console.error('Error al cargar datos:', error);
-                mostrarError();
+                
+                // Ocultar carga y mostrar error
+                const loadingContainer = document.getElementById('loadingContainer');
+                if (loadingContainer) {
+                    loadingContainer.innerHTML = `
+                        <div style="text-align: center; color: #666;">
+                            <div style="font-size: 32px; margin-bottom: 12px;">❌</div>
+                            <div style="margin-bottom: 16px;">Error cargando datos</div>
+                            <button class="btn btn-primary" onclick="cargarSemana()">Reintentar</button>
+                        </div>
+                    `;
+                }
             }
         }
 
@@ -797,17 +1250,45 @@
             if (dia.bloqueado) statusBadges.push('<span class="status-badge status-blocked">Bloqueado</span>');
             if (!dia.es_hoy && !dia.bloqueado) statusBadges.push('<span class="status-badge status-normal">Disponible</span>');
 
-            const turnosHtml = dia.turnos.length > 0
-                ? dia.turnos.map(turno => `
-                    <div class="turno-item ${turno[5] ? 'nuevo' : ''}">
+            // Separar turnos por períodos
+            const turnosMañana = [];
+            const turnosTarde = [];
+
+            dia.turnos.forEach(turno => {
+                const hora = parseInt(turno[3].split(':')[0]); // Obtener hora del formato HH:MM
+                if (hora < 14) { // Antes de las 14:00 es mañana
+                    turnosMañana.push(turno);
+                } else {
+                    turnosTarde.push(turno);
+                }
+            });
+
+            // Función para crear HTML de turnos
+            function crearTurnosHtml(turnos, periodo) {
+                if (turnos.length === 0) {
+                    return '<div class="empty-state"><div class="empty-state-icon">📅</div><div>Sin turnos</div></div>';
+                }
+                
+                return turnos.map(turno => `
+                    <div class="turno-item ${turno[5] ? 'nuevo' : ''} ${periodo}">
                         <div class="turno-info">
                             <div class="turno-nombre">${turno[1]}</div>
-                            <div class="turno-detalles">${turno[3]} • ${turno[4]}</div>
+                            <div class="turno-hora">${turno[3]}</div>
+                            <div class="turno-detalles">${turno[4]}</div>
                         </div>
                         <button class="delete-btn" onclick="eliminarTurno(${turno[0]})" title="Eliminar turno">×</button>
                     </div>
-                `).join('')
-                : '<div class="empty-state"><div class="empty-state-icon">📅</div><div>Sin turnos</div></div>';
+                `).join('');
+            }
+
+            const turnosMananaHtml = crearTurnosHtml(turnosMañana, 'manana');
+            const turnosTardeHtml = crearTurnosHtml(turnosTarde, 'tarde');
+
+            // Determinar pestaña activa por defecto
+            let tabActivaDefecto = 'manana';
+            if (turnosMañana.length === 0 && turnosTarde.length > 0) {
+                tabActivaDefecto = 'tarde';
+            }
 
             diaDiv.innerHTML = `
                 <div class="day-header">
@@ -832,9 +1313,32 @@
                     <div class="turnos-header">
                         <div class="turnos-count">${dia.turnos.length} turno${dia.turnos.length !== 1 ? 's' : ''}</div>
                     </div>
-                    <div class="turnos-list">
-                        ${turnosHtml}
-                    </div>
+                    ${dia.turnos.length > 0 ? `
+                        <div class="turnos-tabs">
+                            <button class="turno-tab ${tabActivaDefecto === 'manana' ? 'active' : ''}" 
+                                    onclick="cambiarPeriodo(this, 'manana')">
+                                🌅 Mañana (${turnosMañana.length})
+                            </button>
+                            <button class="turno-tab ${tabActivaDefecto === 'tarde' ? 'active' : ''}" 
+                                    onclick="cambiarPeriodo(this, 'tarde')">
+                                🌇 Tarde (${turnosTarde.length})
+                            </button>
+                        </div>
+                        <div class="turnos-period ${tabActivaDefecto === 'manana' ? 'active' : ''}" data-period="manana">
+                            <div class="turnos-list">
+                                ${turnosMananaHtml}
+                            </div>
+                        </div>
+                        <div class="turnos-period ${tabActivaDefecto === 'tarde' ? 'active' : ''}" data-period="tarde">
+                            <div class="turnos-list">
+                                ${turnosTardeHtml}
+                            </div>
+                        </div>
+                    ` : `
+                        <div class="turnos-list">
+                            <div class="empty-state"><div class="empty-state-icon">📅</div><div>Sin turnos</div></div>
+                        </div>
+                    `}
                 </div>
             `;
 
@@ -1019,6 +1523,160 @@
             // Inicializar PWA
             initializePWA();
         });
+
+        // ========================================
+        // NUEVAS FUNCIONES - MEJORAS UX/UI
+        // ========================================
+
+        // Cambiar período (mañana/tarde) en turnos
+        function cambiarPeriodo(button, periodo) {
+            const dayCard = button.closest('.day-card');
+            
+            // Actualizar botones
+            dayCard.querySelectorAll('.turno-tab').forEach(tab => tab.classList.remove('active'));
+            button.classList.add('active');
+            
+            // Actualizar contenido
+            dayCard.querySelectorAll('.turnos-period').forEach(period => period.classList.remove('active'));
+            dayCard.querySelector(`[data-period="${periodo}"]`).classList.add('active');
+        }
+
+        // ========================================
+        // CONFIGURACIÓN GLOBAL
+        // ========================================
+
+        // Abrir modal de configuración global
+        function abrirConfiguracionGlobal() {
+            document.getElementById('globalConfigModal').classList.add('show');
+            cargarConfiguracionGlobalActual();
+        }
+
+        // Cerrar modal de configuración global
+        function cerrarModalGlobal() {
+            document.getElementById('globalConfigModal').classList.remove('show');
+        }
+
+        // Cambiar tab en configuración global
+        function cambiarTabGlobal(tab) {
+            // Actualizar botones
+            document.querySelectorAll('.config-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`[onclick="cambiarTabGlobal('${tab}')"]`).classList.add('active');
+            
+            // Actualizar contenido
+            document.querySelectorAll('.config-tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(`tab-${tab}`).classList.add('active');
+        }
+
+        // Cargar configuración global actual
+        function cargarConfiguracionGlobalActual() {
+            // Usar valores por defecto o del primer día disponible
+            const primerDia = datosCache?.dias_semana?.[0];
+            if (primerDia?.horario) {
+                // Mañana
+                document.getElementById('global_manana_inicio').value = primerDia.horario.manana?.hora_inicio || 8;
+                document.getElementById('global_manana_fin').value = primerDia.horario.manana?.hora_fin || 12;
+                document.getElementById('global_manana_intervalo').value = primerDia.horario.manana?.intervalo || 30;
+                
+                // Tarde
+                document.getElementById('global_tarde_inicio').value = primerDia.horario.tarde?.hora_inicio || 15;
+                document.getElementById('global_tarde_fin').value = primerDia.horario.tarde?.hora_fin || 18;
+                document.getElementById('global_tarde_intervalo').value = primerDia.horario.tarde?.intervalo || 30;
+            }
+        }
+
+        // Seleccionar todos los días
+        function seleccionarTodosDias() {
+            document.querySelectorAll('.day-checkbox input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = true;
+            });
+        }
+
+        // Deseleccionar todos los días
+        function deseleccionarTodosDias() {
+            document.querySelectorAll('.day-checkbox input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+        }
+
+        // Aplicar configuración global
+        async function aplicarConfiguracionGlobal() {
+            try {
+                // Obtener configuración global
+                const configGlobal = {
+                    manana: {
+                        hora_inicio: parseInt(document.getElementById('global_manana_inicio').value),
+                        hora_fin: parseInt(document.getElementById('global_manana_fin').value),
+                        intervalo: parseInt(document.getElementById('global_manana_intervalo').value)
+                    },
+                    tarde: {
+                        hora_inicio: parseInt(document.getElementById('global_tarde_inicio').value),
+                        hora_fin: parseInt(document.getElementById('global_tarde_fin').value),
+                        intervalo: parseInt(document.getElementById('global_tarde_intervalo').value)
+                    }
+                };
+
+                // Obtener días seleccionados
+                const diasSeleccionados = [];
+                document.querySelectorAll('.day-checkbox input[type="checkbox"]:checked').forEach(checkbox => {
+                    diasSeleccionados.push(checkbox.value);
+                });
+
+                if (diasSeleccionados.length === 0) {
+                    mostrarNotificacion('⚠️ Selecciona al menos un día', 'warning');
+                    return;
+                }
+
+                // Aplicar configuración a cada día seleccionado
+                for (const nombreDia of diasSeleccionados) {
+                    try {
+                        const formData = new FormData();
+                        formData.append('nombre_dia', nombreDia);
+                        formData.append('manana_hora_inicio', configGlobal.manana.hora_inicio);
+                        formData.append('manana_hora_fin', configGlobal.manana.hora_fin);
+                        formData.append('manana_intervalo', configGlobal.manana.intervalo);
+                        formData.append('tarde_hora_inicio', configGlobal.tarde.hora_inicio);
+                        formData.append('tarde_hora_fin', configGlobal.tarde.hora_fin);
+                        formData.append('tarde_intervalo', configGlobal.tarde.intervalo);
+
+                        const response = await fetch('/configurar_rangos', {
+                            method: 'POST',
+                            body: formData
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`Error aplicando configuración a ${nombreDia}`);
+                        }
+                    } catch (error) {
+                        console.error(`Error configurando ${nombreDia}:`, error);
+                    }
+                }
+
+                // Cerrar modal y recargar
+                cerrarModalGlobal();
+                mostrarNotificacion(`✅ Configuración aplicada a ${diasSeleccionados.length} días`, 'success');
+                
+                // Recargar datos
+                setTimeout(() => {
+                    cargarSemana();
+                }, 1000);
+
+            } catch (error) {
+                console.error('Error aplicando configuración global:', error);
+                mostrarNotificacion('❌ Error aplicando configuración', 'warning');
+            }
+        }
+
+        // Mostrar notificación
+        function mostrarNotificacion(mensaje, tipo = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `connectivity-notification ${tipo}`;
+            notification.textContent = mensaje;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
 
         // ========================================
         // PWA INITIALIZATION

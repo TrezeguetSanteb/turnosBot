@@ -25,7 +25,7 @@ class BotConfig:
 
         # Configuración general
         self.NOTIFICATION_INTERVAL = int(
-            os.getenv('NOTIFICATION_INTERVAL', '60'))
+            os.getenv('NOTIFICATION_INTERVAL', '300'))  # 5 minutos por defecto
         self.LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
 
     def get_telegram_token(self):

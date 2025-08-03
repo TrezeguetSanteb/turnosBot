@@ -161,7 +161,8 @@ async def main(in_thread=False):
 
     log_mensaje("🤖 DAEMON DE NOTIFICACIONES INICIADO")
     log_mensaje("=" * 50)
-    log_mensaje(f"Intervalo: {INTERVALO_SEGUNDOS} segundos")
+    log_mensaje(
+        f"Intervalo: {INTERVALO_SEGUNDOS} segundos ({INTERVALO_SEGUNDOS/60:.1f} minutos)")
     log_mensaje(f"Script: {SCRIPT_SENDER}")
     log_mensaje("Presiona Ctrl+C para detener")
     log_mensaje("=" * 50)
