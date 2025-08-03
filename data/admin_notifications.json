@@ -1,1 +1,25 @@
-[]
+[
+  {
+    "timestamp": "2025-08-03T16:10:14.320627",
+    "tipo": "nuevo_turno",
+    "datos": {
+      "nombre": "Juan Pérez",
+      "telefono": "123456789",
+      "fecha": "2025-08-04",
+      "hora": "14:30",
+      "canal": "WhatsApp"
+    },
+    "enviada": false
+  },
+  {
+    "timestamp": "2025-08-03T16:10:49.894971",
+    "tipo": "cancelacion_turno",
+    "datos": {
+      "nombre": "María García",
+      "fecha": "2025-08-04",
+      "hora": "16:00",
+      "canal": "WhatsApp"
+    },
+    "enviada": false
+  }
+]

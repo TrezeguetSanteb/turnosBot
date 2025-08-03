@@ -69,6 +69,91 @@
             flex: 1;
         }
 
+        /* Header buttons container */
+        .header-buttons {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Botón de notificaciones */
+        .notification-btn {
+            position: relative;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .notification-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .notification-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Badge de contador de notificaciones */
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4444;
+            color: white;
+            border-radius: 50%;
+            min-width: 20px;
+            height: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes slideInRight {
+            from { 
+                transform: translateX(100%); 
+                opacity: 0; 
+            }
+            to { 
+                transform: translateX(0); 
+                opacity: 1; 
+            }
+        }
+
+        @keyframes slideOutRight {
+            from { 
+                transform: translateX(0); 
+                opacity: 1; 
+            }
+            to { 
+                transform: translateX(100%); 
+                opacity: 0; 
+            }
+        }
+
         .mobile-header .global-config-btn {
             background: rgba(255, 255, 255, 0.2);
             color: white;
@@ -78,10 +163,6 @@
             font-size: 18px;
             cursor: pointer;
             transition: all 0.3s;
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
             width: 44px;
             height: 44px;
             display: flex;
@@ -91,8 +172,173 @@
 
         .global-config-btn:hover {
             background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-50%) scale(1.1);
+            transform: scale(1.1);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Panel de notificaciones */
+        .notifications-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: white;
+            z-index: 1000;
+            transition: right 0.3s ease;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .notifications-panel.active {
+            right: 0;
+        }
+
+        .notifications-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notifications-header h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .close-notifications {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-notifications:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .notifications-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0;
+        }
+
+        .notification-item {
+            padding: 16px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .notification-item:hover {
+            background: #f8f9fa;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .notification-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .notification-message {
+            font-size: 14px;
+            color: #333;
+            margin: 0 0 4px 0;
+            line-height: 1.4;
+        }
+
+        .notification-time {
+            font-size: 12px;
+            color: #666;
+            margin: 0;
+        }
+
+        .notification-item.priority-alta {
+            border-left: 4px solid #ff4444;
+        }
+
+        .notification-item.priority-normal {
+            border-left: 4px solid #4CAF50;
+        }
+
+        .notification-item.priority-baja {
+            border-left: 4px solid #ccc;
+        }
+
+        .no-notifications {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+
+        .no-notifications-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .mark-all-read {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin: 16px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .mark-all-read:hover {
+            background: #5a67d8;
+        }
+
+        .mark-all-read:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Overlay para cerrar panel */
+        .notifications-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .notifications-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
 
         /* Banner de instalación PWA */
@@ -864,9 +1110,34 @@
             <h1>🗓️ Panel Admin</h1>
             <div class="subtitle">Gestión de Turnos</div>
         </div>
-        <!-- Botón de configuración global -->
-        <button class="global-config-btn" onclick="abrirConfiguracionGlobal()" title="Configuración Global">
-            ⚙️
+        <div class="header-buttons">
+            <!-- Botón de notificaciones -->
+            <button class="notification-btn" onclick="toggleNotifications()" title="Notificaciones">
+                🔔
+                <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+            </button>
+            <!-- Botón de configuración global -->
+            <button class="global-config-btn" onclick="abrirConfiguracionGlobal()" title="Configuración Global">
+                ⚙️
+            </button>
+        </div>
+    </div>
+
+    <!-- Panel de notificaciones -->
+    <div class="notifications-overlay" id="notificationsOverlay" onclick="closeNotifications()"></div>
+    <div class="notifications-panel" id="notificationsPanel">
+        <div class="notifications-header">
+            <h3>🔔 Notificaciones</h3>
+            <button class="close-notifications" onclick="closeNotifications()">×</button>
+        </div>
+        <div class="notifications-content" id="notificationsContent">
+            <div class="no-notifications" id="noNotifications">
+                <div class="no-notifications-icon">🔔</div>
+                <p>No hay notificaciones nuevas</p>
+            </div>
+        </div>
+        <button class="mark-all-read" id="markAllReadBtn" onclick="markAllNotificationsRead()" style="display: none;">
+            Marcar todas como leídas
         </button>
     </div>
 
@@ -1073,6 +1344,228 @@
     </div>
 
     <script>
+        // ========================================
+        // SISTEMA DE NOTIFICACIONES
+        // ========================================
+        let notificationsPanel = null;
+        let notificationsOverlay = null;
+        let notificationBadge = null;
+        let notificationCheckInterval = null;
+
+        // Inicializar sistema de notificaciones
+        document.addEventListener('DOMContentLoaded', function() {
+            notificationsPanel = document.getElementById('notificationsPanel');
+            notificationsOverlay = document.getElementById('notificationsOverlay');
+            notificationBadge = document.getElementById('notificationBadge');
+            
+            // Cargar notificaciones iniciales
+            loadNotifications();
+            
+            // Configurar polling para nuevas notificaciones cada 30 segundos
+            notificationCheckInterval = setInterval(loadNotifications, 30000);
+            
+            // Solicitar permisos para notificaciones push
+            requestNotificationPermission();
+        });
+
+        // Solicitar permisos para notificaciones push
+        function requestNotificationPermission() {
+            if ('Notification' in window && Notification.permission === 'default') {
+                Notification.requestPermission().then(function(permission) {
+                    if (permission === 'granted') {
+                        console.log('✅ Permisos de notificación concedidos');
+                    }
+                });
+            }
+        }
+
+        // Mostrar notificación push
+        function showPushNotification(title, body, icon = '🔔') {
+            if ('Notification' in window && Notification.permission === 'granted') {
+                const notification = new Notification(title, {
+                    body: body,
+                    icon: '/static/icon-192.png',
+                    badge: '/static/icon-192.png',
+                    tag: 'turnosbot-admin',
+                    requireInteraction: true,
+                    vibrate: [200, 100, 200]
+                });
+
+                notification.onclick = function() {
+                    window.focus();
+                    toggleNotifications();
+                    notification.close();
+                };
+
+                // Auto cerrar después de 10 segundos
+                setTimeout(() => notification.close(), 10000);
+            }
+        }
+
+        // Alternar panel de notificaciones
+        function toggleNotifications() {
+            if (notificationsPanel.classList.contains('active')) {
+                closeNotifications();
+            } else {
+                openNotifications();
+            }
+        }
+
+        // Abrir panel de notificaciones
+        function openNotifications() {
+            notificationsPanel.classList.add('active');
+            notificationsOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            loadNotifications(); // Recargar al abrir
+        }
+
+        // Cerrar panel de notificaciones
+        function closeNotifications() {
+            notificationsPanel.classList.remove('active');
+            notificationsOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Cargar notificaciones desde la API
+        function loadNotifications() {
+            fetch('/api/notifications')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        updateNotificationBadge(data.count);
+                        renderNotifications(data.notifications);
+                    } else {
+                        console.error('Error loading notifications:', data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching notifications:', error);
+                });
+        }
+
+        // Actualizar badge de contador
+        function updateNotificationBadge(count) {
+            if (count > 0) {
+                notificationBadge.textContent = count > 99 ? '99+' : count;
+                notificationBadge.style.display = 'flex';
+            } else {
+                notificationBadge.style.display = 'none';
+            }
+        }
+
+        // Renderizar notificaciones en el panel
+        function renderNotifications(notifications) {
+            const content = document.getElementById('notificationsContent');
+            const noNotifications = document.getElementById('noNotifications');
+            const markAllBtn = document.getElementById('markAllReadBtn');
+
+            if (notifications.length === 0) {
+                content.innerHTML = `
+                    <div class="no-notifications">
+                        <div class="no-notifications-icon">🔔</div>
+                        <p>No hay notificaciones nuevas</p>
+                    </div>
+                `;
+                markAllBtn.style.display = 'none';
+                return;
+            }
+
+            let html = '';
+            notifications.forEach(notification => {
+                const time = formatNotificationTime(notification.timestamp);
+                html += `
+                    <div class="notification-item priority-${notification.prioridad}" onclick="onNotificationClick('${notification.id}')">
+                        <div class="notification-icon">${notification.icono}</div>
+                        <div class="notification-content">
+                            <p class="notification-message">${notification.mensaje}</p>
+                            <p class="notification-time">${time}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            content.innerHTML = html;
+            markAllBtn.style.display = 'block';
+        }
+
+        // Formatear tiempo de notificación
+        function formatNotificationTime(timestamp) {
+            const date = new Date(timestamp);
+            const now = new Date();
+            const diff = now - date;
+            const minutes = Math.floor(diff / 60000);
+            const hours = Math.floor(diff / 3600000);
+            const days = Math.floor(diff / 86400000);
+
+            if (minutes < 1) return 'Ahora mismo';
+            if (minutes < 60) return `Hace ${minutes} min`;
+            if (hours < 24) return `Hace ${hours}h`;
+            if (days < 7) return `Hace ${days}d`;
+            return date.toLocaleDateString();
+        }
+
+        // Manejar click en notificación
+        function onNotificationClick(notificationId) {
+            console.log('Clicked notification:', notificationId);
+            // Aquí podrías agregar lógica específica por tipo de notificación
+        }
+
+        // Marcar todas las notificaciones como leídas
+        function markAllNotificationsRead() {
+            fetch('/api/notifications/mark-read', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    loadNotifications(); // Recargar lista
+                    updateNotificationBadge(0);
+                    showToast('Notificaciones marcadas como leídas', 'success');
+                } else {
+                    showToast('Error al marcar notificaciones', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error marking notifications as read:', error);
+                showToast('Error de conexión', 'error');
+            });
+        }
+
+        // Mostrar toast notification
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                z-index: 10000;
+                font-size: 14px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                animation: slideInRight 0.3s ease;
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => document.body.removeChild(toast), 300);
+            }, 3000);
+        }
+
+        // Limpiar interval al cerrar la página
+        window.addEventListener('beforeunload', function() {
+            if (notificationCheckInterval) {
+                clearInterval(notificationCheckInterval);
+            }
+        });
+
         // ========================================
         // PWA FUNCTIONALITY
         // ========================================

@@ -642,6 +642,108 @@ def enviar_respuesta_whatsapp(phone_number, message):
         return False
 
 
+# API para notificaciones del panel móvil
+@app.route('/api/notifications', methods=['GET'])
+def get_notifications():
+    """Obtener notificaciones para el panel móvil"""
+    try:
+        from src.admin.notifications import obtener_notificaciones_pendientes
+        notificaciones = obtener_notificaciones_pendientes()
+        
+        # Formatear notificaciones para el frontend
+        notificaciones_formateadas = []
+        for notif in notificaciones:
+            tipo = notif.get('tipo', '')
+            datos = notif.get('datos', {})
+            timestamp = notif.get('timestamp', '')
+            
+            # Crear mensaje legible según el tipo
+            if tipo == 'nuevo_turno':
+                mensaje = f"Nuevo turno: {datos.get('nombre', 'N/A')} - {datos.get('fecha', '')} {datos.get('hora', '')}"
+                icono = "📅"
+                prioridad = "normal"
+            elif tipo == 'cancelacion_turno':
+                mensaje = f"Turno cancelado: {datos.get('nombre', 'N/A')} - {datos.get('fecha', '')} {datos.get('hora', '')}"
+                icono = "❌"
+                prioridad = "alta"
+            elif tipo == 'bloqueo_dia':
+                mensaje = f"Día bloqueado: {datos.get('fecha', 'N/A')}"
+                icono = "🚫"
+                prioridad = "normal"
+            elif tipo == 'desbloqueo_dia':
+                mensaje = f"Día desbloqueado: {datos.get('fecha', 'N/A')}"
+                icono = "✅"
+                prioridad = "normal"
+            else:
+                mensaje = f"Evento: {tipo}"
+                icono = "ℹ️"
+                prioridad = "baja"
+            
+            notificaciones_formateadas.append({
+                'id': f"{timestamp}_{tipo}",
+                'tipo': tipo,
+                'mensaje': mensaje,
+                'icono': icono,
+                'prioridad': prioridad,
+                'timestamp': timestamp,
+                'datos': datos
+            })
+        
+        return jsonify({
+            'success': True,
+            'notifications': notificaciones_formateadas,
+            'count': len(notificaciones_formateadas)
+        })
+    
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e),
+            'notifications': [],
+            'count': 0
+        }), 500
+
+
+@app.route('/api/notifications/mark-read', methods=['POST'])
+def mark_notifications_read():
+    """Marcar notificaciones como leídas"""
+    try:
+        from src.admin.notifications import limpiar_notificaciones_viejas
+        # Limpiar notificaciones (las marca como procesadas)
+        eliminadas = limpiar_notificaciones_viejas(0)  # Limpiar todas
+        
+        return jsonify({
+            'success': True,
+            'marked_read': eliminadas
+        })
+    
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+
+@app.route('/api/notifications/count', methods=['GET'])
+def get_notifications_count():
+    """Obtener solo el conteo de notificaciones pendientes"""
+    try:
+        from src.admin.notifications import contar_notificaciones_pendientes
+        count = contar_notificaciones_pendientes()
+        
+        return jsonify({
+            'success': True,
+            'count': count
+        })
+    
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e),
+            'count': 0
+        }), 500
+
+
 if __name__ == '__main__':
     # El puerto lo asigna automáticamente la plataforma cloud
     port = int(os.environ.get('PORT', 9000))
