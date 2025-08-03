@@ -855,9 +855,9 @@ def notification_stream():
 
 
 # Health check endpoint para Railway Sleep optimization
-@app.route('/health')
-def health_check():
-    """Health check que indica el estado de actividad de la aplicación"""
+@app.route('/api/health/detailed')
+def health_check_detailed():
+    """Health check detallado que indica el estado de actividad de la aplicación"""
     try:
         from src.admin.notifications import contar_notificaciones_pendientes
         notification_count = contar_notificaciones_pendientes()
