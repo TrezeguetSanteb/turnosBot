@@ -72,14 +72,17 @@ def ejecutar_bot_sender():
                     stats['notificaciones_enviadas'] += 1
 
             stats['ultimo_envio'] = datetime.now()
-            log_mensaje("✅ Script ejecutado exitosamente")
-
-            # Mostrar output si hay notificaciones
-            if '📨 Enviando' in resultado.stdout:
+            
+            # Mostrar output relevante
+            if '📭 No hay notificaciones pendientes' in resultado.stdout:
+                log_mensaje("📭 No hay notificaciones pendientes")
+            elif '📨 Enviando' in resultado.stdout:
                 log_mensaje("📋 Output del envío:")
                 for line in output_lines:
                     if any(emoji in line for emoji in ['📨', '✅', '❌', '📊', '🧹']):
                         print(f"    {line}")
+            else:
+                log_mensaje("✅ Script ejecutado exitosamente")
         else:
             stats['errores'] += 1
             log_mensaje(
