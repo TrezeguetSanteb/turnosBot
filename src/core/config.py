@@ -1,9 +1,5 @@
 """
-Configuración centra        # Configuración general
-        self.NOTIFICATION_INTERVAL = int(
-            # 30 minutos por defecto
-            os.getenv('NOTIFICATION_INTERVAL', '1800'))
-        self.LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')a para el sistema de turnos WhatsApp.
+Configuración centralizada para el sistema de turnos WhatsApp.
 """
 
 import os
