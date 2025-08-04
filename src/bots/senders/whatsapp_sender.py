@@ -37,6 +37,8 @@ class WhatsAppSender:
         try:
             # Limpiar el número de teléfono
             clean_number = self._clean_phone_number(to_number)
+            
+            print(f"📱 Enviando WhatsApp: {to_number} → {clean_number}")
 
             headers = {
                 'Authorization': f'Bearer {self.access_token}',
@@ -52,6 +54,9 @@ class WhatsAppSender:
                 }
             }
 
+            print(f"🚀 Request URL: {self.base_url}")
+            print(f"📝 Payload: {json.dumps(payload, indent=2)}")
+
             response = requests.post(
                 self.base_url,
                 headers=headers,
@@ -59,17 +64,35 @@ class WhatsAppSender:
                 timeout=30
             )
 
+            print(f"📊 Response Status: {response.status_code}")
+            print(f"📄 Response Body: {response.text}")
+
             if response.status_code == 200:
-                logger.info(f"Mensaje enviado exitosamente a {clean_number}")
+                response_data = response.json()
+                message_id = response_data.get('messages', [{}])[0].get('id', 'unknown')
+                print(f"✅ Mensaje enviado exitosamente (ID: {message_id})")
+                logger.info(f"Mensaje enviado exitosamente a {clean_number} (ID: {message_id})")
                 return True
             else:
-                logger.error(
-                    f"Error enviando mensaje a {clean_number}: {response.status_code} - {response.text}")
+                print(f"❌ Error enviando mensaje: {response.status_code}")
+                print(f"💬 Error details: {response.text}")
+                logger.error(f"Error enviando mensaje a {clean_number}: {response.status_code} - {response.text}")
                 return False
 
+        except requests.exceptions.Timeout:
+            error_msg = f"Timeout enviando mensaje a {to_number}"
+            print(f"⏰ {error_msg}")
+            logger.error(error_msg)
+            return False
+        except requests.exceptions.ConnectionError:
+            error_msg = f"Error de conexión enviando mensaje a {to_number}"
+            print(f"🌐 {error_msg}")
+            logger.error(error_msg)
+            return False
         except Exception as e:
-            logger.error(
-                f"Excepción enviando mensaje por WhatsApp a {to_number}: {e}")
+            error_msg = f"Excepción enviando mensaje por WhatsApp a {to_number}: {e}"
+            print(f"💥 {error_msg}")
+            logger.error(error_msg)
             return False
 
     def _clean_phone_number(self, phone_number):
@@ -82,18 +105,30 @@ class WhatsAppSender:
         Returns:
             str: Número en formato que Meta acepta
         """
-        # Solo remover caracteres no numéricos
+        # Remover todos los caracteres no numéricos y el símbolo +
         clean = ''.join(filter(str.isdigit, phone_number))
-
-        # Si no empieza con código de país, asumir Argentina (54)
-        if not clean.startswith('54') and len(clean) >= 10:
-            clean = '54' + clean
-
-        # SOLUCIÓN: Convertir 549xxxxxxxx a 54xxxxxxxx (Meta lo prefiere así)
-        if clean.startswith('549') and len(clean) == 13:
-            # Remover el 9: 5492396511845 -> 542396511845
-            clean = '54' + clean[3:]
-
+        
+        # Manejar diferentes formatos de Argentina
+        if clean.startswith('549'):
+            # +549XXXXXXXXX -> usar tal como está (formato internacional completo)
+            return clean
+        elif clean.startswith('54'):
+            # +54XXXXXXXXX -> agregar 9 para celulares
+            if len(clean) == 12:  # 54 + 10 dígitos
+                return '549' + clean[2:]
+            else:
+                return clean
+        elif len(clean) == 10:
+            # XXXXXXXXXX (solo número local) -> agregar 549
+            return '549' + clean
+        elif len(clean) == 11 and clean.startswith('15'):
+            # 15XXXXXXXXX -> quitar 15 y agregar 549
+            return '549' + clean[2:]
+        else:
+            # Si no empieza con código de país, asumir Argentina (549)
+            if len(clean) >= 8:
+                return '549' + clean
+        
         return clean
 
 

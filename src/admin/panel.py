@@ -1,4 +1,5 @@
-from src.admin.notifications import notificar_admin
+from whatsapp_sender import WhatsAppSender
+from src.admin.notifications import notificar_admin, notificar_admin_cancelacion_directa
 from src.services.notifications import notificar_cancelacion_turno, notificar_dia_bloqueado
 from flask import Flask, render_template, request, redirect, url_for, jsonify, send_from_directory, Response
 import os
@@ -10,6 +11,11 @@ import time
 
 # Importar el nuevo módulo de base de datos
 from src.core.database import obtener_turnos_por_fecha, eliminar_turno_admin, obtener_todos_los_turnos
+
+# Importar WhatsApp sender para envío directo
+import sys
+sys.path.append(os.path.join(os.path.dirname(
+    __file__), '..', 'bots', 'senders'))
 
 
 def generar_domingos_proximos_meses(meses=6):
@@ -187,13 +193,24 @@ def eliminar(turno_id):
 
         # Eliminar el turno
         if eliminar_turno_admin(turno_id):
-            # Si encontramos el turno, enviar notificación
+            # Si encontramos el turno, enviar notificación directa por WhatsApp
             if turno_a_eliminar:
                 turno_id, nombre, fecha, hora, telefono = turno_a_eliminar
-                notificar_cancelacion_turno(
-                    turno_id, nombre, fecha, hora, telefono)
-                print(
-                    f"✅ Notificación enviada a {telefono} por cancelación de turno")
+
+                # Usar la nueva función de envío directo (inmediato)
+                exito_envio = notificar_admin_cancelacion_directa(
+                    nombre, fecha, hora, telefono)
+
+                if exito_envio:
+                    print(
+                        f"✅ Notificación enviada directamente por WhatsApp a {nombre} ({telefono})")
+                else:
+                    print(
+                        f"⚠️ Admin notificado pero error en WhatsApp directo a {telefono}")
+                    # Fallback: usar sistema diferido como backup
+                    notificar_cancelacion_turno(
+                        turno_id, nombre, fecha, hora, telefono)
+                    print(f"📝 Notificación agregada al sistema diferido como backup")
 
         semana = request.form.get('semana')
         if semana:
@@ -651,14 +668,14 @@ def get_notifications():
     try:
         from src.admin.notifications import obtener_notificaciones_pendientes
         notificaciones = obtener_notificaciones_pendientes()
-        
+
         # Formatear notificaciones para el frontend
         notificaciones_formateadas = []
         for notif in notificaciones:
             tipo = notif.get('tipo', '')
             datos = notif.get('datos', {})
             timestamp = notif.get('timestamp', '')
-            
+
             # Crear mensaje legible según el tipo
             if tipo == 'nuevo_turno':
                 mensaje = f"Nuevo turno: {datos.get('nombre', 'N/A')} - {datos.get('fecha', '')} {datos.get('hora', '')}"
@@ -680,7 +697,7 @@ def get_notifications():
                 mensaje = f"Evento: {tipo}"
                 icono = "ℹ️"
                 prioridad = "baja"
-            
+
             notificaciones_formateadas.append({
                 'id': f"{timestamp}_{tipo}",
                 'tipo': tipo,
@@ -690,13 +707,13 @@ def get_notifications():
                 'timestamp': timestamp,
                 'datos': datos
             })
-        
+
         return jsonify({
             'success': True,
             'notifications': notificaciones_formateadas,
             'count': len(notificaciones_formateadas)
         })
-    
+
     except Exception as e:
         return jsonify({
             'success': False,
@@ -713,12 +730,12 @@ def mark_notifications_read():
         from src.admin.notifications import limpiar_notificaciones_viejas
         # Limpiar notificaciones (las marca como procesadas)
         eliminadas = limpiar_notificaciones_viejas(0)  # Limpiar todas
-        
+
         return jsonify({
             'success': True,
             'marked_read': eliminadas
         })
-    
+
     except Exception as e:
         return jsonify({
             'success': False,
@@ -732,12 +749,12 @@ def get_notifications_count():
     try:
         from src.admin.notifications import contar_notificaciones_pendientes
         count = contar_notificaciones_pendientes()
-        
+
         return jsonify({
             'success': True,
             'count': count
         })
-    
+
     except Exception as e:
         return jsonify({
             'success': False,
@@ -751,39 +768,44 @@ clients_sse = []
 last_notification_count = 0
 consecutive_no_change = 0
 
+
 def add_sse_client(client):
     """Agregar cliente SSE"""
     clients_sse.append(client)
+
 
 def remove_sse_client(client):
     """Remover cliente SSE"""
     if client in clients_sse:
         clients_sse.remove(client)
 
+
 def send_sse_notification(data):
     """Enviar notificación SSE a todos los clientes conectados"""
     global clients_sse
     dead_clients = []
-    
-    for client in clients_sse[:]:  # Copia para evitar modificación durante iteración
+
+    # Copia para evitar modificación durante iteración
+    for client in clients_sse[:]:
         try:
             client.put(f"data: {json.dumps(data)}\n\n")
         except:
             dead_clients.append(client)
-    
+
     # Remover clientes desconectados
     for client in dead_clients:
         remove_sse_client(client)
 
+
 def notification_monitor():
     """Monitor de notificaciones para envío en tiempo real - optimizado para Railway Sleep"""
     global last_notification_count, consecutive_no_change
-    
+
     while True:
         try:
             from src.admin.notifications import contar_notificaciones_pendientes
             current_count = contar_notificaciones_pendientes()
-            
+
             if current_count != last_notification_count:
                 # Hay cambios en las notificaciones
                 data = {
@@ -794,12 +816,12 @@ def notification_monitor():
                 send_sse_notification(data)
                 last_notification_count = current_count
                 consecutive_no_change = 0
-                
+
                 # Después de cambio, revisar más frecuentemente por si hay más
                 sleep_time = 2
             else:
                 consecutive_no_change += 1
-                
+
                 # Usar intervalos progresivamente más largos cuando no hay cambios
                 if len(clients_sse) == 0:
                     # Sin clientes conectados, dormir más tiempo
@@ -810,27 +832,31 @@ def notification_monitor():
                     sleep_time = 10  # Menos frecuente
                 else:
                     sleep_time = 30  # Muy poco frecuente para permitir sleep
-                
+
         except Exception as e:
             print(f"Error en monitor de notificaciones: {e}")
             sleep_time = 10
-        
+
         time.sleep(sleep_time)
 
+
 # Iniciar monitor en background
-notification_monitor_thread = threading.Thread(target=notification_monitor, daemon=True)
+notification_monitor_thread = threading.Thread(
+    target=notification_monitor, daemon=True)
 notification_monitor_thread.start()
 
 # Endpoint SSE para notificaciones en tiempo real
+
+
 @app.route('/api/notifications/stream')
 def notification_stream():
     """Stream de notificaciones en tiempo real usando Server-Sent Events"""
     import queue
-    
+
     def event_stream():
         q = queue.Queue()
         add_sse_client(q)
-        
+
         try:
             while True:
                 try:
@@ -842,7 +868,7 @@ def notification_stream():
                     yield "data: {\"type\": \"heartbeat\"}\n\n"
         except GeneratorExit:
             remove_sse_client(q)
-    
+
     return Response(
         event_stream(),
         mimetype='text/event-stream',
@@ -862,14 +888,14 @@ def health_check_detailed():
         from src.admin.notifications import contar_notificaciones_pendientes
         notification_count = contar_notificaciones_pendientes()
         connected_clients = len(clients_sse)
-        
+
         # Determinar si la app está "idle" (puede dormir)
         is_idle = (
-            notification_count == 0 and 
-            connected_clients == 0 and 
+            notification_count == 0 and
+            connected_clients == 0 and
             consecutive_no_change > 10
         )
-        
+
         return jsonify({
             'status': 'healthy',
             'timestamp': datetime.now().isoformat(),

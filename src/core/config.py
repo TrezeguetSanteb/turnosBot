@@ -46,7 +46,15 @@ class BotConfig:
 
     def has_whatsapp(self):
         """Verifica si WhatsApp está configurado"""
-        return bool(self.WHATSAPP_ACCESS_TOKEN and self.WHATSAPP_PHONE_NUMBER_ID)
+        has_token = bool(self.WHATSAPP_ACCESS_TOKEN)
+        has_phone_id = bool(self.WHATSAPP_PHONE_NUMBER_ID)
+        
+        if not has_token:
+            print("❌ WHATSAPP_ACCESS_TOKEN no configurado")
+        if not has_phone_id:
+            print("❌ WHATSAPP_PHONE_NUMBER_ID no configurado")
+            
+        return has_token and has_phone_id
 
     def get_admin_phone_number(self):
         """Obtiene el número de teléfono del administrador"""

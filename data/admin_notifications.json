@@ -1,22 +1,12 @@
 [
   {
-    "timestamp": "2025-08-04T14:59:01.427086",
-    "tipo": "test_sistema",
+    "timestamp": "2025-08-04T20:07:59.750849",
+    "tipo": "cancelacion_turno",
     "datos": {
-      "mensaje": "Prueba del sistema después de la corrección del daemon",
-      "timestamp": "2025-08-04 14:58:00"
-    },
-    "enviada": false
-  },
-  {
-    "timestamp": "2025-08-04T15:18:11.485494",
-    "tipo": "nuevo_turno",
-    "datos": {
-      "nombre": "María García",
-      "telefono": "+5411112222",
-      "fecha": "2025-08-10",
-      "hora": "16:00",
-      "canal": "WhatsApp"
+      "nombre": "Usuario Test Híbrido",
+      "fecha": "2024-12-30",
+      "hora": "16:30",
+      "canal": "Panel Móvil"
     },
     "enviada": false
   }

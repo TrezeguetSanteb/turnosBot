@@ -435,6 +435,81 @@ def contar_notificaciones_pendientes():
         return 0
 
 
+def enviar_whatsapp_directo_cancelacion(nombre, fecha, hora, telefono):
+    """
+    Envía notificación directa por WhatsApp al usuario cuando el admin cancela su turno
+    Similar a las notificaciones del panel móvil - envío inmediato sin daemon
+    """
+    try:
+        from src.bots.senders.whatsapp_sender import WhatsAppSender
+
+        # Crear instancia del sender
+        sender = WhatsAppSender()
+
+        # Crear mensaje de cancelación para el usuario
+        mensaje = f"""❌ *Turno Cancelado*
+
+Hola {nombre},
+
+Tu turno ha sido cancelado por el administrador:
+
+📅 **Fecha:** {fecha}
+⏰ **Hora:** {hora}
+
+Si necesitas reprogramar tu turno, por favor contactanos.
+
+Disculpa las molestias."""
+
+        # Limpiar número de teléfono
+        telefono_limpio = sender.clean_phone_number(telefono)
+
+        print(f"📱 Enviando notificación directa a {telefono_limpio}")
+        print(f"💬 Mensaje: {mensaje[:50]}...")
+
+        # Enviar mensaje directo
+        resultado = sender.send_message(telefono_limpio, mensaje)
+
+        if resultado:
+            print(
+                f"✅ Notificación enviada exitosamente a {nombre} ({telefono})")
+            return True
+        else:
+            print(f"❌ Error enviando notificación a {nombre} ({telefono})")
+            return False
+
+    except Exception as e:
+        print(f"❌ Error en envío directo WhatsApp: {e}")
+        import traceback
+        traceback.print_exc()
+        return False
+
+
+def notificar_admin_cancelacion_directa(nombre, fecha, hora, telefono):
+    """
+    Notifica al admin que se canceló un turno Y envía WhatsApp directo al usuario
+    Función híbrida: notificación al admin (diferida) + WhatsApp al usuario (inmediato)
+    """
+    try:
+        # 1. Notificar al admin (sistema existente - diferido)
+        notificar_cancelacion_turno(nombre, fecha, hora, "Panel Móvil")
+
+        # 2. Enviar WhatsApp directo al usuario (inmediato)
+        envio_exitoso = enviar_whatsapp_directo_cancelacion(
+            nombre, fecha, hora, telefono)
+
+        if envio_exitoso:
+            print(
+                f"🎯 Cancelación completa: Admin notificado + Usuario notificado por WhatsApp")
+        else:
+            print(f"⚠️ Admin notificado pero falló envío WhatsApp al usuario")
+
+        return envio_exitoso
+
+    except Exception as e:
+        print(f"❌ Error en notificación completa de cancelación: {e}")
+        return False
+
+
 if __name__ == '__main__':
     # Prueba del sistema
     print("🧪 Probando sistema de notificaciones...")
