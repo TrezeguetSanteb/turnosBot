@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 import json
 import os
 import time
+import pytz
 
 # Importar usando rutas relativas para compatibilidad
 try:
@@ -36,6 +37,25 @@ except ImportError:
 PROJECT_ROOT = os.path.abspath(os.path.join(
     os.path.dirname(__file__), '..', '..'))
 CONFIG_PATH = os.path.join(PROJECT_ROOT, 'config', 'config.json')
+
+# Configuración de zona horaria
+ARGENTINA_TZ = pytz.timezone('America/Argentina/Buenos_Aires')
+
+
+def obtener_hora_argentina():
+    """Obtiene la hora actual en Argentina (UTC-3)"""
+    return datetime.now(ARGENTINA_TZ)
+
+
+def obtener_fecha_argentina():
+    """Obtiene la fecha actual en Argentina"""
+    return obtener_hora_argentina().date()
+
+
+def obtener_hora_solo_argentina():
+    """Obtiene solo la hora actual en Argentina (sin fecha)"""
+    return obtener_hora_argentina().time()
+
 
 user_states = {}
 user_data = {}
@@ -185,7 +205,7 @@ def formatear_fecha_legible(fecha_str, hora_str=None):
 
 def obtener_fechas_disponibles():
     """Obtiene las fechas disponibles para reservar (hoy + 6 días)"""
-    hoy = datetime.now().date()
+    hoy = obtener_fecha_argentina()  # Usar zona horaria Argentina
     fechas = []
     dias_nombres = ['lunes', 'martes', 'miércoles',
                     'jueves', 'viernes', 'sábado', 'domingo']
@@ -255,8 +275,8 @@ def obtener_horarios_disponibles(fecha_str):
     posibles.sort()
 
     # Si es hoy, filtrar horarios que ya pasaron
-    hoy = datetime.now().date()
-    hora_actual = datetime.now().time()
+    hoy = obtener_fecha_argentina()  # Usar zona horaria Argentina
+    hora_actual = obtener_hora_solo_argentina()  # Usar zona horaria Argentina
 
     if fecha_dt == hoy:
         # Filtrar horarios que ya pasaron

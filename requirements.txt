@@ -7,6 +7,7 @@ requests==2.31.0
 
 # Manejo de fechas y tiempo
 python-dateutil==2.8.2
+pytz==2023.4
 
 # Variables de entorno
 python-dotenv==1.0.0
