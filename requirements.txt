@@ -5,28 +5,8 @@
 Flask==3.0.0
 requests==2.31.0
 
-# Manejo de fechas y tiempo
-python-dateutil==2.8.2
+# Manejo de fechas y tiempo (zona horaria Argentina)
 pytz==2023.4
 
 # Variables de entorno
 python-dotenv==1.0.0
-
-# Logging mejorado (opcional)
-colorlog==6.8.0
-
-# Utilidades para archivos JSON
-jsonschema==4.20.0
-
-# Para crear iconos PWA (opcional, solo si necesitas regenerar iconos)
-Pillow==10.1.0
-
-# Para webhooks HTTPS en desarrollo (opcional)
-# ngrok==1.0.1
-
-# Para producción - WSGI server (opcional)
-# gunicorn==21.2.0
-# waitress==2.1.2
-
-# Monitoreo y logs en producción (opcional)
-# psutil==5.9.6
