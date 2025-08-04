@@ -24,8 +24,8 @@ class BotConfig:
 
         # Configuración general
         self.NOTIFICATION_INTERVAL = int(
-            # 2 minutos para pruebas
-            os.getenv('NOTIFICATION_INTERVAL', '120'))
+            # 5 minutos por defecto
+            os.getenv('NOTIFICATION_INTERVAL', '300'))
         self.LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
 
         # Configuración específica para Railway Sleep/Idle
