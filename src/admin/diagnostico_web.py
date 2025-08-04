@@ -116,13 +116,17 @@ def test_funcion_panel():
     
     try:
         nombre = "Usuario Railway Test"
+        fecha = "2025-08-05"  # Fecha de ejemplo
+        hora = "10:00"  # Hora de ejemplo
         telefono = "5491123456789"  # Cambiar por número real para test
         
         output.append(f"📝 Ejecutando enviar_whatsapp_directo_cancelacion:")
         output.append(f"   Nombre: {nombre}")
+        output.append(f"   Fecha: {fecha}")
+        output.append(f"   Hora: {hora}")
         output.append(f"   Teléfono: {telefono}")
         
-        resultado = enviar_whatsapp_directo_cancelacion(nombre, telefono)
+        resultado = enviar_whatsapp_directo_cancelacion(nombre, fecha, hora, telefono)
         
         if resultado:
             output.append("✅ FUNCIÓN PANEL OK")
@@ -144,17 +148,21 @@ def test_simulacion_cancelacion():
     try:
         turno_id = 999
         nombre_usuario = "Usuario Cancelado"
+        fecha_usuario = "2025-08-05"  # Fecha de ejemplo
+        hora_usuario = "14:30"  # Hora de ejemplo
         telefono_usuario = "5491123456789"  # Cambiar por número real
         
         output.append(f"📋 Simulando cancelación desde panel admin...")
         output.append(f"   Turno ID: {turno_id}")
         output.append(f"   Usuario: {nombre_usuario}")
+        output.append(f"   Fecha: {fecha_usuario}")
+        output.append(f"   Hora: {hora_usuario}")
         output.append(f"   Teléfono: {telefono_usuario}")
         
         output.append(f"🚀 Ejecutando notificar_admin_cancelacion_directa...")
         
         resultado = notificar_admin_cancelacion_directa(
-            turno_id, nombre_usuario, telefono_usuario
+            nombre_usuario, fecha_usuario, hora_usuario, telefono_usuario
         )
         
         if resultado:
