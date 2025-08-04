@@ -1,4 +1,3 @@
-from whatsapp_sender import WhatsAppSender
 from src.admin.notifications import notificar_admin, notificar_admin_cancelacion_directa
 from src.services.notifications import notificar_cancelacion_turno, notificar_dia_bloqueado
 from flask import Flask, render_template, request, redirect, url_for, jsonify, send_from_directory, Response
@@ -11,8 +10,6 @@ import time
 
 # Importar el nuevo módulo de base de datos
 from src.core.database import obtener_turnos_por_fecha, eliminar_turno_admin, obtener_todos_los_turnos
-
-# Importar WhatsApp sender para envío directo
 import sys
 sys.path.append(os.path.join(os.path.dirname(
     __file__), '..', 'bots', 'senders'))
