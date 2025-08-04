@@ -12,7 +12,13 @@ import sys
 import os
 from datetime import datetime, timedelta
 import signal
-from src.core.config import config
+import requests
+
+# Configurar path para imports - obtener ruta raíz del proyecto (2 niveles arriba desde src/services/)
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+sys.path.insert(0, os.path.join(project_root, 'src'))
+
+from core.config import config
 
 # Configuración desde bot_config
 INTERVALO_SEGUNDOS = config.NOTIFICATION_INTERVAL
@@ -20,9 +26,16 @@ INTERVALO_SEGUNDOS = config.NOTIFICATION_INTERVAL
 SCRIPT_SENDER = 'src/bots/senders/bot_sender.py'
 EJECUTAR_AL_INICIO = True
 
+# Configuración para keep-alive en Railway
+KEEP_ALIVE_INTERVAL = 300  # 5 minutos
+RAILWAY_VARS = ['RAILWAY_STATIC_URL', 'RAILWAY_ENVIRONMENT', 'RAILWAY_SERVICE_NAME']
+is_railway = any(os.environ.get(var) for var in RAILWAY_VARS)
+railway_url = os.environ.get('RAILWAY_STATIC_URL')
+
 # Variables globales para el control del daemon
 ejecutando = True
 ultimo_mantenimiento = None  # Para controlar el mantenimiento diario
+ultimo_keep_alive = None  # Para controlar el keep-alive
 stats = {
     'ejecuciones': 0,
     'errores': 0,
@@ -135,15 +148,84 @@ def necesita_mantenimiento():
     if ultimo_mantenimiento is None:
         return True
 
-    # Verificar si ha pasado un día
+    # Verificar si ha pasado un día desde el último mantenimiento
     ahora = datetime.now()
-    tiempo_transcurrido = ahora - ultimo_mantenimiento
-
-    # Ejecutar mantenimiento cada 24 horas
-    return tiempo_transcurrido.total_seconds() > 86400  # 24 horas
+    diferencia = ahora - ultimo_mantenimiento
+    return diferencia.days >= 1
 
 
-# ...existing code...
+async def keep_alive_ping():
+    """Hace ping al endpoint keep-alive para evitar hibernación en Railway"""
+    global ultimo_keep_alive
+    
+    if not is_railway or not railway_url:
+        return  # No hacer ping si no estamos en Railway o no hay URL
+    
+    ahora = time.time()
+    if ultimo_keep_alive and (ahora - ultimo_keep_alive) < KEEP_ALIVE_INTERVAL:
+        return  # No hacer ping aún
+    
+    try:
+        # Determinar la URL del keep-alive
+        keep_alive_url = f"{railway_url}/api/keep-alive"
+        
+        log_mensaje(f"🏓 Keep-alive ping a {keep_alive_url}")
+        
+        # Usar threading para evitar bloquear el loop async
+        import threading
+        
+        def make_request():
+            try:
+                response = requests.get(keep_alive_url, timeout=10)
+                return response.status_code
+            except Exception:
+                return None
+        
+        # Ejecutar en un thread separado
+        thread = threading.Thread(target=make_request)
+        thread.start()
+        thread.join(timeout=15)  # Esperar máximo 15 segundos
+        
+        ultimo_keep_alive = ahora
+        log_mensaje("✅ Keep-alive ping enviado")
+            
+    except Exception as e:
+        log_mensaje(f"❌ Error inesperado en keep-alive: {e}")
+
+
+def necesita_keep_alive():
+    """Verifica si es necesario hacer keep-alive ping"""
+    global ultimo_keep_alive
+    
+    if not is_railway or not railway_url:
+        return False
+    
+    if ultimo_keep_alive is None:
+        return True
+    
+    ahora = time.time()
+    return (ahora - ultimo_keep_alive) >= KEEP_ALIVE_INTERVAL
+
+
+async def mantener_conexion_railway():
+    """Mantiene la conexión activa con Railway usando keep-alive endpoint"""
+    global ultimo_keep_alive
+    
+    if not railway_url:
+        log_mensaje("⚠️ No hay URL de Railway configurada para keep-alive")
+        return
+
+    log_mensaje(f"🏓 Iniciando keep-alive para Railway: {railway_url}")
+
+    while ejecutando:
+        try:
+            await keep_alive_ping()
+            # Esperar el intervalo de keep-alive
+            await asyncio.sleep(KEEP_ALIVE_INTERVAL)
+
+        except Exception as e:
+            log_mensaje(f"❌ Error en keep-alive de Railway: {e}")
+            await asyncio.sleep(30)  # Esperar antes de reintentar
 
 
 async def main(in_thread=False):
@@ -167,12 +249,28 @@ async def main(in_thread=False):
     log_mensaje(
         f"Intervalo: {INTERVALO_SEGUNDOS} segundos ({INTERVALO_SEGUNDOS/60:.1f} minutos)")
     log_mensaje(f"Script: {SCRIPT_SENDER}")
+    
+    # Información sobre Railway
+    if is_railway:
+        log_mensaje(f"🚂 Entorno: Railway")
+        if railway_url:
+            log_mensaje(f"🌐 URL: {railway_url}")
+            log_mensaje(f"🏓 Keep-alive: Activado (cada {KEEP_ALIVE_INTERVAL/60:.1f} min)")
+        else:
+            log_mensaje("⚠️ URL de Railway no disponible - keep-alive desactivado")
+    else:
+        log_mensaje("💻 Entorno: Local")
+    
     log_mensaje("Presiona Ctrl+C para detener")
     log_mensaje("=" * 50)
 
     # Ejecutar una vez al inicio si está configurado
     if EJECUTAR_AL_INICIO:
         ejecutar_bot_sender()
+
+    # Iniciar tarea de mantener conexión con Railway si es necesario
+    if is_railway:
+        asyncio.create_task(mantener_conexion_railway())
 
     contador_stats = 0
 
@@ -199,6 +297,10 @@ async def main(in_thread=False):
             # Ejecutar mantenimiento de la base de datos si es necesario
             if necesita_mantenimiento():
                 ejecutar_mantenimiento_db()
+
+            # Hacer ping de keep-alive si es necesario
+            if necesita_keep_alive():
+                await keep_alive_ping()
 
         except Exception as e:
             log_mensaje(f"❌ Error en el loop principal: {e}")

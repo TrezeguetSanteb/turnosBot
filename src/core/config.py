@@ -1,5 +1,9 @@
 """
-Configuración centralizada para el sistema de turnos WhatsApp.
+Configuración centra        # Configuración general
+        self.NOTIFICATION_INTERVAL = int(
+            # 30 minutos por defecto
+            os.getenv('NOTIFICATION_INTERVAL', '1800'))
+        self.LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')a para el sistema de turnos WhatsApp.
 """
 
 import os
@@ -24,8 +28,8 @@ class BotConfig:
 
         # Configuración general
         self.NOTIFICATION_INTERVAL = int(
-            # 30 minutos por defecto
-            os.getenv('NOTIFICATION_INTERVAL', '1800'))
+            # 2 minutos para pruebas
+            os.getenv('NOTIFICATION_INTERVAL', '120'))
         self.LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
 
         # Configuración específica para Railway Sleep/Idle

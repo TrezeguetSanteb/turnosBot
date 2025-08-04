@@ -886,6 +886,16 @@ def health_check_detailed():
         }), 500
 
 
+@app.route('/api/keep-alive')
+def keep_alive():
+    """Endpoint para mantener la aplicación activa en Railway"""
+    return jsonify({
+        'status': 'alive',
+        'timestamp': datetime.now().isoformat(),
+        'message': 'TurnosBot daemon keep-alive ping'
+    })
+
+
 if __name__ == '__main__':
     # El puerto lo asigna automáticamente la plataforma cloud
     port = int(os.environ.get('PORT', 9000))
