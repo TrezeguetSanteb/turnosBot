@@ -2,6 +2,25 @@
 """
 Sistema de notificaciones para el administrador
 Envía notificaciones por WhatsApp cuando ocurren eventos importantes
+
+🔄 SISTEMA HÍBRIDO DE NOTIFICACIONES:
+
+1. 📱 ENVÍO DIRECTO (Inmediato):
+   - enviar_whatsapp_directo_cancelacion(): Para cancelaciones desde panel admin
+   - notificar_admin_cancelacion_directa(): Función híbrida completa
+   - ✅ Ventaja: El usuario recibe WhatsApp inmediatamente
+
+2. 🤖 DAEMON (Diferido - cada 30 minutos):
+   - Notificaciones al admin sobre eventos
+   - Recordatorios automáticos
+   - Backup si el envío directo falla
+   - ✅ Ventaja: Robustez y redundancia
+
+3. 🎯 FLUJO DE CANCELACIÓN DESDE PANEL:
+   - Admin cancela turno → notificar_admin_cancelacion_directa()
+   - → Notifica admin (diferido via daemon)
+   - → Envía WhatsApp al usuario (inmediato)
+   - → Si falla directo, usa daemon como backup
 """
 
 import json
