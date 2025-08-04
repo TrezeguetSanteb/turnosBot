@@ -456,7 +456,7 @@ Tu turno ha sido cancelado por el administrador:
 📅 **Fecha:** {fecha}
 ⏰ **Hora:** {hora}
 
-Si necesitas reprogramar tu turno, por favor contactanos.
+Puedes reservar otro turno cuando gustes.
 
 Disculpa las molestias."""
 
