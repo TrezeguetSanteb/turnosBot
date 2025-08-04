@@ -460,14 +460,11 @@ Si necesitas reprogramar tu turno, por favor contactanos.
 
 Disculpa las molestias."""
 
-        # Limpiar número de teléfono
-        telefono_limpio = sender.clean_phone_number(telefono)
-
-        print(f"📱 Enviando notificación directa a {telefono_limpio}")
+        print(f"📱 Enviando notificación directa a {telefono}")
         print(f"💬 Mensaje: {mensaje[:50]}...")
 
-        # Enviar mensaje directo
-        resultado = sender.send_message(telefono_limpio, mensaje)
+        # Enviar mensaje directo (send_message limpia el teléfono internamente)
+        resultado = sender.send_message(telefono, mensaje)
 
         if resultado:
             print(
