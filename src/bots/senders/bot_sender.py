@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Script para enviar notificaciones por WhatsApp.
+Script para enviar notificaciones por WhatsApp a usuarios.
 Sistema optimizado exclusivamente para WhatsApp Business API.
 """
 

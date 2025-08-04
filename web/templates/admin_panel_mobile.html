@@ -1374,7 +1374,7 @@
             loadNotifications();
 
             // Intentar usar SSE para notificaciones en tiempo real
-            if (typeof(EventSource) !== "undefined") {
+            if (typeof (EventSource) !== "undefined") {
                 console.log('📡 Configurando Server-Sent Events...');
                 setupSSE();
             } else {
@@ -1390,16 +1390,16 @@
         // Configurar Server-Sent Events para notificaciones en tiempo real
         function setupSSE() {
             eventSource = new EventSource('/api/notifications/stream');
-            
-            eventSource.onmessage = function(event) {
+
+            eventSource.onmessage = function (event) {
                 const data = JSON.parse(event.data);
                 console.log('📨 SSE recibido:', data);
-                
+
                 if (data.type === 'notification_update') {
                     console.log(`🔔 Actualización de notificaciones: ${data.count}`);
                     // Recargar notificaciones cuando hay cambios
                     loadNotifications();
-                    
+
                     // Mostrar notificación push si está permitido
                     if (data.count > 0) {
                         showPushNotification(
@@ -1409,8 +1409,8 @@
                     }
                 }
             };
-            
-            eventSource.onerror = function(event) {
+
+            eventSource.onerror = function (event) {
                 console.error('❌ Error en SSE:', event);
                 // Fallback a polling en caso de error
                 if (!notificationCheckInterval) {
@@ -1418,8 +1418,8 @@
                     notificationCheckInterval = setInterval(loadNotifications, 30000);
                 }
             };
-            
-            eventSource.onopen = function(event) {
+
+            eventSource.onopen = function (event) {
                 console.log('✅ Conexión SSE establecida');
                 // Limpiar polling si SSE funciona
                 if (notificationCheckInterval) {

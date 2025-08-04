@@ -1,22 +1,20 @@
 [
   {
-    "timestamp": "2025-08-03T16:10:14.320627",
-    "tipo": "nuevo_turno",
+    "timestamp": "2025-08-04T14:59:01.427086",
+    "tipo": "test_sistema",
     "datos": {
-      "nombre": "Juan Pérez",
-      "telefono": "123456789",
-      "fecha": "2025-08-04",
-      "hora": "14:30",
-      "canal": "WhatsApp"
+      "mensaje": "Prueba del sistema después de la corrección del daemon",
+      "timestamp": "2025-08-04 14:58:00"
     },
     "enviada": false
   },
   {
-    "timestamp": "2025-08-03T16:10:49.894971",
-    "tipo": "cancelacion_turno",
+    "timestamp": "2025-08-04T15:18:11.485494",
+    "tipo": "nuevo_turno",
     "datos": {
       "nombre": "María García",
-      "fecha": "2025-08-04",
+      "telefono": "+5411112222",
+      "fecha": "2025-08-10",
       "hora": "16:00",
       "canal": "WhatsApp"
     },

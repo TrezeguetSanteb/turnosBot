@@ -1,1 +1,91 @@
-[]
+[
+  {
+    "timestamp": "2025-08-04T15:09:55.540597",
+    "telefono": "+5411234567",
+    "mensaje": "🚫 *Turno Cancelado* 🚫\n\nHola Juan Pérez,\n\nLamentamos informarte que tu turno ha sido cancelado por motivos administrativos:\n\n📅 **Fecha y hora:** domingo 10 de agosto a las 15:00\n\nTe pedimos disculpas por las molestias ocasionadas. Puedes reservar un nuevo turno escribiendo *hola*.\n\n¡Gracias por tu comprensión! 🙏",
+    "tipo": "cancelacion_turno",
+    "turno_id": "test123",
+    "enviado": false
+  },
+  {
+    "timestamp": "2025-08-04T15:18:36.206858",
+    "telefono": "+5411234578",
+    "mensaje": "🚫 *Turno Cancelado* 🚫\n\nHola Carlos López,\n\nLamentamos informarte que tu turno ha sido cancelado por motivos administrativos:\n\n📅 **Fecha y hora:** lunes 11 de agosto a las 14:30\n\nTe pedimos disculpas por las molestias ocasionadas. Puedes reservar un nuevo turno escribiendo *hola*.\n\n¡Gracias por tu comprensión! 🙏",
+    "tipo": "cancelacion_turno",
+    "turno_id": "test456",
+    "enviado": false
+  },
+  {
+    "timestamp": "2025-08-04T15:46:39.466398",
+    "telefono": "+5411234567",
+    "mensaje": "🚫 *Turno Cancelado* 🚫\n\nHola Juan Pérez,\n\nLamentamos informarte que tu turno ha sido cancelado por motivos administrativos:\n\n📅 **Fecha y hora:** domingo 10 de agosto a las 15:00\n\nTe pedimos disculpas por las molestias ocasionadas. Puedes reservar un nuevo turno escribiendo *hola*.\n\n¡Gracias por tu comprensión! 🙏",
+    "tipo": "cancelacion_turno",
+    "turno_id": 3,
+    "enviado": false
+  },
+  {
+    "timestamp": "2025-08-04T15:52:58.224643",
+    "telefono": "+5411999888",
+    "mensaje": "🚫 *Turno Cancelado* 🚫\n\nHola María López,\n\nLamentamos informarte que tu turno ha sido cancelado por motivos administrativos:\n\n📅 **Fecha y hora:** lunes 11 de agosto a las 14:30\n\nTe pedimos disculpas por las molestias ocasionadas. Puedes reservar un nuevo turno escribiendo *hola*.\n\n¡Gracias por tu comprensión! 🙏",
+    "tipo": "cancelacion_turno",
+    "turno_id": 4,
+    "enviado": false
+  },
+  {
+    "timestamp": "2025-08-04T15:59:52.341770",
+    "telefono": "987654321",
+    "mensaje": "🚫 *Turno Cancelado* 🚫\n\nHola Usuario Real Test,\n\nLamentamos informarte que tu turno ha sido cancelado por motivos administrativos:\n\n📅 **Fecha y hora:** lunes 4 de agosto a las 16:30\n\nTe pedimos disculpas por las molestias ocasionadas. Puedes reservar un nuevo turno escribiendo *hola*.\n\n¡Gracias por tu comprensión! 🙏",
+    "tipo": "cancelacion_turno",
+    "turno_id": 2,
+    "enviado": false
+  },
+  {
+    "timestamp": "2025-08-04T16:12:55.468514",
+    "telefono": "+5491199998888",
+    "mensaje": "🚫 *Turno Cancelado* 🚫\n\nHola Test Railway User,\n\nLamentamos informarte que tu turno ha sido cancelado por motivos administrativos:\n\n📅 **Fecha y hora:** viernes 15 de agosto a las 16:00\n\nTe pedimos disculpas por las molestias ocasionadas. Puedes reservar un nuevo turno escribiendo *hola*.\n\n¡Gracias por tu comprensión! 🙏",
+    "tipo": "cancelacion_turno",
+    "turno_id": 5,
+    "enviado": false
+  },
+  {
+    "timestamp": "2025-08-04T18:11:35.448093",
+    "telefono": "123456789",
+    "mensaje": "🚫 *Turno Cancelado* 🚫\n\nHola Usuario Test,\n\nLamentamos informarte que tu turno ha sido cancelado por motivos administrativos:\n\n📅 **Fecha y hora:** martes 5 de agosto a las 10:30\n\nTe pedimos disculpas por las molestias ocasionadas. Puedes reservar un nuevo turno escribiendo *hola*.\n\n¡Gracias por tu comprensión! 🙏",
+    "tipo": "cancelacion_turno",
+    "turno_id": 999,
+    "enviado": false
+  },
+  {
+    "timestamp": "2025-08-04T18:11:35.449496",
+    "telefono": "123456789",
+    "mensaje": "Test cancelación",
+    "tipo": "cancelacion_turno",
+    "turno_id": 999,
+    "enviado": false
+  },
+  {
+    "timestamp": "2025-08-04T18:11:35.457866",
+    "telefono": "123456789",
+    "mensaje": "🚫 *Turno Cancelado* 🚫\n\nHola Usuario Test,\n\nLamentamos informarte que tu turno ha sido cancelado por motivos administrativos:\n\n📅 **Fecha y hora:** martes 5 de agosto a las 10:30\n\nTe pedimos disculpas por las molestias ocasionadas. Puedes reservar un nuevo turno escribiendo *hola*.\n\n¡Gracias por tu comprensión! 🙏",
+    "tipo": "cancelacion_turno",
+    "turno_id": 999,
+    "enviado": false
+  },
+  {
+    "timestamp": "2025-08-04T18:20:08.662983",
+    "telefono": "987654321",
+    "mensaje": "🚫 *Turno Cancelado* 🚫\n\nHola Usuario Real Test,\n\nLamentamos informarte que tu turno ha sido cancelado por motivos administrativos:\n\n📅 **Fecha y hora:** lunes 4 de agosto a las 16:30\n\nTe pedimos disculpas por las molestias ocasionadas. Puedes reservar un nuevo turno escribiendo *hola*.\n\n¡Gracias por tu comprensión! 🙏",
+    "tipo": "cancelacion_turno",
+    "turno_id": 2,
+    "enviado": false
+  },
+  {
+    "id": "test_1754342917",
+    "turno_id": 9999,
+    "telefono": "+5491123456789",
+    "mensaje": "🚨 CANCELACIÓN: Tu turno del 2024-12-20 a las 15:00 ha sido cancelado. Disculpa las molestias.",
+    "tipo": "cancelacion_turno",
+    "fecha_creacion": "2025-08-04 18:28:37",
+    "enviado": false
+  }
+]
