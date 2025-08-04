@@ -919,6 +919,64 @@ def keep_alive():
     })
 
 
+# RUTA DE DIAGNÓSTICO TEMPORAL PARA RAILWAY
+@app.route('/diagnostico-railway-temp', methods=['GET'])
+def diagnostico_railway():
+    """Ruta temporal para diagnosticar el problema de WhatsApp en Railway"""
+    try:
+        from src.admin.diagnostico_web import ejecutar_diagnostico_completo
+        resultado, estados = ejecutar_diagnostico_completo()
+        
+        # Formatear el resultado para HTML
+        resultado_html = resultado.replace('\n', '<br>')
+        
+        html = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Diagnóstico Railway - WhatsApp</title>
+            <meta charset="utf-8">
+            <style>
+                body {{ font-family: monospace; margin: 20px; background: #1a1a1a; color: #00ff00; }}
+                .container {{ max-width: 1200px; margin: 0 auto; }}
+                .resultado {{ white-space: pre-wrap; background: #000; padding: 20px; border-radius: 5px; }}
+                .header {{ color: #ffff00; font-size: 20px; margin-bottom: 20px; }}
+                .success {{ color: #00ff00; }}
+                .error {{ color: #ff4444; }}
+                .warning {{ color: #ffaa00; }}
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">🚀 DIAGNÓSTICO RAILWAY - WHATSAPP CANCELACIÓN</div>
+                <div class="resultado">{resultado_html}</div>
+            </div>
+        </body>
+        </html>
+        """
+        
+        return Response(html, mimetype='text/html')
+        
+    except Exception as e:
+        error_html = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Error Diagnóstico</title>
+            <meta charset="utf-8">
+            <style>
+                body {{ font-family: monospace; margin: 20px; background: #1a1a1a; color: #ff4444; }}
+            </style>
+        </head>
+        <body>
+            <h1>❌ Error en diagnóstico</h1>
+            <p><strong>Error:</strong> {str(e)}</p>
+            <p><strong>Tipo:</strong> {type(e).__name__}</p>
+        </body>
+        </html>
+        """
+        return Response(error_html, mimetype='text/html')
+
 if __name__ == '__main__':
     # El puerto lo asigna automáticamente la plataforma cloud
     port = int(os.environ.get('PORT', 9000))

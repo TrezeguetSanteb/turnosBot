@@ -9,5 +9,38 @@
       "canal": "Panel Móvil"
     },
     "enviada": false
+  },
+  {
+    "timestamp": "2025-08-04T20:26:05.930744",
+    "tipo": "cancelacion_turno",
+    "datos": {
+      "nombre": "Usuario Simulación",
+      "fecha": "2024-12-31",
+      "hora": "11:30",
+      "canal": "Panel Móvil"
+    },
+    "enviada": false
+  },
+  {
+    "timestamp": "2025-08-04T20:29:19.540029",
+    "tipo": "cancelacion_turno",
+    "datos": {
+      "nombre": "Test Flujo",
+      "fecha": "2024-12-30",
+      "hora": "16:00",
+      "canal": "Panel Móvil"
+    },
+    "enviada": false
+  },
+  {
+    "timestamp": "2025-08-04T20:31:25.147031",
+    "tipo": "cancelacion_turno",
+    "datos": {
+      "nombre": "Usuario Cancelado",
+      "fecha": "2024-12-30",
+      "hora": "17:00",
+      "canal": "Panel Móvil"
+    },
+    "enviada": false
   }
 ]
