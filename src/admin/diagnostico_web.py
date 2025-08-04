@@ -126,7 +126,19 @@ def test_funcion_panel():
         output.append(f"   Hora: {hora}")
         output.append(f"   Teléfono: {telefono}")
         
-        resultado = enviar_whatsapp_directo_cancelacion(nombre, fecha, hora, telefono)
+        # Capturar output de print statements
+        import io
+        import contextlib
+        
+        f = io.StringIO()
+        with contextlib.redirect_stdout(f):
+            resultado = enviar_whatsapp_directo_cancelacion(nombre, fecha, hora, telefono)
+        
+        output_capturado = f.getvalue()
+        if output_capturado:
+            output.append("📋 Output de la función:")
+            for line in output_capturado.strip().split('\n'):
+                output.append(f"   {line}")
         
         if resultado:
             output.append("✅ FUNCIÓN PANEL OK")
@@ -161,9 +173,21 @@ def test_simulacion_cancelacion():
         
         output.append(f"🚀 Ejecutando notificar_admin_cancelacion_directa...")
         
-        resultado = notificar_admin_cancelacion_directa(
-            nombre_usuario, fecha_usuario, hora_usuario, telefono_usuario
-        )
+        # Capturar output de print statements
+        import io
+        import contextlib
+        
+        f = io.StringIO()
+        with contextlib.redirect_stdout(f):
+            resultado = notificar_admin_cancelacion_directa(
+                nombre_usuario, fecha_usuario, hora_usuario, telefono_usuario
+            )
+        
+        output_capturado = f.getvalue()
+        if output_capturado:
+            output.append("📋 Output de la función:")
+            for line in output_capturado.strip().split('\n'):
+                output.append(f"   {line}")
         
         if resultado:
             output.append("✅ SIMULACIÓN COMPLETA OK")
