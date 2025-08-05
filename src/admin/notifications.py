@@ -3,7 +3,7 @@
 Sistema de notificaciones para el administrador
 Envía notificaciones por WhatsApp cuando ocurren eventos importantes
 
-🔄 SISTEMA HÍBRIDO DE NOTIFICACIONES:
+🔄 SISTEMA HÍBRIDO DE NOTIFICACIONES OPTIMIZADO:
 
 1. 📱 ENVÍO DIRECTO (Inmediato):
    - enviar_whatsapp_directo_cancelacion(): Para cancelaciones desde panel admin
@@ -12,18 +12,25 @@ Envía notificaciones por WhatsApp cuando ocurren eventos importantes
 
 2. 🤖 DAEMON (Diferido - cada 30 minutos):
    - Notificaciones al admin SOLO cuando:
-     ✅ Un usuario agenda un turno
-     ✅ Un usuario cancela su turno
+     ✅ Un usuario agenda un turno (desde WhatsApp)
+     ✅ Un usuario cancela su turno (desde WhatsApp)
    - ❌ NO notifica al admin cuando:
-     - Admin cancela turnos desde panel
-     - Admin bloquea/desbloquea días
-   - ✅ Ventaja: Evita autonotificaciones innecesarias
+     ❌ Admin cancela turnos desde panel (evita autonotificación)
+     ❌ Admin bloquea/desbloquea días (evita autonotificación)
+     ❌ Admin modifica horarios (evita autonotificación)
+   - ✅ Ventaja: Evita spam de autonotificaciones innecesarias
 
-3. 🎯 FLUJO DE CANCELACIÓN DESDE PANEL:
-   - Admin cancela turno → notificar_admin_cancelacion_directa()
-   - → NO notifica admin (evita autonotificación)
-   - → Envía WhatsApp al usuario (inmediato)
-   - → Si falla, simplemente falla (sin spam al admin)
+3. 🎯 FLUJO OPTIMIZADO:
+   - ✅ Usuario agenda turno → DAEMON notifica al admin (30min)
+   - ✅ Usuario cancela turno → DAEMON notifica al admin (30min)
+   - ✅ Admin cancela turno → DIRECTO notifica solo al usuario (inmediato)
+   - ✅ Admin bloquea/desbloquea día → NO genera notificaciones al admin
+   - ✅ Usuarios con turnos en día bloqueado → DAEMON notifica usuarios afectados
+
+4. 📊 CONFIGURACIÓN:
+   - NOTIFICATION_INTERVAL=1800 (30 minutos)
+   - Daemon optimizado para Railway Sleep/Idle
+   - Notificaciones relevantes sin spam
 """
 
 import json
@@ -507,19 +514,20 @@ def notificar_admin_cancelacion_directa(nombre, fecha, hora, telefono):
     """
     SOLO envía WhatsApp directo al usuario cuando el admin cancela un turno
     NO notifica al admin (para evitar autonotificaciones)
-    
+
     Antes: Admin notificado + Usuario notificado
     Ahora: Solo Usuario notificado (el admin ya sabe que canceló)
     """
     try:
         print(f"📱 Cancelación desde panel admin: enviando WhatsApp solo al usuario")
-        
+
         # Enviar WhatsApp directo al usuario (inmediato)
         envio_exitoso = enviar_whatsapp_directo_cancelacion(
             nombre, fecha, hora, telefono)
 
         if envio_exitoso:
-            print(f"✅ Usuario {nombre} notificado por WhatsApp sobre cancelación")
+            print(
+                f"✅ Usuario {nombre} notificado por WhatsApp sobre cancelación")
         else:
             print(f"❌ Error enviando WhatsApp al usuario {nombre}")
 

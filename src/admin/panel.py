@@ -1,4 +1,4 @@
-from src.admin.notifications import notificar_admin, notificar_admin_cancelacion_directa
+from src.admin.notifications import notificar_admin_cancelacion_directa
 from src.services.notifications import notificar_cancelacion_turno, notificar_dia_bloqueado
 from flask import Flask, render_template, request, redirect, url_for, jsonify, send_from_directory, Response
 import os
@@ -267,7 +267,7 @@ def desbloquear_dia():
         guardar_config(config)
 
         print(f"🔓 Día {fecha} desbloqueado (sin notificar al admin)")
-        
+
     return redirect(url_for('index', semana=semana))
 
 
