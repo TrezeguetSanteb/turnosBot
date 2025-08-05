@@ -475,19 +475,19 @@ def enviar_whatsapp_directo_cancelacion(nombre, fecha, hora, telefono):
         # Crear instancia del sender
         sender = WhatsAppSender()
 
-        # Crear mensaje de cancelación para el usuario
-        mensaje = f"""❌ *Turno Cancelado*
+        # Crear mensaje de cancelación para el usuario (versión mejorada - formal y empática)
+        mensaje = f"""🚫 *Turno Cancelado*
 
-Hola {nombre},
+Estimado/a {nombre},
 
-Tu turno ha sido cancelado por el administrador:
+Lamentamos informarte que tu turno reservado ha sido cancelado por motivos administrativos:
 
 📅 **Fecha:** {fecha}
 ⏰ **Hora:** {hora}
 
-Puedes reservar otro turno cuando gustes.
+Te pedimos disculpas por las molestias ocasionadas. Puedes reservar un nuevo turno escribiendo *hola* en cualquier momento.
 
-Disculpa las molestias."""
+¡Gracias por tu comprensión! 🙏"""
 
         print(f"📱 Enviando notificación directa a {telefono}")
         print(f"💬 Mensaje: {mensaje[:50]}...")
