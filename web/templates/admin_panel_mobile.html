@@ -2005,19 +2005,20 @@
 
                 if (response.ok) {
                     cerrarModal();
+                    mostrarNotificacion('✅ Horario actualizado exitosamente', 'success');
                     cargarSemana(); // Recargar datos
                 } else {
-                    alert('Error al guardar configuración');
+                    mostrarNotificacion('❌ Error al guardar configuración', 'error');
                 }
             } catch (error) {
                 console.error('Error:', error);
-                alert('Error de conexión');
+                mostrarNotificacion('❌ Error de conexión', 'error');
             }
         });
 
         // Eliminar turno
         async function eliminarTurno(turnoId) {
-            if (!confirm('¿Estás seguro de que quieres eliminar este turno?')) return;
+            if (!confirm('¿Estás seguro de que quieres cancelar este turno?\n\nEl usuario será notificado por WhatsApp.')) return;
 
             try {
                 const response = await fetch(`/eliminar/${turnoId}`, {
@@ -2025,13 +2026,14 @@
                 });
 
                 if (response.ok) {
+                    mostrarNotificacion('✅ Turno cancelado correctamente', 'success');
                     cargarSemana(); // Recargar datos
                 } else {
-                    alert('Error al eliminar turno');
+                    mostrarNotificacion('❌ Error al eliminar turno', 'error');
                 }
             } catch (error) {
                 console.error('Error:', error);
-                alert('Error de conexión');
+                mostrarNotificacion('❌ Error de conexión al eliminar turno', 'error');
             }
         }
 
@@ -2048,13 +2050,14 @@
                 });
 
                 if (response.ok) {
+                    mostrarNotificacion('🔒 Día bloqueado correctamente', 'success');
                     cargarSemana();
                 } else {
-                    alert('Error al bloquear día');
+                    mostrarNotificacion('❌ Error al bloquear día', 'error');
                 }
             } catch (error) {
                 console.error('Error:', error);
-                alert('Error de conexión');
+                mostrarNotificacion('❌ Error de conexión al bloquear día', 'error');
             }
         }
 
@@ -2071,13 +2074,14 @@
                 });
 
                 if (response.ok) {
+                    mostrarNotificacion('🔓 Día desbloqueado correctamente', 'success');
                     cargarSemana();
                 } else {
-                    alert('Error al desbloquear día');
+                    mostrarNotificacion('❌ Error al desbloquear día', 'error');
                 }
             } catch (error) {
                 console.error('Error:', error);
-                alert('Error de conexión');
+                mostrarNotificacion('❌ Error de conexión al desbloquear día', 'error');
             }
         }
 
