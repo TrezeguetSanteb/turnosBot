@@ -3,7 +3,6 @@ from datetime import datetime, timedelta
 import json
 import os
 import time
-import pytz
 
 # Importar usando rutas relativas para compatibilidad
 try:
@@ -37,25 +36,6 @@ except ImportError:
 PROJECT_ROOT = os.path.abspath(os.path.join(
     os.path.dirname(__file__), '..', '..'))
 CONFIG_PATH = os.path.join(PROJECT_ROOT, 'config', 'config.json')
-
-# Configuración de zona horaria
-ARGENTINA_TZ = pytz.timezone('America/Argentina/Buenos_Aires')
-
-
-def obtener_hora_argentina():
-    """Obtiene la hora actual en Argentina (UTC-3)"""
-    return datetime.now(ARGENTINA_TZ)
-
-
-def obtener_fecha_argentina():
-    """Obtiene la fecha actual en Argentina"""
-    return obtener_hora_argentina().date()
-
-
-def obtener_hora_solo_argentina():
-    """Obtiene solo la hora actual en Argentina (sin fecha)"""
-    return obtener_hora_argentina().time()
-
 
 user_states = {}
 user_data = {}
@@ -205,7 +185,7 @@ def formatear_fecha_legible(fecha_str, hora_str=None):
 
 def obtener_fechas_disponibles():
     """Obtiene las fechas disponibles para reservar (hoy + 6 días)"""
-    hoy = obtener_fecha_argentina()  # Usar zona horaria Argentina
+    hoy = datetime.now().date()
     fechas = []
     dias_nombres = ['lunes', 'martes', 'miércoles',
                     'jueves', 'viernes', 'sábado', 'domingo']
@@ -275,8 +255,8 @@ def obtener_horarios_disponibles(fecha_str):
     posibles.sort()
 
     # Si es hoy, filtrar horarios que ya pasaron
-    hoy = obtener_fecha_argentina()  # Usar zona horaria Argentina
-    hora_actual = obtener_hora_solo_argentina()  # Usar zona horaria Argentina
+    hoy = datetime.now().date()
+    hora_actual = datetime.now().time()
 
     if fecha_dt == hoy:
         # Filtrar horarios que ya pasaron
@@ -338,7 +318,7 @@ def handle_message(incoming_msg, from_number, user_states, user_data):
     if incoming_msg.lower() in ['hola', 'start', '/start'] or state == 'inicio':
         user_states[from_number] = 'menu_principal'
         return (
-            '🤖 *Sistema de Turnos* 🤖\n\n'
+            '*Sistema de Turnos*\n\n'
             'Selecciona una opción:\n'
             '1️⃣ Reservar turno\n'
             '2️⃣ Ver mis turnos\n'
@@ -446,9 +426,11 @@ def handle_message(incoming_msg, from_number, user_states, user_data):
                     # Notificar al admin sobre la cancelación
                     try:
                         from admin.notifications import notificar_admin
-                        notificar_admin('cancelacion_turno', turno_info[1], turno_info[2], turno_info[3], canal='WhatsApp')
+                        notificar_admin(
+                            'cancelacion_turno', turno_info[1], turno_info[2], turno_info[3], canal='WhatsApp')
                     except Exception as e:
-                        print(f"⚠️ Error enviando notificación de cancelación: {e}")
+                        print(
+                            f"⚠️ Error enviando notificación de cancelación: {e}")
 
                     user_states[from_number] = 'inicio'
                     user_data.pop(from_number, None)
@@ -535,9 +517,11 @@ def handle_message(incoming_msg, from_number, user_states, user_data):
                         # Notificar al admin sobre el nuevo turno
                         try:
                             from admin.notifications import notificar_admin
-                            notificar_admin('nuevo_turno', datos['nombre'], from_number, datos['fecha'], datos['hora'], canal='WhatsApp')
+                            notificar_admin(
+                                'nuevo_turno', datos['nombre'], from_number, datos['fecha'], datos['hora'], canal='WhatsApp')
                         except Exception as e:
-                            print(f"Error enviando notificación de nuevo turno: {e}")
+                            print(
+                                f"Error enviando notificación de nuevo turno: {e}")
 
                         user_states[from_number] = 'inicio'
                         user_data.pop(from_number)
