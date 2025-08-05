@@ -200,14 +200,11 @@ def eliminar(turno_id):
 
                 if exito_envio:
                     print(
-                        f"✅ Notificación enviada directamente por WhatsApp a {nombre} ({telefono})")
+                        f"✅ Usuario {nombre} notificado por WhatsApp sobre cancelación")
                 else:
                     print(
-                        f"⚠️ Admin notificado pero error en WhatsApp directo a {telefono}")
-                    # Fallback: usar sistema diferido como backup
-                    notificar_cancelacion_turno(
-                        turno_id, nombre, fecha, hora, telefono)
-                    print(f"📝 Notificación agregada al sistema diferido como backup")
+                        f"❌ Error enviando WhatsApp a {nombre} ({telefono})")
+                    print(f"⚠️ El usuario no fue notificado sobre la cancelación")
 
         semana = request.form.get('semana')
         if semana:
@@ -255,11 +252,7 @@ def bloquear_dia():
         config['dias_bloqueados'].append(fecha)
         guardar_config(config)
 
-        # Notificar al admin sobre el bloqueo
-        try:
-            notificar_admin('bloqueo_dia', fecha)
-        except Exception as e:
-            print(f"❌ Error al notificar admin sobre bloqueo: {e}")
+        print(f"🔒 Día {fecha} bloqueado (sin notificar al admin)")
 
     return redirect(url_for('index', semana=semana))
 
@@ -273,11 +266,8 @@ def desbloquear_dia():
         config['dias_bloqueados'].remove(fecha)
         guardar_config(config)
 
-        # Notificar al admin sobre el desbloqueo
-        try:
-            notificar_admin('desbloqueo_dia', fecha)
-        except Exception as e:
-            print(f"❌ Error al notificar admin sobre desbloqueo: {e}")
+        print(f"🔓 Día {fecha} desbloqueado (sin notificar al admin)")
+        
     return redirect(url_for('index', semana=semana))
 
 

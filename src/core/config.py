@@ -24,14 +24,17 @@ class BotConfig:
 
         # Configuración general
         self.NOTIFICATION_INTERVAL = int(
-            # 5 minutos por defecto
-            os.getenv('NOTIFICATION_INTERVAL', '300'))
+            # 30 minutos por defecto
+            os.getenv('NOTIFICATION_INTERVAL', '1800'))
         self.LOG_LEVEL = os.getenv('LOG_LEVEL', 'INFO')
 
         # Configuración específica para Railway Sleep/Idle
-        self.RAILWAY_SLEEP_OPTIMIZED = os.getenv('RAILWAY_SLEEP_OPTIMIZED', 'true').lower() == 'true'
-        self.IDLE_CHECK_INTERVAL = int(os.getenv('IDLE_CHECK_INTERVAL', '300'))  # 5 minutos cuando idle
-        self.ACTIVE_CHECK_INTERVAL = int(os.getenv('ACTIVE_CHECK_INTERVAL', '60'))  # 1 minuto cuando activo
+        self.RAILWAY_SLEEP_OPTIMIZED = os.getenv(
+            'RAILWAY_SLEEP_OPTIMIZED', 'true').lower() == 'true'
+        self.IDLE_CHECK_INTERVAL = int(
+            os.getenv('IDLE_CHECK_INTERVAL', '300'))  # 5 minutos cuando idle
+        self.ACTIVE_CHECK_INTERVAL = int(
+            os.getenv('ACTIVE_CHECK_INTERVAL', '60'))  # 1 minuto cuando activo
 
     def get_whatsapp_config(self):
         """Obtiene la configuración de WhatsApp"""
@@ -46,15 +49,7 @@ class BotConfig:
 
     def has_whatsapp(self):
         """Verifica si WhatsApp está configurado"""
-        has_token = bool(self.WHATSAPP_ACCESS_TOKEN)
-        has_phone_id = bool(self.WHATSAPP_PHONE_NUMBER_ID)
-        
-        if not has_token:
-            print("❌ WHATSAPP_ACCESS_TOKEN no configurado")
-        if not has_phone_id:
-            print("❌ WHATSAPP_PHONE_NUMBER_ID no configurado")
-            
-        return has_token and has_phone_id
+        return bool(self.WHATSAPP_ACCESS_TOKEN and self.WHATSAPP_PHONE_NUMBER_ID)
 
     def get_admin_phone_number(self):
         """Obtiene el número de teléfono del administrador"""
