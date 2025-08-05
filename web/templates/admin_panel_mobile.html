@@ -252,15 +252,71 @@
             align-items: flex-start;
             gap: 12px;
             cursor: pointer;
-            transition: background 0.2s ease;
+            transition: all 0.2s ease;
+            position: relative;
         }
 
         .notification-item:hover {
             background: #f8f9fa;
+            transform: translateX(2px);
         }
 
         .notification-item:last-child {
             border-bottom: none;
+        }
+
+        .notification-item.read {
+            opacity: 0.6;
+            background-color: #f9f9f9;
+        }
+
+        .notification-item.read::after {
+            content: "✓";
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: #4CAF50;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .notification-item.clicked {
+            background-color: #e3f2fd;
+            animation: clickFeedback 0.3s ease;
+        }
+
+        @keyframes clickFeedback {
+            0% { background-color: #2196F3; }
+            100% { background-color: #e3f2fd; }
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateX(-50%) translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutUp {
+            from {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(-50%) translateY(-100%);
+                opacity: 0;
+            }
         }
 
         .notification-icon {
@@ -1574,10 +1630,54 @@
             return date.toLocaleDateString();
         }
 
-        // Manejar click en notificación
+        // Manejar click en notificación individual
         function onNotificationClick(notificationId) {
-            console.log('Clicked notification:', notificationId);
-            // Aquí podrías agregar lógica específica por tipo de notificación
+            console.log('🔔 Click en notificación:', notificationId);
+            
+            // Agregar efecto visual inmediato
+            const notificationElement = event.currentTarget;
+            notificationElement.classList.add('clicked');
+            
+            // Marcar esta notificación específica como leída
+            markSingleNotificationRead(notificationId);
+        }
+
+        // Marcar una notificación individual como leída
+        function markSingleNotificationRead(notificationId) {
+            fetch('/api/notifications/mark-single-read', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ notificationId: notificationId })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log('✅ Notificación marcada como leída:', notificationId);
+                        
+                        // Agregar clase 'read' al elemento clickeado
+                        const notificationElement = document.querySelector(`[onclick="onNotificationClick('${notificationId}')"]`);
+                        if (notificationElement) {
+                            notificationElement.classList.add('read');
+                            notificationElement.classList.remove('clicked');
+                        }
+                        
+                        // Recargar las notificaciones para actualizar el contador
+                        setTimeout(() => {
+                            loadNotifications();
+                        }, 500);
+                        
+                        showToast('📖 Notificación marcada como leída', 'success');
+                    } else {
+                        console.error('❌ Error al marcar notificación:', data.error);
+                        showToast('Error al marcar notificación', 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('❌ Error de conexión:', error);
+                    showToast('Error de conexión', 'error');
+                });
         }
 
         // Marcar todas las notificaciones como leídas
@@ -1604,29 +1704,80 @@
                 });
         }
 
-        // Mostrar toast notification
+        // Mostrar toast notification mejorado
         function showToast(message, type = 'info') {
+            // Remover toast anterior si existe
+            const existingToast = document.querySelector('.toast-notification');
+            if (existingToast) {
+                existingToast.remove();
+            }
+
             const toast = document.createElement('div');
+            toast.className = 'toast-notification';
+            
+            // Definir colores y iconos según el tipo
+            let backgroundColor, icon;
+            switch (type) {
+                case 'success':
+                    backgroundColor = '#4CAF50';
+                    icon = '✅';
+                    break;
+                case 'error':
+                    backgroundColor = '#f44336';
+                    icon = '❌';
+                    break;
+                case 'warning':
+                    backgroundColor = '#ff9800';
+                    icon = '⚠️';
+                    break;
+                case 'info':
+                default:
+                    backgroundColor = '#2196F3';
+                    icon = 'ℹ️';
+                    break;
+            }
+
             toast.style.cssText = `
                 position: fixed;
-                top: 20px;
-                right: 20px;
-                background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
+                top: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: ${backgroundColor};
                 color: white;
-                padding: 12px 20px;
-                border-radius: 8px;
-                z-index: 10000;
+                padding: 16px 24px;
+                border-radius: 12px;
+                z-index: 10001;
                 font-size: 14px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-                animation: slideInRight 0.3s ease;
+                font-weight: 500;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+                animation: slideInDown 0.3s ease-out;
+                max-width: 90%;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                justify-content: center;
             `;
-            toast.textContent = message;
+            
+            toast.innerHTML = `
+                <span style="font-size: 16px;">${icon}</span>
+                <span>${message}</span>
+            `;
+            
             document.body.appendChild(toast);
 
+            // Auto remove después de tiempo variable según tipo
+            const duration = type === 'error' ? 5000 : type === 'info' ? 2000 : 3000;
             setTimeout(() => {
-                toast.style.animation = 'slideOutRight 0.3s ease';
-                setTimeout(() => document.body.removeChild(toast), 300);
-            }, 3000);
+                if (toast.parentNode) {
+                    toast.style.animation = 'slideOutUp 0.3s ease-in';
+                    setTimeout(() => {
+                        if (toast.parentNode) {
+                            document.body.removeChild(toast);
+                        }
+                    }, 300);
+                }
+            }, duration);
         }
 
         // Limpiar interval al cerrar la página
@@ -1997,6 +2148,8 @@
             e.preventDefault();
 
             try {
+                showToast('🔄 Guardando configuración...', 'info');
+                
                 const formData = new FormData(this);
                 const response = await fetch('/configurar_rangos', {
                     method: 'POST',
@@ -2004,42 +2157,46 @@
                 });
 
                 if (response.ok) {
+                    showToast('⚙️ Horario actualizado correctamente', 'success');
                     cerrarModal();
-                    mostrarNotificacion('✅ Horario actualizado exitosamente', 'success');
                     cargarSemana(); // Recargar datos
                 } else {
-                    mostrarNotificacion('❌ Error al guardar configuración', 'error');
+                    showToast('❌ Error al guardar configuración', 'error');
                 }
             } catch (error) {
                 console.error('Error:', error);
-                mostrarNotificacion('❌ Error de conexión', 'error');
+                showToast('❌ Error de conexión', 'error');
             }
         });
 
         // Eliminar turno
         async function eliminarTurno(turnoId) {
-            if (!confirm('¿Estás seguro de que quieres cancelar este turno?\n\nEl usuario será notificado por WhatsApp.')) return;
+            if (!confirm('¿Estás seguro de que quieres eliminar este turno?')) return;
 
             try {
+                showToast('🔄 Eliminando turno...', 'info');
+                
                 const response = await fetch(`/eliminar/${turnoId}`, {
                     method: 'POST'
                 });
 
                 if (response.ok) {
-                    mostrarNotificacion('✅ Turno cancelado correctamente', 'success');
+                    showToast('✅ Turno eliminado correctamente', 'success');
                     cargarSemana(); // Recargar datos
                 } else {
-                    mostrarNotificacion('❌ Error al eliminar turno', 'error');
+                    showToast('❌ Error al eliminar turno', 'error');
                 }
             } catch (error) {
                 console.error('Error:', error);
-                mostrarNotificacion('❌ Error de conexión al eliminar turno', 'error');
+                showToast('❌ Error de conexión', 'error');
             }
         }
 
         // Bloquear día
         async function bloquearDia(fecha) {
             try {
+                showToast('🔄 Bloqueando día...', 'info');
+                
                 const formData = new FormData();
                 formData.append('fecha', fecha);
                 formData.append('semana', datosCache.semana_inicio_str);
@@ -2050,20 +2207,22 @@
                 });
 
                 if (response.ok) {
-                    mostrarNotificacion('🔒 Día bloqueado correctamente', 'success');
+                    showToast('🔒 Día bloqueado correctamente', 'success');
                     cargarSemana();
                 } else {
-                    mostrarNotificacion('❌ Error al bloquear día', 'error');
+                    showToast('❌ Error al bloquear día', 'error');
                 }
             } catch (error) {
                 console.error('Error:', error);
-                mostrarNotificacion('❌ Error de conexión al bloquear día', 'error');
+                showToast('❌ Error de conexión', 'error');
             }
         }
 
         // Desbloquear día
         async function desbloquearDia(fecha) {
             try {
+                showToast('🔄 Desbloqueando día...', 'info');
+                
                 const formData = new FormData();
                 formData.append('fecha', fecha);
                 formData.append('semana', datosCache.semana_inicio_str);
@@ -2074,14 +2233,14 @@
                 });
 
                 if (response.ok) {
-                    mostrarNotificacion('🔓 Día desbloqueado correctamente', 'success');
+                    showToast('🔓 Día desbloqueado correctamente', 'success');
                     cargarSemana();
                 } else {
-                    mostrarNotificacion('❌ Error al desbloquear día', 'error');
+                    showToast('❌ Error al desbloquear día', 'error');
                 }
             } catch (error) {
                 console.error('Error:', error);
-                mostrarNotificacion('❌ Error de conexión al desbloquear día', 'error');
+                showToast('❌ Error de conexión', 'error');
             }
         }
 
@@ -2212,9 +2371,11 @@
                 });
 
                 if (diasSeleccionados.length === 0) {
-                    mostrarNotificacion('⚠️ Selecciona al menos un día', 'warning');
+                    showToast('⚠️ Selecciona al menos un día', 'warning');
                     return;
                 }
+
+                showToast(`🔄 Aplicando configuración a ${diasSeleccionados.length} días...`, 'info');
 
                 // Aplicar configuración a cada día seleccionado
                 for (const nombreDia of diasSeleccionados) {
@@ -2243,7 +2404,7 @@
 
                 // Cerrar modal y recargar
                 cerrarModalGlobal();
-                mostrarNotificacion(`✅ Configuración aplicada a ${diasSeleccionados.length} días`, 'success');
+                showToast(`✅ Configuración aplicada exitosamente a ${diasSeleccionados.length} días`, 'success');
 
                 // Recargar datos
                 setTimeout(() => {
@@ -2252,7 +2413,7 @@
 
             } catch (error) {
                 console.error('Error aplicando configuración global:', error);
-                mostrarNotificacion('❌ Error aplicando configuración', 'warning');
+                showToast('❌ Error aplicando configuración', 'error');
             }
         }
 

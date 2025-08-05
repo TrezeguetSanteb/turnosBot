@@ -750,6 +750,50 @@ def get_notifications_count():
         }), 500
 
 
+@app.route('/api/notifications/mark-single-read', methods=['POST'])
+def mark_single_notification_read():
+    """Marcar una notificación individual como leída"""
+    try:
+        data = request.get_json()
+        notification_id = data.get('notificationId')
+        
+        if not notification_id:
+            return jsonify({
+                'success': False,
+                'error': 'ID de notificación requerido'
+            }), 400
+
+        # Extraer timestamp del ID (formato: timestamp_tipo)
+        try:
+            timestamp = notification_id.split('_')[0]
+            
+            from src.admin.notifications import marcar_notificacion_enviada_por_timestamp
+            success = marcar_notificacion_enviada_por_timestamp(timestamp)
+            
+            if success:
+                return jsonify({
+                    'success': True,
+                    'message': 'Notificación marcada como leída'
+                })
+            else:
+                return jsonify({
+                    'success': False,
+                    'error': 'No se pudo marcar la notificación'
+                }), 404
+                
+        except (ValueError, IndexError) as e:
+            return jsonify({
+                'success': False,
+                'error': 'ID de notificación inválido'
+            }), 400
+            
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+
 # Variables globales para notificaciones en tiempo real
 clients_sse = []
 last_notification_count = 0
