@@ -1,555 +1,588 @@
-import re
-from datetime import datetime, timedelta
-import json
+"""
+Bot Core - Lógica principal del bot de turnos con múltiples profesionales
+"""
 import os
-import time
+import sqlite3
+import json
+from datetime import datetime, timedelta
+import re
 
-# Importar usando rutas relativas para compatibilidad
-try:
-    # Cuando se importa como módulo desde la aplicación principal
-    from .database import (
-        obtener_turnos_por_telefono,
-        obtener_turnos_con_id_por_telefono,
-        obtener_horarios_ocupados,
-        verificar_horario_disponible,
-        crear_turno,
-        cancelar_turno_por_usuario
-    )
-except ImportError:
-    # Cuando se ejecuta como script independiente o desde otro contexto
-    from database import (
-        obtener_turnos_por_telefono,
-        obtener_turnos_con_id_por_telefono,
-        obtener_horarios_ocupados,
-        verificar_horario_disponible,
-        crear_turno,
-        cancelar_turno_por_usuario
-    )
 
-# Importar el módulo de notificaciones
-try:
-    from ..services.notifications import obtener_notificaciones_pendientes, marcar_notificacion_enviada
-except ImportError:
-    from services.notifications import obtener_notificaciones_pendientes, marcar_notificacion_enviada
-
-# Obtener ruta de configuración usando ruta relativa
-PROJECT_ROOT = os.path.abspath(os.path.join(
-    os.path.dirname(__file__), '..', '..'))
-CONFIG_PATH = os.path.join(PROJECT_ROOT, 'config', 'config.json')
-
+# Estados de conversación
 user_states = {}
 user_data = {}
 
-# Tiempo máximo de inactividad en segundos para limpiar estados huérfanos
-STATE_TIMEOUT = 600  # 10 minutos
-# Guardar el último acceso de cada usuario
-user_last_active = {}
+# Estados posibles
+STATE_GREETING = 'greeting'
+STATE_WAITING_DATE = 'waiting_date'
+STATE_WAITING_TIME = 'waiting_time'
+STATE_WAITING_PROFESSIONAL = 'waiting_professional'
+STATE_WAITING_NAME = 'waiting_name'
+STATE_CONFIRMING = 'confirming'
+STATE_MENU = 'menu'
+STATE_CANCELING = 'canceling'
 
 
-def generar_domingos_proximos_meses(meses=6):
-    """Genera las fechas de todos los domingos de los próximos meses"""
-    domingos = []
-    hoy = datetime.now().date()
-
-    # Encontrar el próximo domingo
-    dias_hasta_domingo = (6 - hoy.weekday()) % 7
-    if dias_hasta_domingo == 0 and hoy.weekday() == 6:  # Si hoy es domingo
-        proximo_domingo = hoy
-    else:
-        proximo_domingo = hoy + timedelta(days=dias_hasta_domingo)
-
-    # Generar domingos para los próximos meses
-    fecha_limite = hoy + timedelta(days=meses * 30)  # Aproximadamente X meses
-    domingo_actual = proximo_domingo
-
-    while domingo_actual <= fecha_limite:
-        domingos.append(domingo_actual.strftime('%Y-%m-%d'))
-        domingo_actual += timedelta(days=7)  # Siguiente domingo
-
-    return domingos
+def get_db_connection():
+    """Obtener conexión a la base de datos"""
+    project_root = os.path.abspath(os.path.join(
+        os.path.dirname(__file__), '..', '..'))
+    db_path = os.path.join(project_root, 'data', 'turnos.db')
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    return conn
 
 
-def cargar_config():
-    config_default = {
-        "hora_inicio": 8, "hora_fin": 18, "intervalo": 30, "dias_bloqueados": [],
-        "horarios_por_dia": {
-            dia: {
-                "manana": {"hora_inicio": 8, "hora_fin": 12, "intervalo": 30},
-                "tarde": {"hora_inicio": 15, "hora_fin": 18, "intervalo": 30}
-            } for dia in ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
-        }
-    }
-    if os.path.exists(CONFIG_PATH):
-        with open(CONFIG_PATH, 'r') as f:
-            config = json.load(f)
-            if "dias_bloqueados" not in config:
-                config["dias_bloqueados"] = []
-            if "horarios_por_dia" not in config:
-                config["horarios_por_dia"] = config_default["horarios_por_dia"]
-            # Migración: si algún día tiene solo un rango, convertirlo a dos rangos
-            for dia, val in config["horarios_por_dia"].items():
-                if "manana" not in val or "tarde" not in val:
-                    config["horarios_por_dia"][dia] = {
-                        "manana": val if isinstance(val, dict) else config_default["horarios_por_dia"][dia]["manana"],
-                        "tarde": config_default["horarios_por_dia"][dia]["tarde"]
-                    }
-    else:
-        config = config_default.copy()
-
-    # Agregar automáticamente todos los domingos como días bloqueados
-    domingos = generar_domingos_proximos_meses(6)  # 6 meses
-    dias_bloqueados_set = set(config["dias_bloqueados"])
-
-    # Agregar domingos que no estén ya en la lista
-    domingos_agregados = 0
-    for domingo in domingos:
-        if domingo not in dias_bloqueados_set:
-            config["dias_bloqueados"].append(domingo)
-            domingos_agregados += 1
-
-    # Solo guardar si se agregaron nuevos domingos para evitar escrituras innecesarias
-    if domingos_agregados > 0 and os.path.exists(os.path.dirname(CONFIG_PATH)):
-        try:
-            with open(CONFIG_PATH, 'w') as f:
-                json.dump(config, f)
-        except Exception as e:
-            print(
-                f"Warning: No se pudo guardar la configuración actualizada: {e}")
-
-    return config
-
-
-def parse_fecha(fecha_str):
-    fecha_str = fecha_str.strip().lower()
-    hoy = datetime.now().date()
-    dias_semana = {
-        'lunes': 0, 'martes': 1, 'miercoles': 2, 'miércoles': 2, 'jueves': 3, 'viernes': 4, 'sabado': 5, 'sábado': 5, 'domingo': 6
-    }
-    if fecha_str in ["hoy"]:
-        return hoy.strftime("%Y-%m-%d")
-    if fecha_str in ["mañana", "manana"]:
-        return (hoy + timedelta(days=1)).strftime("%Y-%m-%d")
-    if fecha_str in dias_semana:
-        dia_objetivo = dias_semana[fecha_str]
-        dias_a_sumar = (dia_objetivo - hoy.weekday() + 7) % 7
-        if dias_a_sumar == 0:
-            dias_a_sumar = 7  # próximo día, no hoy
-        return (hoy + timedelta(days=dias_a_sumar)).strftime("%Y-%m-%d")
-    # DD/MM/YYYY o DD-MM-YYYY
-    for fmt in ["%d/%m/%Y", "%d-%m-%Y"]:
-        try:
-            return datetime.strptime(fecha_str, fmt).strftime("%Y-%m-%d")
-        except Exception:
-            pass
-    # DD/MM o DD-MM (asume año actual o próximo si ya pasó)
-    for fmt in ["%d/%m", "%d-%m"]:
-        try:
-            dt = datetime.strptime(fecha_str, fmt)
-            anio = hoy.year
-            fecha = datetime(anio, dt.month, dt.day)
-            if fecha.date() < hoy:
-                fecha = datetime(anio+1, dt.month, dt.day)
-            return fecha.strftime("%Y-%m-%d")
-        except Exception:
-            pass
-    # YYYY-MM-DD (formato original)
+def obtener_profesionales_activos():
+    """Obtener lista de profesionales activos"""
     try:
-        return datetime.strptime(fecha_str, "%Y-%m-%d").strftime("%Y-%m-%d")
-    except Exception:
-        pass
-    return None
+        conn = get_db_connection()
+        profesionales = conn.execute('''
+            SELECT id, nombre, color FROM profesionales 
+            WHERE activo = 1 
+            ORDER BY orden, nombre
+        ''').fetchall()
+        conn.close()
 
-
-def limpiar_estados_huerfanos():
-    ahora = time.time()
-    inactivos = [k for k, v in user_last_active.items() if ahora -
-                 v > STATE_TIMEOUT]
-    for k in inactivos:
-        user_states.pop(k, None)
-        user_data.pop(k, None)
-        user_last_active.pop(k, None)
-
-
-def formatear_fecha_legible(fecha_str, hora_str=None):
-    meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
-             'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
-    dias = ['lunes', 'martes', 'miércoles',
-            'jueves', 'viernes', 'sábado', 'domingo']
-    dt = datetime.strptime(fecha_str, '%Y-%m-%d')
-    dia_semana = dias[dt.weekday()]
-    fecha_legible = f"{dia_semana} {dt.day} de {meses[dt.month-1]}"
-    if hora_str:
-        return f"{fecha_legible}, {hora_str}"
-    return fecha_legible
-
-
-def obtener_fechas_disponibles():
-    """Obtiene las fechas disponibles para reservar (hoy + 6 días)"""
-    hoy = datetime.now().date()
-    fechas = []
-    dias_nombres = ['lunes', 'martes', 'miércoles',
-                    'jueves', 'viernes', 'sábado', 'domingo']
-
-    # Obtener días bloqueados desde la configuración
-    config = cargar_config()
-    dias_bloqueados = set(config.get('dias_bloqueados', []))
-
-    for i in range(7):
-        fecha = hoy + timedelta(days=i)
-        fecha_str = fecha.strftime('%Y-%m-%d')
-
-        # Saltar días bloqueados
-        if fecha_str in dias_bloqueados:
-            continue
-
-        nombre_dia = dias_nombres[fecha.weekday()]
-        etiqueta = "hoy" if i == 0 else ("mañana" if i == 1 else nombre_dia)
-        fechas.append({
-            'fecha': fecha_str,
-            'etiqueta': etiqueta,
-            'fecha_legible': formatear_fecha_legible(fecha_str)
-        })
-    return fechas
-
-
-def obtener_horarios_disponibles(fecha_str):
-    """Obtiene los horarios disponibles para una fecha específica"""
-    config_horarios = cargar_config()
-    fecha_dt = datetime.strptime(fecha_str, "%Y-%m-%d").date()
-    nombre_dia = fecha_dt.strftime('%A')
-    nombres_map = {'Monday': 'Lunes', 'Tuesday': 'Martes', 'Wednesday': 'Miércoles',
-                   'Thursday': 'Jueves', 'Friday': 'Viernes', 'Saturday': 'Sábado', 'Sunday': 'Domingo'}
-    nombre_dia = nombres_map.get(nombre_dia, nombre_dia)
-
-    horarios_por_dia = config_horarios.get('horarios_por_dia', {})
-    rangos = horarios_por_dia.get(nombre_dia, {
-        'manana': {'hora_inicio': config_horarios['hora_inicio'], 'hora_fin': 12, 'intervalo': config_horarios['intervalo']},
-        'tarde': {'hora_inicio': 15, 'hora_fin': config_horarios['hora_fin'], 'intervalo': config_horarios['intervalo']}
-    })
-
-    # Generar todos los horarios posibles
-    posibles = []
-
-    # Procesar mañana y tarde por separado para evitar superposiciones
-    for nombre_rango, rango in [('manana', rangos['manana']), ('tarde', rangos['tarde'])]:
-        hora_inicio = rango['hora_inicio']
-        hora_fin = rango['hora_fin']
-        intervalo = rango['intervalo']
-
-        # Generar horarios desde hora_inicio hasta hora_fin (sin incluir hora_fin)
-        minutos_totales = hora_inicio * 60  # Convertir a minutos desde medianoche
-        minutos_fin = hora_fin * 60
-
-        while minutos_totales < minutos_fin:
-            horas = minutos_totales // 60
-            minutos = minutos_totales % 60
-            horario_str = f"{horas:02d}:{minutos:02d}"
-
-            # Evitar duplicados si ya existe el horario
-            if horario_str not in posibles:
-                posibles.append(horario_str)
-
-            minutos_totales += intervalo
-
-    # Ordenar los horarios cronológicamente
-    posibles.sort()
-
-    # Si es hoy, filtrar horarios que ya pasaron
-    hoy = datetime.now().date()
-    hora_actual = datetime.now().time()
-
-    if fecha_dt == hoy:
-        # Filtrar horarios que ya pasaron
-        posibles_filtrados = []
-        for hora_str in posibles:
-            hora_obj = datetime.strptime(hora_str, '%H:%M').time()
-            if hora_obj > hora_actual:
-                posibles_filtrados.append(hora_str)
-        posibles = posibles_filtrados
-
-    # Verificar cuáles están ocupados
-    ocupados = obtener_horarios_ocupados(fecha_str)
-
-    disponibles = [h for h in posibles if h not in ocupados]
-    return disponibles
-
-
-def verificar_notificaciones_pendientes(from_number):
-    """Verifica si hay notificaciones pendientes para un usuario específico"""
-    try:
-        notificaciones = obtener_notificaciones_pendientes()
-        print(
-            f"🔍 Verificando notificaciones para {from_number}: {len(notificaciones)} pendientes")
-
-        notificaciones_usuario = [
-            n for n in notificaciones if n['telefono'] == from_number]
-
-        print(
-            f"📱 Notificaciones para este usuario: {len(notificaciones_usuario)}")
-
-        if notificaciones_usuario:
-            # Enviar la primera notificación pendiente
-            notificacion = notificaciones_usuario[0]
-            mensaje = notificacion['mensaje']
-
-            print(f"📨 Enviando notificación: {notificacion['tipo']}")
-
-            # Marcar como enviada
-            marcar_notificacion_enviada(notificacion)
-
-            return mensaje
-
-        return None
+        return [dict(p) for p in profesionales]
     except Exception as e:
-        print(f"❌ Error al verificar notificaciones: {e}")
+        print(f"Error obteniendo profesionales: {e}")
+        return [{"id": 1, "nombre": "Martín", "color": "#e74c3c"}]
+
+
+def obtener_profesionales_disponibles_fecha_hora(fecha, hora):
+    """Obtener profesionales disponibles para una fecha/hora específica"""
+    try:
+        conn = get_db_connection()
+
+        # Obtener profesionales que ya tienen turno en ese horario
+        ocupados = conn.execute('''
+            SELECT profesional_id FROM turnos 
+            WHERE fecha = ? AND hora = ?
+        ''', (fecha, hora)).fetchall()
+
+        ocupados_ids = [o['profesional_id'] for o in ocupados]
+
+        # Obtener todos los profesionales activos
+        profesionales = conn.execute('''
+            SELECT id, nombre, color FROM profesionales 
+            WHERE activo = 1 AND id NOT IN ({})
+            ORDER BY orden, nombre
+        '''.format(','.join('?' * len(ocupados_ids)) if ocupados_ids else '0'), ocupados_ids).fetchall()
+
+        conn.close()
+
+        return [dict(p) for p in profesionales]
+
+    except Exception as e:
+        print(f"Error obteniendo disponibles: {e}")
+        return obtener_profesionales_activos()
+
+
+def crear_turno(fecha, hora, nombre, telefono, profesional_id):
+    """Crear un nuevo turno"""
+    try:
+        conn = get_db_connection()
+        cursor = conn.execute('''
+            INSERT INTO turnos (fecha, hora, nombre, telefono, profesional_id)
+            VALUES (?, ?, ?, ?, ?)
+        ''', (fecha, hora, nombre, telefono, profesional_id))
+
+        turno_id = cursor.lastrowid
+        conn.commit()
+        conn.close()
+
+        return turno_id
+
+    except Exception as e:
+        print(f"Error creando turno: {e}")
         return None
 
 
-def handle_message(incoming_msg, from_number, user_states, user_data):
-    limpiar_estados_huerfanos()
-    user_last_active[from_number] = time.time()
-    state = user_states.get(from_number, 'inicio')
-    config_horarios = cargar_config()
+def obtener_turnos_usuario(telefono):
+    """Obtener turnos de un usuario"""
+    try:
+        conn = get_db_connection()
+        turnos = conn.execute('''
+            SELECT t.id, t.fecha, t.hora, t.nombre, p.nombre as profesional_nombre
+            FROM turnos t
+            LEFT JOIN profesionales p ON t.profesional_id = p.id
+            WHERE t.telefono = ? AND t.fecha >= ?
+            ORDER BY t.fecha, t.hora
+        ''', (telefono, datetime.now().strftime('%Y-%m-%d'))).fetchall()
 
-    # Las notificaciones se envían automáticamente por el daemon, no aquí
-    # Esto evita interferir con el flujo de conversación
+        conn.close()
 
-    # Menú principal
-    if incoming_msg.lower() in ['hola', 'start', '/start'] or state == 'inicio':
-        user_states[from_number] = 'menu_principal'
-        return (
-            '*Sistema de Turnos*\n\n'
-            'Selecciona una opción:\n'
-            '1️⃣ Reservar turno\n'
-            '2️⃣ Ver mis turnos\n'
-            '3️⃣ Cancelar turno\n'
-            '4️⃣ Ayuda\n\n'
-            'Escribe el número de tu opción:'
-        )
-    # Manejo del menú principal
-    elif state == 'menu_principal':
-        if incoming_msg.strip() == '1':
-            user_states[from_number] = 'esperando_nombre'
-            return (
-                '📝 *Reservar Turno* 📝\n\n'
-                'Por favor, ingresa tu nombre completo:'
-            )
-        elif incoming_msg.strip() == '2':
-            # Ver turnos
-            try:
-                turnos = obtener_turnos_por_telefono(from_number)
-                if turnos:
-                    respuesta = '📅 *Tus turnos reservados:*\n\n'
-                    for i, t in enumerate(turnos, 1):
-                        respuesta += f"{i}) {t[0]}: {formatear_fecha_legible(t[1], t[2])}\n"
-                    respuesta += '\n💬 Escribe *hola* para volver al menú principal'
-                    user_states[from_number] = 'inicio'
-                    return respuesta
+        return [dict(t) for t in turnos]
+
+    except Exception as e:
+        print(f"Error obteniendo turnos: {e}")
+        return []
+
+
+def cancelar_turno(turno_id, telefono):
+    """Cancelar un turno del usuario"""
+    try:
+        conn = get_db_connection()
+        cursor = conn.execute('''
+            DELETE FROM turnos 
+            WHERE id = ? AND telefono = ?
+        ''', (turno_id, telefono))
+
+        rows_deleted = cursor.rowcount
+        conn.commit()
+        conn.close()
+
+        return rows_deleted > 0
+
+    except Exception as e:
+        print(f"Error cancelando turno: {e}")
+        return False
+
+
+def generar_horarios_disponibles(fecha):
+    """Generar horarios disponibles para una fecha"""
+    try:
+        # Obtener configuración de horarios (simplificado por ahora)
+        horarios_mañana = []
+        horarios_tarde = []
+
+        # Mañana: 8:00 a 12:00
+        for hour in range(8, 12):
+            for minute in [0, 30]:
+                hora = f"{hour:02d}:{minute:02d}"
+                horarios_mañana.append(hora)
+
+        # Tarde: 15:00 a 18:00
+        for hour in range(15, 18):
+            for minute in [0, 30]:
+                hora = f"{hour:02d}:{minute:02d}"
+                horarios_tarde.append(hora)
+
+        return horarios_mañana + horarios_tarde
+
+    except Exception as e:
+        print(f"Error generando horarios: {e}")
+        return ["09:00", "10:00", "16:00", "17:00"]  # Fallback
+
+
+def validar_fecha(fecha_str):
+    """Validar y parsear fecha en formato DD/MM o DD/MM/YYYY"""
+    try:
+        # Intentar diferentes formatos
+        fecha_patterns = [
+            (r'(\d{1,2})/(\d{1,2})/(\d{4})', '%d/%m/%Y'),  # DD/MM/YYYY
+            (r'(\d{1,2})/(\d{1,2})', '%d/%m'),  # DD/MM (año actual)
+            (r'(\d{1,2})-(\d{1,2})-(\d{4})', '%d-%m-%Y'),  # DD-MM-YYYY
+            (r'(\d{1,2})-(\d{1,2})', '%d-%m'),  # DD-MM (año actual)
+        ]
+
+        for pattern, format_str in fecha_patterns:
+            match = re.match(pattern, fecha_str.strip())
+            if match:
+                if '%Y' in format_str:
+                    fecha = datetime.strptime(
+                        fecha_str.strip(), format_str).date()
                 else:
-                    user_states[from_number] = 'inicio'
-                    return '❌ No tienes turnos reservados.\n\n💬 Escribe *hola* para volver al menú principal'
-            except Exception as e:
-                user_states[from_number] = 'inicio'
-                return f"❌ Error al consultar turnos: {e}\n\n💬 Escribe *hola* para volver al menú principal"
-        elif incoming_msg.strip() == '3':
-            # Cancelar turno
-            try:
-                turnos = obtener_turnos_con_id_por_telefono(from_number)
-                if turnos:
-                    respuesta = '🗑️ *Cancelar Turno* 🗑️\n\n¿Qué turno deseas cancelar?\n\n'
-                    for idx, t in enumerate(turnos, 1):
-                        respuesta += f"{idx}) {t[1]}: {formatear_fecha_legible(t[2], t[3])}\n"
-                    respuesta += '\nEscribe el número del turno a cancelar:'
-                    user_states[from_number] = 'esperando_cancelacion'
-                    user_data[from_number] = {'turnos': turnos}
-                    return respuesta
+                    # Agregar año actual
+                    fecha = datetime.strptime(
+                        f"{fecha_str.strip()}/{datetime.now().year}", f"{format_str}/%Y").date()
+
+                # Validar que no sea una fecha pasada
+                if fecha < datetime.now().date():
+                    return None, "La fecha no puede ser anterior a hoy."
+
+                # Validar que esté dentro de los próximos 60 días
+                limite = datetime.now().date() + timedelta(days=60)
+                if fecha > limite:
+                    return None, "Solo puedes reservar turnos hasta 2 meses adelante."
+
+                return fecha, None
+
+        return None, "Formato de fecha inválido. Usa DD/MM o DD/MM/YYYY."
+
+    except Exception as e:
+        return None, "Error al procesar la fecha."
+
+
+def validar_hora(hora_str):
+    """Validar formato de hora"""
+    try:
+        # Intentar diferentes formatos
+        hora_patterns = [
+            r'(\d{1,2}):(\d{2})',  # HH:MM
+            r'(\d{1,2})\.(\d{2})',  # HH.MM
+            r'(\d{1,2})',  # HH (agregar :00)
+        ]
+
+        for pattern in hora_patterns:
+            match = re.match(pattern, hora_str.strip())
+            if match:
+                if len(match.groups()) == 2:
+                    hour, minute = match.groups()
                 else:
-                    user_states[from_number] = 'inicio'
-                    return '❌ No tienes turnos para cancelar.\n\n💬 Escribe *hola* para volver al menú principal'
-            except Exception as e:
-                user_states[from_number] = 'inicio'
-                return f"❌ Error al consultar turnos: {e}\n\n💬 Escribe *hola* para volver al menú principal"
-        elif incoming_msg.strip() == '4':
-            user_states[from_number] = 'inicio'
-            return (
-                '❓ *Ayuda* ❓\n\n'
-                '• Este bot te permite reservar, ver y cancelar turnos\n'
-                '• Solo puedes reservar turnos desde hoy hasta 6 días adelante\n'
-                '• Los horarios disponibles dependen de la configuración del día\n'
-                '• Usa los números para navegar por los menús\n\n'
-                '💬 Escribe *hola* para volver al menú principal'
-            )
+                    hour = match.group(1)
+                    minute = "00"
+
+                hour = int(hour)
+                minute = int(minute)
+
+                # Validar rangos
+                if not (0 <= hour <= 23) or not (0 <= minute <= 59):
+                    return None, "Hora inválida."
+
+                return f"{hour:02d}:{minute:02d}", None
+
+        return None, "Formato de hora inválido. Usa HH:MM."
+
+    except Exception as e:
+        return None, "Error al procesar la hora."
+
+
+def handle_message(message, phone_number, states, data):
+    """
+    Manejar mensaje del usuario
+    """
+    message = message.strip().lower()
+    phone_number = phone_number.strip()
+
+    # Obtener estado actual del usuario
+    current_state = states.get(phone_number, STATE_GREETING)
+    user_info = data.get(phone_number, {})
+
+    try:
+        if current_state == STATE_GREETING or message in ['hola', 'menu', 'inicio']:
+            return handle_greeting(phone_number, states, data)
+
+        elif current_state == STATE_MENU:
+            return handle_menu_selection(message, phone_number, states, data)
+
+        elif current_state == STATE_WAITING_DATE:
+            return handle_date_input(message, phone_number, states, data)
+
+        elif current_state == STATE_WAITING_TIME:
+            return handle_time_input(message, phone_number, states, data)
+
+        elif current_state == STATE_WAITING_PROFESSIONAL:
+            return handle_professional_selection(message, phone_number, states, data)
+
+        elif current_state == STATE_WAITING_NAME:
+            return handle_name_input(message, phone_number, states, data)
+
+        elif current_state == STATE_CONFIRMING:
+            return handle_confirmation(message, phone_number, states, data)
+
+        elif current_state == STATE_CANCELING:
+            return handle_cancellation(message, phone_number, states, data)
+
         else:
-            return (
-                '❌ Opción inválida. Por favor selecciona:\n\n'
-                '1️⃣ Reservar turno\n'
-                '2️⃣ Ver mis turnos\n'
-                '3️⃣ Cancelar turno\n'
-                '4️⃣ Ayuda'
-            )
-    elif state == 'inicio' and incoming_msg.lower() == 'consultar':
-        try:
-            turnos = obtener_turnos_por_telefono(from_number)
-            if turnos:
-                respuesta = 'Tus turnos reservados:\n'
-                for t in turnos:
-                    respuesta += f"- {t[0]}: {formatear_fecha_legible(t[1], t[2])}\n"
-                return respuesta.strip()
-            else:
-                return 'No tienes turnos reservados.'
-        except Exception as e:
-            return f"Ocurrió un error al consultar los turnos: {e}"
-    elif state == 'inicio' and incoming_msg.lower() == 'cancelar':
-        try:
-            turnos = obtener_turnos_con_id_por_telefono(from_number)
-            if turnos:
-                respuesta = '¿Qué turno deseas cancelar? Escribe el número correspondiente:\n'
-                for idx, t in enumerate(turnos, 1):
-                    respuesta += f"{idx}) {t[1]}: {formatear_fecha_legible(t[2], t[3])}\n"
-                user_states[from_number] = 'esperando_cancelacion'
-                user_data[from_number] = {'turnos': turnos}
-                return respuesta.strip()
-            else:
-                return 'No tienes turnos para cancelar.'
-        except Exception as e:
-            return f"Ocurrió un error al consultar los turnos: {e}"
-    # Esperando confirmación de cancelación
-    elif state == 'esperando_cancelacion':
-        try:
-            opcion = int(incoming_msg.strip())
-            turnos = user_data[from_number]['turnos']
-            if 1 <= opcion <= len(turnos):
-                turno_id = turnos[opcion-1][0]
-                turno_info = turnos[opcion-1]
+            # Estado desconocido, reiniciar
+            return handle_greeting(phone_number, states, data)
 
-                if cancelar_turno_por_usuario(turno_id, from_number):
-                    # Notificar al admin sobre la cancelación
-                    try:
-                        from admin.notifications import notificar_admin
-                        notificar_admin(
-                            'cancelacion_turno', turno_info[1], turno_info[2], turno_info[3], canal='WhatsApp')
-                    except Exception as e:
-                        print(
-                            f"⚠️ Error enviando notificación de cancelación: {e}")
+    except Exception as e:
+        print(f"Error en handle_message: {e}")
+        # Reiniciar conversación en caso de error
+        states[phone_number] = STATE_GREETING
+        data[phone_number] = {}
+        return "❌ Ocurrió un error. Escribe *hola* para comenzar de nuevo."
 
-                    user_states[from_number] = 'inicio'
-                    user_data.pop(from_number, None)
-                    fecha_legible = formatear_fecha_legible(
-                        turno_info[2], turno_info[3])
-                    return (
-                        f"✅ *Turno Cancelado* ✅\n\n"
-                        f"👤 Nombre: {turno_info[1]}\n"
-                        f"📅 Fecha y hora: {fecha_legible}\n\n"
-                        f"Tu turno ha sido cancelado exitosamente.\n\n"
-                        f"💬 Escribe *hola* para volver al menú principal"
-                    )
-                else:
-                    return f"❌ Error al cancelar el turno. Inténtalo nuevamente."
-            else:
-                return f"❌ Opción inválida. Selecciona un número del 1 al {len(turnos)}:"
-        except ValueError:
-            turnos = user_data[from_number]['turnos']
-            return f"❌ Por favor ingresa un número del 1 al {len(turnos)}:"
-        except Exception as e:
-            user_states[from_number] = 'inicio'
-            user_data.pop(from_number, None)
-            return f"❌ Error al cancelar el turno: {e}\n\n💬 Escribe *hola* para volver al menú principal"
-    # Esperando nombre para reserva
-    elif state == 'esperando_nombre':
-        if len(incoming_msg.strip()) < 2:
-            return '❌ Por favor ingresa un nombre válido (mínimo 2 caracteres):'
-        user_data[from_number] = {'nombre': incoming_msg.strip()}
-        user_states[from_number] = 'seleccionando_fecha'
 
-        # Mostrar fechas disponibles
-        fechas = obtener_fechas_disponibles()
-        respuesta = '📅 *Seleccionar Fecha* 📅\n\n¿Qué día prefieres para tu turno?\n\n'
-        for i, fecha in enumerate(fechas, 1):
-            respuesta += f"{i}) {fecha['etiqueta'].title()} ({fecha['fecha_legible']})\n"
-        respuesta += '\nEscribe el número del día:'
-        user_data[from_number]['fechas_disponibles'] = fechas
+def handle_greeting(phone_number, states, data):
+    """Manejar saludo inicial y mostrar menú"""
+    states[phone_number] = STATE_MENU
+    data[phone_number] = {}
+
+    menu = """
+🦷 *¡Hola! Bienvenido al sistema de turnos.*
+
+¿Qué deseas hacer?
+
+*1️⃣* - Reservar un turno
+*2️⃣* - Ver mis turnos
+*3️⃣* - Cancelar un turno
+
+Responde con el número de opción.
+    """.strip()
+
+    return menu
+
+
+def handle_menu_selection(message, phone_number, states, data):
+    """Manejar selección del menú principal"""
+    if message in ['1', 'reservar', 'turno', 'nuevo']:
+        states[phone_number] = STATE_WAITING_DATE
+        return "📅 *Perfecto! Vamos a reservar tu turno.*\n\n¿Para qué fecha lo necesitas?\nPor favor envía la fecha en formato DD/MM (ejemplo: 15/03)"
+
+    elif message in ['2', 'ver', 'mis turnos', 'turnos']:
+        turnos = obtener_turnos_usuario(phone_number)
+
+        if not turnos:
+            states[phone_number] = STATE_MENU
+            return "📋 *No tienes turnos reservados.*\n\nEscribe *menu* para ver las opciones disponibles."
+
+        respuesta = "📋 *Tus turnos reservados:*\n\n"
+        for turno in turnos:
+            fecha_formateada = datetime.strptime(
+                turno['fecha'], '%Y-%m-%d').strftime('%d/%m/%Y')
+            profesional = turno['profesional_nombre'] or 'Sin asignar'
+            respuesta += f"🗓️ {fecha_formateada} a las {turno['hora']}\n"
+            respuesta += f"👤 Con: {profesional}\n"
+            respuesta += f"📝 ID: {turno['id']}\n\n"
+
+        states[phone_number] = STATE_MENU
+        respuesta += "Escribe *menu* para ver más opciones."
         return respuesta
-    # Seleccionando fecha
-    elif state == 'seleccionando_fecha':
-        try:
-            opcion = int(incoming_msg.strip())
-            fechas = user_data[from_number]['fechas_disponibles']
-            if 1 <= opcion <= len(fechas):
-                fecha_seleccionada = fechas[opcion-1]['fecha']
-                user_data[from_number]['fecha'] = fecha_seleccionada
-                user_states[from_number] = 'seleccionando_hora'
 
-                # Mostrar horarios disponibles
-                horarios = obtener_horarios_disponibles(fecha_seleccionada)
-                if horarios:
-                    respuesta = f"🕐 *Seleccionar Horario* 🕐\n\nFecha: {fechas[opcion-1]['fecha_legible']}\n\nHorarios disponibles:\n\n"
-                    for i, hora in enumerate(horarios, 1):
-                        respuesta += f"{i}) {hora}\n"
-                    respuesta += '\nEscribe el número del horario:'
-                    user_data[from_number]['horarios_disponibles'] = horarios
-                    return respuesta
-                else:
-                    user_states[from_number] = 'seleccionando_fecha'
-                    return f"❌ No hay horarios disponibles para {fechas[opcion-1]['fecha_legible']}.\n\nPor favor selecciona otro día:"
-            else:
-                return f"❌ Opción inválida. Selecciona un número del 1 al {len(fechas)}:"
-        except ValueError:
-            fechas = user_data[from_number]['fechas_disponibles']
-            return f"❌ Por favor ingresa un número del 1 al {len(fechas)}:"
-    # Seleccionando hora
-    elif state == 'seleccionando_hora':
-        try:
-            opcion = int(incoming_msg.strip())
-            horarios = user_data[from_number]['horarios_disponibles']
-            if 1 <= opcion <= len(horarios):
-                hora_seleccionada = horarios[opcion-1]
-                user_data[from_number]['hora'] = hora_seleccionada
+    elif message in ['3', 'cancelar']:
+        turnos = obtener_turnos_usuario(phone_number)
 
-                # Confirmar y guardar turno
-                datos = user_data[from_number]
-                try:
-                    # Verificar disponibilidad y crear turno
-                    if not verificar_horario_disponible(datos['fecha'], datos['hora']):
-                        user_states[from_number] = 'seleccionando_hora'
-                        return f"❌ El horario {datos['hora']} ya fue reservado por otro usuario.\n\nPor favor selecciona otro horario:"
+        if not turnos:
+            states[phone_number] = STATE_MENU
+            return "📋 *No tienes turnos para cancelar.*\n\nEscribe *menu* para ver las opciones disponibles."
 
-                    if crear_turno(datos['nombre'], datos['fecha'], datos['hora'], from_number):
-                        # Notificar al admin sobre el nuevo turno
-                        try:
-                            from admin.notifications import notificar_admin
-                            notificar_admin(
-                                'nuevo_turno', datos['nombre'], from_number, datos['fecha'], datos['hora'], canal='WhatsApp')
-                        except Exception as e:
-                            print(
-                                f"Error enviando notificación de nuevo turno: {e}")
+        data[phone_number]['cancelar_turnos'] = turnos
+        states[phone_number] = STATE_CANCELING
 
-                        user_states[from_number] = 'inicio'
-                        user_data.pop(from_number)
-                        fecha_legible = formatear_fecha_legible(
-                            datos['fecha'], datos['hora'])
-                        return (
-                            f"✅ *Turno Confirmado* ✅\n\n"
-                            f"👤 Nombre: {datos['nombre']}\n"
-                            f"📅 Fecha y hora: {fecha_legible}\n\n"
-                            f"¡Tu turno ha sido reservado exitosamente!\n\n"
-                            f"💬 Escribe *hola* para volver al menú principal"
-                        )
-                    else:
-                        user_states[from_number] = 'inicio'
-                        user_data.pop(from_number, None)
-                        return f"❌ Error al guardar el turno. Inténtalo nuevamente.\n\n💬 Escribe *hola* para volver al menú principal"
-                except Exception as e:
-                    user_states[from_number] = 'inicio'
-                    user_data.pop(from_number, None)
-                    return f"❌ Error al guardar el turno: {e}\n\n💬 Escribe *hola* para volver al menú principal"
-            else:
-                return f"❌ Opción inválida. Selecciona un número del 1 al {len(horarios)}:"
-        except ValueError:
-            horarios = user_data[from_number]['horarios_disponibles']
-            return f"❌ Por favor ingresa un número del 1 al {len(horarios)}:"
-    # Mensaje no reconocido
+        respuesta = "❌ *¿Qué turno deseas cancelar?*\n\n"
+        for i, turno in enumerate(turnos, 1):
+            fecha_formateada = datetime.strptime(
+                turno['fecha'], '%Y-%m-%d').strftime('%d/%m/%Y')
+            profesional = turno['profesional_nombre'] or 'Sin asignar'
+            respuesta += f"*{i}* - {fecha_formateada} a las {turno['hora']} (Con: {profesional})\n"
+
+        respuesta += "\nResponde con el número del turno a cancelar."
+        return respuesta
+
     else:
-        return (
-            '❌ No entendí tu mensaje.\n\n'
-            '💬 Escribe *hola* para ir al menú principal'
+        return "❌ Opción no válida. Por favor responde:\n*1* - Reservar turno\n*2* - Ver turnos\n*3* - Cancelar turno"
+
+
+def handle_date_input(message, phone_number, states, data):
+    """Manejar entrada de fecha"""
+    fecha, error = validar_fecha(message)
+
+    if error:
+        return f"❌ {error}\n\nIntenta nuevamente con formato DD/MM (ejemplo: 15/03)"
+
+    data[phone_number]['fecha'] = fecha.strftime('%Y-%m-%d')
+    data[phone_number]['fecha_mostrar'] = fecha.strftime('%d/%m/%Y')
+
+    # Generar horarios disponibles
+    horarios = generar_horarios_disponibles(fecha.strftime('%Y-%m-%d'))
+
+    if not horarios:
+        return f"❌ No hay horarios disponibles para el {fecha.strftime('%d/%m/%Y')}.\n\nPrueba con otra fecha."
+
+    states[phone_number] = STATE_WAITING_TIME
+
+    # Mostrar horarios agrupados
+    respuesta = f"⏰ *Horarios disponibles para {fecha.strftime('%d/%m/%Y')}:*\n\n"
+    respuesta += "*Mañana:*\n"
+
+    mañana = [h for h in horarios if int(h.split(':')[0]) < 14]
+    tarde = [h for h in horarios if int(h.split(':')[0]) >= 14]
+
+    if mañana:
+        for hora in mañana:
+            respuesta += f"🌅 {hora}\n"
+    else:
+        respuesta += "Sin horarios disponibles\n"
+
+    respuesta += "\n*Tarde:*\n"
+
+    if tarde:
+        for hora in tarde:
+            respuesta += f"🌆 {hora}\n"
+    else:
+        respuesta += "Sin horarios disponibles\n"
+
+    respuesta += "\n¿A qué hora te gustaría el turno? (ejemplo: 10:30)"
+
+    return respuesta
+
+
+def handle_time_input(message, phone_number, states, data):
+    """Manejar entrada de hora"""
+    hora, error = validar_hora(message)
+
+    if error:
+        return f"❌ {error}\n\nIntenta nuevamente (ejemplo: 10:30)"
+
+    fecha = data[phone_number]['fecha']
+
+    # Verificar que la hora esté disponible
+    horarios_disponibles = generar_horarios_disponibles(fecha)
+
+    if hora not in horarios_disponibles:
+        return f"❌ La hora {hora} no está disponible.\n\nPor favor elige una de las horas mostradas anteriormente."
+
+    data[phone_number]['hora'] = hora
+
+    # Obtener profesionales disponibles para esta fecha/hora
+    profesionales = obtener_profesionales_disponibles_fecha_hora(fecha, hora)
+
+    if not profesionales:
+        return f"❌ No hay profesionales disponibles para {data[phone_number]['fecha_mostrar']} a las {hora}.\n\nPrueba con otro horario escribiendo *menu*."
+
+    if len(profesionales) == 1:
+        # Solo hay un profesional disponible, asignarlo automáticamente
+        data[phone_number]['profesional_id'] = profesionales[0]['id']
+        data[phone_number]['profesional_nombre'] = profesionales[0]['nombre']
+        states[phone_number] = STATE_WAITING_NAME
+
+        return f"👤 *Profesional asignado:* {profesionales[0]['nombre']}\n\n¿Cuál es tu nombre completo?"
+
+    # Hay múltiples profesionales, permitir elegir
+    data[phone_number]['profesionales_disponibles'] = profesionales
+    states[phone_number] = STATE_WAITING_PROFESSIONAL
+
+    respuesta = f"👥 *Hay varios profesionales disponibles para {data[phone_number]['fecha_mostrar']} a las {hora}:*\n\n"
+
+    for i, prof in enumerate(profesionales, 1):
+        respuesta += f"*{i}* - {prof['nombre']}\n"
+
+    respuesta += "\n¿Con quién te gustaría reservar? Responde con el número."
+
+    return respuesta
+
+
+def handle_professional_selection(message, phone_number, states, data):
+    """Manejar selección de profesional"""
+    try:
+        seleccion = int(message.strip())
+        profesionales = data[phone_number].get('profesionales_disponibles', [])
+
+        if 1 <= seleccion <= len(profesionales):
+            profesional = profesionales[seleccion - 1]
+            data[phone_number]['profesional_id'] = profesional['id']
+            data[phone_number]['profesional_nombre'] = profesional['nombre']
+
+            states[phone_number] = STATE_WAITING_NAME
+
+            return f"👤 *Perfecto! Has elegido a {profesional['nombre']}*\n\n¿Cuál es tu nombre completo?"
+        else:
+            return f"❌ Opción inválida. Por favor responde con un número del 1 al {len(profesionales)}."
+
+    except ValueError:
+        profesionales = data[phone_number].get('profesionales_disponibles', [])
+        return f"❌ Por favor responde con un número del 1 al {len(profesionales)}."
+
+
+def handle_name_input(message, phone_number, states, data):
+    """Manejar entrada del nombre"""
+    nombre = message.strip().title()
+
+    if len(nombre) < 2:
+        return "❌ Por favor ingresa un nombre válido."
+
+    data[phone_number]['nombre'] = nombre
+    states[phone_number] = STATE_CONFIRMING
+
+    # Mostrar resumen para confirmar
+    fecha_mostrar = data[phone_number]['fecha_mostrar']
+    hora = data[phone_number]['hora']
+    profesional = data[phone_number]['profesional_nombre']
+
+    respuesta = f"""
+📋 *Confirma tu turno:*
+
+📅 Fecha: {fecha_mostrar}
+⏰ Hora: {hora}
+👤 Profesional: {profesional}
+🙋‍♂️ Nombre: {nombre}
+
+¿Está todo correcto?
+Responde *SÍ* para confirmar o *NO* para cancelar.
+    """.strip()
+
+    return respuesta
+
+
+def handle_confirmation(message, phone_number, states, data):
+    """Manejar confirmación del turno"""
+    if message in ['si', 'sí', 'yes', 'ok', 'confirmar', 'confirmo']:
+        # Crear el turno
+        turno_id = crear_turno(
+            data[phone_number]['fecha'],
+            data[phone_number]['hora'],
+            data[phone_number]['nombre'],
+            phone_number,
+            data[phone_number]['profesional_id']
         )
+
+        if turno_id:
+            # Limpiar datos del usuario
+            states[phone_number] = STATE_MENU
+
+            fecha_mostrar = data[phone_number]['fecha_mostrar']
+            hora = data[phone_number]['hora']
+            profesional = data[phone_number]['profesional_nombre']
+            nombre = data[phone_number]['nombre']
+
+            data[phone_number] = {}  # Limpiar datos
+
+            respuesta = f"""
+✅ *¡Turno confirmado!*
+
+📅 Fecha: {fecha_mostrar}
+⏰ Hora: {hora}
+👤 Profesional: {profesional}
+🙋‍♂️ Nombre: {nombre}
+🆔 ID del turno: {turno_id}
+
+📝 *Recordatorio importante:*
+• Llega 5 minutos antes
+• Si no puedes asistir, cancela con anticipación
+
+Escribe *menu* para más opciones.
+            """.strip()
+
+            return respuesta
+        else:
+            states[phone_number] = STATE_MENU
+            data[phone_number] = {}
+            return "❌ Error al crear el turno. Por favor intenta nuevamente escribiendo *menu*."
+
+    elif message in ['no', 'cancelar', 'cancel']:
+        states[phone_number] = STATE_MENU
+        data[phone_number] = {}
+        return "❌ Turno cancelado.\n\nEscribe *menu* si deseas hacer otra consulta."
+
+    else:
+        return "❌ Por favor responde *SÍ* para confirmar o *NO* para cancelar."
+
+
+def handle_cancellation(message, phone_number, states, data):
+    """Manejar cancelación de turno"""
+    try:
+        seleccion = int(message.strip())
+        turnos = data[phone_number].get('cancelar_turnos', [])
+
+        if 1 <= seleccion <= len(turnos):
+            turno = turnos[seleccion - 1]
+
+            if cancelar_turno(turno['id'], phone_number):
+                states[phone_number] = STATE_MENU
+                data[phone_number] = {}
+
+                fecha_formateada = datetime.strptime(
+                    turno['fecha'], '%Y-%m-%d').strftime('%d/%m/%Y')
+                profesional = turno['profesional_nombre'] or 'Sin asignar'
+
+                return f"""
+✅ *Turno cancelado exitosamente*
+
+📅 Fecha: {fecha_formateada}
+⏰ Hora: {turno['hora']}
+👤 Profesional: {profesional}
+
+Escribe *menu* para más opciones.
+                """.strip()
+            else:
+                return "❌ Error al cancelar el turno. Intenta nuevamente."
+        else:
+            return f"❌ Opción inválida. Por favor responde con un número del 1 al {len(turnos)}."
+
+    except ValueError:
+        turnos = data[phone_number].get('cancelar_turnos', [])
+        return f"❌ Por favor responde con un número del 1 al {len(turnos)}."

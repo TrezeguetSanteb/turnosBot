@@ -7,6 +7,7 @@ import requests
 from datetime import datetime, timedelta
 import threading
 import time
+import sqlite3  # Agregar para manejo directo de BD
 
 # Importar el nuevo módulo de base de datos
 from src.core.database import obtener_turnos_por_fecha, eliminar_turno_admin, obtener_todos_los_turnos
@@ -104,8 +105,162 @@ def guardar_config(config):
         json.dump(config, f)
 
 
+# ========================================
+# FUNCIONES DE PROFESIONALES
+# ========================================
+
+def get_db_connection():
+    """Obtener conexión a la base de datos"""
+    db_path = os.path.join(PROJECT_ROOT, 'data', 'turnos.db')
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+
+def inicializar_bd_profesionales():
+    """Inicializar tablas de profesionales si no existen"""
+    try:
+        conn = get_db_connection()
+
+        # Crear tablas según el schema.sql
+        with open(os.path.join(PROJECT_ROOT, 'data', 'schema.sql'), 'r') as f:
+            schema = f.read()
+            conn.executescript(schema)
+
+        conn.commit()
+        conn.close()
+
+        print("✅ Base de datos profesionales inicializada")
+
+    except Exception as e:
+        print(f"❌ Error inicializando BD profesionales: {e}")
+
+
+def obtener_profesionales():
+    """Obtener lista de profesionales activos"""
+    try:
+        conn = get_db_connection()
+        profesionales = conn.execute('''
+            SELECT id, nombre, color, activo, orden 
+            FROM profesionales 
+            WHERE activo = 1 
+            ORDER BY orden, nombre
+        ''').fetchall()
+        conn.close()
+
+        return [dict(p) for p in profesionales]
+
+    except Exception as e:
+        print(f"Error obteniendo profesionales: {e}")
+        return [{"id": 1, "nombre": "Martín", "color": "#e74c3c", "activo": 1, "orden": 1}]
+
+
+def obtener_capacidad_horario(dia_semana, periodo):
+    """Obtener capacidad máxima para un horario específico"""
+    try:
+        conn = get_db_connection()
+        resultado = conn.execute('''
+            SELECT capacidad_total FROM capacidad_horarios 
+            WHERE dia_semana = ? AND periodo = ?
+        ''', (dia_semana, periodo)).fetchone()
+        conn.close()
+
+        return resultado['capacidad_total'] if resultado else 1
+
+    except Exception as e:
+        print(f"Error obteniendo capacidad: {e}")
+        return 1
+
+
+def obtener_turnos_por_fecha_con_profesional(fecha):
+    """Obtener turnos de una fecha con información del profesional"""
+    try:
+        conn = get_db_connection()
+        turnos = conn.execute('''
+            SELECT t.id, t.nombre, t.fecha, t.hora, t.telefono, t.timestamp,
+                   p.nombre as profesional_nombre, p.color as profesional_color
+            FROM turnos t
+            LEFT JOIN profesionales p ON t.profesional_id = p.id
+            WHERE t.fecha = ?
+            ORDER BY t.hora, p.orden
+        ''', (fecha,)).fetchall()
+        conn.close()
+
+        return [dict(t) for t in turnos]
+
+    except Exception as e:
+        print(f"Error obteniendo turnos con profesional: {e}")
+        # Fallback a función original
+        from src.core.database import obtener_turnos_por_fecha
+        return obtener_turnos_por_fecha(fecha)
+
+
+def contar_turnos_por_horario_y_periodo(fecha, hora, periodo):
+    """Contar turnos existentes en un horario y periodo específico"""
+    try:
+        conn = get_db_connection()
+        count = conn.execute('''
+            SELECT COUNT(*) as total FROM turnos 
+            WHERE fecha = ? AND hora = ?
+        ''', (fecha, hora)).fetchone()
+        conn.close()
+
+        return count['total'] if count else 0
+
+    except Exception as e:
+        print(f"Error contando turnos: {e}")
+        return 0
+
+
+def obtener_profesionales_disponibles_horario(fecha, hora, periodo):
+    """Obtener profesionales que aún tienen cupo en un horario"""
+    try:
+        dia_semana = datetime.strptime(fecha, '%Y-%m-%d').strftime('%A')
+
+        # Traducir día al español
+        dias_español = {
+            'Monday': 'Lunes', 'Tuesday': 'Martes', 'Wednesday': 'Miércoles',
+            'Thursday': 'Jueves', 'Friday': 'Viernes', 'Saturday': 'Sábado', 'Sunday': 'Domingo'
+        }
+        dia_español = dias_español.get(dia_semana, dia_semana)
+
+        conn = get_db_connection()
+
+        # Obtener profesionales que ya tienen turno en ese horario
+        ocupados = conn.execute('''
+            SELECT profesional_id FROM turnos 
+            WHERE fecha = ? AND hora = ?
+        ''', (fecha, hora)).fetchall()
+
+        ocupados_ids = [o['profesional_id'] for o in ocupados]
+
+        # Obtener todos los profesionales activos
+        profesionales = conn.execute('''
+            SELECT id, nombre, color FROM profesionales 
+            WHERE activo = 1 
+            ORDER BY orden, nombre
+        ''').fetchall()
+
+        conn.close()
+
+        # Filtrar disponibles
+        disponibles = [
+            dict(p) for p in profesionales
+            if p['id'] not in ocupados_ids
+        ]
+
+        return disponibles
+
+    except Exception as e:
+        print(f"Error obteniendo disponibles: {e}")
+        return obtener_profesionales()
+
+
 @app.route('/', methods=['GET'])
 def index():
+    # Inicializar BD de profesionales al cargar la página
+    inicializar_bd_profesionales()
+
     semana_inicio_str = request.args.get('semana')
     hoy = datetime.now().date()
     if semana_inicio_str:
@@ -128,14 +283,22 @@ def index():
             dia = hoy + timedelta(days=i)
             fecha_str = dia.strftime('%Y-%m-%d')
             nombre_dia = nombres_dias[dia.weekday()]
-            turnos = obtener_turnos_por_fecha(fecha_str)
+
+            # Usar nueva función con información de profesional
+            turnos = obtener_turnos_por_fecha_con_profesional(fecha_str)
             turnos_marcados = []
             for t in turnos:
-                # t[2]=fecha, t[3]=hora (formato HH:MM)
                 turno_dt = datetime.strptime(
-                    f"{t[2]} {t[3]}", "%Y-%m-%d %H:%M")
+                    f"{t['fecha']} {t['hora']}", "%Y-%m-%d %H:%M")
                 es_nuevo = (datetime.now() - turno_dt).total_seconds() < 86400
-                turnos_marcados.append(list(t) + [es_nuevo])
+                # Formato compatible con template existente
+                turno_completo = [
+                    t['id'], t['nombre'], t['fecha'], t['hora'], t['telefono'],
+                    es_nuevo, t.get('profesional_nombre',
+                                    'N/A'), t.get('profesional_color', '#3498db')
+                ]
+                turnos_marcados.append(turno_completo)
+
             horario = horarios_por_dia.get(nombre_dia, {
                 'manana': {'hora_inicio': config['hora_inicio'], 'hora_fin': 12, 'intervalo': config['intervalo']},
                 'tarde': {'hora_inicio': 15, 'hora_fin': config['hora_fin'], 'intervalo': config['intervalo']}
@@ -154,13 +317,22 @@ def index():
             dia = semana_inicio + timedelta(days=i)
             fecha_str = dia.strftime('%Y-%m-%d')
             nombre_dia = nombres_dias[dia.weekday()]
-            turnos = obtener_turnos_por_fecha(fecha_str)
+
+            # Usar nueva función con información de profesional
+            turnos = obtener_turnos_por_fecha_con_profesional(fecha_str)
             turnos_marcados = []
             for t in turnos:
                 turno_dt = datetime.strptime(
-                    f"{t[2]} {t[3]}", "%Y-%m-%d %H:%M")
+                    f"{t['fecha']} {t['hora']}", "%Y-%m-%d %H:%M")
                 es_nuevo = (datetime.now() - turno_dt).total_seconds() < 86400
-                turnos_marcados.append(list(t) + [es_nuevo])
+                # Formato compatible con template existente
+                turno_completo = [
+                    t['id'], t['nombre'], t['fecha'], t['hora'], t['telefono'],
+                    es_nuevo, t.get('profesional_nombre',
+                                    'N/A'), t.get('profesional_color', '#3498db')
+                ]
+                turnos_marcados.append(turno_completo)
+
             horario = horarios_por_dia.get(nombre_dia, {
                 'manana': {'hora_inicio': config['hora_inicio'], 'hora_fin': 12, 'intervalo': config['intervalo']},
                 'tarde': {'hora_inicio': 15, 'hora_fin': config['hora_fin'], 'intervalo': config['intervalo']}
@@ -273,7 +445,7 @@ def desbloquear_dia():
 
 @app.route('/api/turnos_semana')
 def api_turnos_semana():
-    """API para obtener datos de la semana - versión móvil"""
+    """API para obtener datos de la semana - versión móvil con información de profesionales"""
     semana_inicio_str = request.args.get('semana')
     hoy = datetime.now().date()
 
@@ -295,13 +467,28 @@ def api_turnos_semana():
         dia = semana_inicio + timedelta(days=i)
         fecha_str = dia.strftime('%Y-%m-%d')
         nombre_dia = nombres_dias[dia.weekday()]
-        turnos = obtener_turnos_por_fecha(fecha_str)
+
+        # Usar función con información de profesional
+        turnos = obtener_turnos_por_fecha_con_profesional(fecha_str)
 
         turnos_marcados = []
         for t in turnos:
-            turno_dt = datetime.strptime(f"{t[2]} {t[3]}", "%Y-%m-%d %H:%M")
+            turno_dt = datetime.strptime(
+                f"{t['fecha']} {t['hora']}", "%Y-%m-%d %H:%M")
             es_nuevo = (datetime.now() - turno_dt).total_seconds() < 86400
-            turnos_marcados.append(list(t) + [es_nuevo])
+
+            # Formato para el móvil incluyendo información del profesional
+            turno_formateado = {
+                'id': t['id'],
+                'nombre': t['nombre'],
+                'fecha': t['fecha'],
+                'hora': t['hora'],
+                'telefono': t['telefono'],
+                'es_nuevo': es_nuevo,
+                'profesional_nombre': t.get('profesional_nombre', 'N/A'),
+                'profesional_color': t.get('profesional_color', '#666666')
+            }
+            turnos_marcados.append(turno_formateado)
 
         horario = horarios_por_dia.get(nombre_dia, {
             'manana': {'hora_inicio': 9, 'hora_fin': 12, 'intervalo': 30},
@@ -756,7 +943,7 @@ def mark_single_notification_read():
     try:
         data = request.get_json()
         notification_id = data.get('notificationId')
-        
+
         if not notification_id:
             return jsonify({
                 'success': False,
@@ -766,10 +953,10 @@ def mark_single_notification_read():
         # Extraer timestamp del ID (formato: timestamp_tipo)
         try:
             timestamp = notification_id.split('_')[0]
-            
+
             from src.admin.notifications import marcar_notificacion_enviada_por_timestamp
             success = marcar_notificacion_enviada_por_timestamp(timestamp)
-            
+
             if success:
                 return jsonify({
                     'success': True,
@@ -780,13 +967,13 @@ def mark_single_notification_read():
                     'success': False,
                     'error': 'No se pudo marcar la notificación'
                 }), 404
-                
+
         except (ValueError, IndexError) as e:
             return jsonify({
                 'success': False,
                 'error': 'ID de notificación inválido'
             }), 400
-            
+
     except Exception as e:
         return jsonify({
             'success': False,
@@ -951,6 +1138,193 @@ def keep_alive():
         'timestamp': datetime.now().isoformat(),
         'message': 'TurnosBot daemon keep-alive ping'
     })
+
+
+# ================================
+# NUEVAS FUNCIONES Y ENDPOINTS
+# ================================
+
+def guardar_profesionales(profesionales_data):
+    """Guardar configuración de profesionales"""
+    try:
+        conn = get_db_connection()
+
+        # Limpiar profesionales existentes
+        conn.execute('DELETE FROM profesionales')
+
+        # Insertar nuevos profesionales
+        for i, prof in enumerate(profesionales_data):
+            conn.execute('''
+                INSERT INTO profesionales (nombre, color, activo, orden)
+                VALUES (?, ?, 1, ?)
+            ''', (prof['nombre'], prof['color'], i + 1))
+
+        conn.commit()
+        conn.close()
+
+        return True
+
+    except Exception as e:
+        print(f"Error guardando profesionales: {e}")
+        return False
+
+
+def actualizar_capacidad_horarios(capacidad_data, num_profesionales):
+    """Actualizar capacidad de horarios según número de profesionales"""
+    try:
+        conn = get_db_connection()
+
+        # Limpiar capacidad existente
+        conn.execute('DELETE FROM capacidad_horarios')
+
+        # Insertar nueva capacidad para todos los días
+        dias_semana = ['Lunes', 'Martes', 'Miércoles',
+                       'Jueves', 'Viernes', 'Sábado', 'Domingo']
+
+        for dia in dias_semana:
+            # Domingo con capacidad 0
+            if dia == 'Domingo':
+                conn.execute('''
+                    INSERT INTO capacidad_horarios (dia_semana, periodo, capacidad_total)
+                    VALUES (?, 'manana', 0), (?, 'tarde', 0)
+                ''', (dia, dia))
+            else:
+                capacidad = capacidad_data.get(dia, num_profesionales)
+                conn.execute('''
+                    INSERT INTO capacidad_horarios (dia_semana, periodo, capacidad_total)
+                    VALUES (?, 'manana', ?), (?, 'tarde', ?)
+                ''', (dia, capacidad, dia, capacidad))
+
+        conn.commit()
+        conn.close()
+
+        return True
+
+    except Exception as e:
+        print(f"Error actualizando capacidad: {e}")
+        return False
+
+
+@app.route('/api/profesionales', methods=['GET'])
+def api_obtener_profesionales():
+    """API para obtener lista de profesionales"""
+    try:
+        profesionales = obtener_profesionales()
+        return jsonify({
+            'success': True,
+            'profesionales': profesionales
+        })
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e),
+            'profesionales': []
+        }), 500
+
+
+@app.route('/api/profesionales', methods=['POST'])
+def api_guardar_profesionales():
+    """API para guardar configuración de profesionales"""
+    try:
+        data = request.get_json()
+        profesionales_data = data.get('profesionales', [])
+
+        if not profesionales_data:
+            return jsonify({
+                'success': False,
+                'error': 'Datos de profesionales requeridos'
+            }), 400
+
+        # Validar datos
+        for prof in profesionales_data:
+            if not prof.get('nombre') or not prof.get('color'):
+                return jsonify({
+                    'success': False,
+                    'error': 'Nombre y color son requeridos para cada profesional'
+                }), 400
+
+        # Guardar profesionales
+        if guardar_profesionales(profesionales_data):
+            # Actualizar capacidad de horarios
+            actualizar_capacidad_horarios(
+                data.get('capacidad', {}), len(profesionales_data))
+
+            return jsonify({
+                'success': True,
+                'message': 'Profesionales actualizados correctamente'
+            })
+        else:
+            return jsonify({
+                'success': False,
+                'error': 'Error guardando profesionales'
+            }), 500
+
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
+
+
+@app.route('/api/disponibles/<fecha>/<hora>')
+def api_profesionales_disponibles(fecha, hora):
+    """API para obtener profesionales disponibles en un horario específico"""
+    try:
+        # Determinar periodo (mañana o tarde)
+        hora_int = int(hora.split(':')[0])
+        periodo = 'manana' if hora_int < 15 else 'tarde'
+
+        disponibles = obtener_profesionales_disponibles_horario(
+            fecha, hora, periodo)
+
+        return jsonify({
+            'success': True,
+            'disponibles': disponibles,
+            'fecha': fecha,
+            'hora': hora,
+            'periodo': periodo
+        })
+
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e),
+            'disponibles': []
+        }), 500
+
+
+@app.route('/api/bot/test', methods=['POST'])
+def test_bot():
+    """Endpoint para probar el bot de turnos"""
+    try:
+        data = request.get_json()
+        message = data.get('message', '')
+        phone = data.get('phone', '5491123456789')
+
+        if not message:
+            return jsonify({
+                'success': False,
+                'error': 'Mensaje requerido'
+            }), 400
+
+        # Importar lógica del bot
+        from src.core.bot_core import handle_message, user_states, user_data
+
+        # Procesar mensaje
+        response = handle_message(message, phone, user_states, user_data)
+
+        return jsonify({
+            'success': True,
+            'response': response,
+            'state': user_states.get(phone, 'greeting'),
+            'data': user_data.get(phone, {})
+        })
+
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
 
 
 if __name__ == '__main__':

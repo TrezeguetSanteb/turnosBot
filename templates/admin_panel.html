@@ -253,14 +253,30 @@
             let html = `<h3>Turnos para ${dia.nombre} (${dia.fecha})</h3>`;
             html += `<button class='btn' style='margin-right:10px;' onclick='bloquearDesbloquearDia();return false;'>${dia.bloqueado ? 'Desbloquear día' : 'Bloquear día'}</button>`;
             html += `<button class='btn' onclick='editarRangosDia();return false;'>Editar rangos</button>`;
-            html += `<table class='excel-table'><tr><th>Hora</th><th>Nombre</th><th>Teléfono</th><th>Acción</th></tr>`;
+            html += `<table class='excel-table'><tr><th>Hora</th><th>Nombre</th><th>Profesional</th><th>Teléfono</th><th>Acción</th></tr>`;
             if (dia.turnos.length > 0) {
                 for (const t of dia.turnos) {
                     const esNuevo = t[5] && !vistos.includes(t[0]);
-                    html += `<tr${esNuevo ? " style='background:#eaffea;'" : ''}><td><input type='text' value='${t[3]}' readonly></td><td><input type='text' value='${t[1]}' readonly>${esNuevo ? " <span style='color:#28a745;font-weight:bold;font-size:0.95em;' title='Turno reciente'>&#9733; Nuevo</span>" : ""}</td><td><input type='text' value='${t[4]}' readonly></td><td><button class='btn' onclick='eliminarTurno(${t[0]});return false;'>✕</button></td></tr>`;
+                    const profesionalNombre = t[6] || 'N/A';
+                    const profesionalColor = t[7] || '#666666';
+
+                    // Estilo de fila con color del profesional como borde izquierdo
+                    const rowStyle = esNuevo ? `background:#eaffea; border-left: 4px solid ${profesionalColor};` : `border-left: 4px solid ${profesionalColor};`;
+
+                    html += `<tr style='${rowStyle}'>
+                        <td><input type='text' value='${t[3]}' readonly></td>
+                        <td><input type='text' value='${t[1]}' readonly>${esNuevo ? " <span style='color:#28a745;font-weight:bold;font-size:0.95em;' title='Turno reciente'>&#9733; Nuevo</span>" : ""}</td>
+                        <td style='text-align: center;'>
+                            <span style='background-color: ${profesionalColor}; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.8em; font-weight: bold;'>
+                                ${profesionalNombre}
+                            </span>
+                        </td>
+                        <td><input type='text' value='${t[4]}' readonly></td>
+                        <td><button class='btn' onclick='eliminarTurno(${t[0]});return false;'>✕</button></td>
+                    </tr>`;
                 }
             } else {
-                html += `<tr><td colspan='4'>Sin turnos</td></tr>`;
+                html += `<tr><td colspan='5'>Sin turnos</td></tr>`;
             }
             html += `</table>`;
             document.getElementById('tabla-turnos-fija').innerHTML = html;
