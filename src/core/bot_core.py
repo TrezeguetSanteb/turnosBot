@@ -14,6 +14,8 @@ user_data = {}
 
 # Estados posibles
 STATE_GREETING = 'greeting'
+STATE_CHOOSING_PROFESSIONAL = 'choosing_professional'
+STATE_CHOOSING_DAY = 'choosing_day'
 STATE_WAITING_DATE = 'waiting_date'
 STATE_WAITING_TIME = 'waiting_time'
 STATE_WAITING_PROFESSIONAL = 'waiting_professional'
@@ -140,26 +142,45 @@ def cancelar_turno(turno_id, telefono):
         return False
 
 
-def generar_horarios_disponibles(fecha):
-    """Generar horarios disponibles para una fecha"""
+def generar_horarios_disponibles(fecha, profesional_id=None):
+    """Generar horarios disponibles para una fecha, filtrando por profesional si se especifica"""
     try:
         # Obtener configuración de horarios (simplificado por ahora)
-        horarios_mañana = []
-        horarios_tarde = []
+        horarios_base = []
 
         # Mañana: 8:00 a 12:00
         for hour in range(8, 12):
             for minute in [0, 30]:
                 hora = f"{hour:02d}:{minute:02d}"
-                horarios_mañana.append(hora)
+                horarios_base.append(hora)
 
         # Tarde: 15:00 a 18:00
         for hour in range(15, 18):
             for minute in [0, 30]:
                 hora = f"{hour:02d}:{minute:02d}"
-                horarios_tarde.append(hora)
+                horarios_base.append(hora)
 
-        return horarios_mañana + horarios_tarde
+        # Si no se especifica profesional, mostrar todos los horarios donde hay algún profesional disponible
+        if profesional_id is None:
+            horarios_disponibles = []
+            for hora in horarios_base:
+                profesionales_disponibles = obtener_profesionales_disponibles_fecha_hora(fecha, hora)
+                if profesionales_disponibles:
+                    horarios_disponibles.append(hora)
+            return horarios_disponibles
+        
+        # Si se especifica profesional, filtrar solo horarios donde ese profesional está disponible
+        else:
+            conn = get_db_connection()
+            ocupados = conn.execute('''
+                SELECT hora FROM turnos 
+                WHERE fecha = ? AND profesional_id = ?
+            ''', (fecha, profesional_id)).fetchall()
+            conn.close()
+
+            horas_ocupadas = [o['hora'] for o in ocupados]
+            horarios_disponibles = [h for h in horarios_base if h not in horas_ocupadas]
+            return horarios_disponibles
 
     except Exception as e:
         print(f"Error generando horarios: {e}")
@@ -257,6 +278,12 @@ def handle_message(message, phone_number, states, data):
         elif current_state == STATE_MENU:
             return handle_menu_selection(message, phone_number, states, data)
 
+        elif current_state == STATE_CHOOSING_PROFESSIONAL:
+            return handle_choosing_professional(message, phone_number, states, data)
+
+        elif current_state == STATE_CHOOSING_DAY:
+            return handle_choosing_day(message, phone_number, states, data)
+
         elif current_state == STATE_WAITING_DATE:
             return handle_date_input(message, phone_number, states, data)
 
@@ -310,8 +337,25 @@ Responde con el número de opción.
 def handle_menu_selection(message, phone_number, states, data):
     """Manejar selección del menú principal"""
     if message in ['1', 'reservar', 'turno', 'nuevo']:
-        states[phone_number] = STATE_WAITING_DATE
-        return "📅 *Perfecto! Vamos a reservar tu turno.*\n\n¿Para qué fecha lo necesitas?\nPor favor envía la fecha en formato DD/MM (ejemplo: 15/03)"
+        states[phone_number] = STATE_CHOOSING_PROFESSIONAL
+        
+        # Obtener todos los profesionales activos
+        profesionales = obtener_profesionales_activos()
+        
+        if not profesionales:
+            states[phone_number] = STATE_MENU
+            return "❌ No hay profesionales disponibles en este momento.\n\nEscribe *menu* para ver otras opciones."
+        
+        respuesta = "👥 *¿Con qué profesional deseas reservar tu turno?*\n\n"
+        
+        for i, prof in enumerate(profesionales, 1):
+            respuesta += f"*{i}* - {prof['nombre']}\n"
+        
+        respuesta += f"*{len(profesionales) + 1}* - Cualquiera (mostrar toda la disponibilidad)\n"
+        respuesta += "\nResponde con el número de tu elección."
+        
+        data[phone_number]['profesionales_disponibles'] = profesionales
+        return respuesta
 
     elif message in ['2', 'ver', 'mis turnos', 'turnos']:
         turnos = obtener_turnos_usuario(phone_number)
@@ -367,83 +411,105 @@ def handle_date_input(message, phone_number, states, data):
     data[phone_number]['fecha'] = fecha.strftime('%Y-%m-%d')
     data[phone_number]['fecha_mostrar'] = fecha.strftime('%d/%m/%Y')
 
-    # Generar horarios disponibles
-    horarios = generar_horarios_disponibles(fecha.strftime('%Y-%m-%d'))
+    # Generar horarios disponibles según el profesional elegido
+    profesional_id = data[phone_number].get('profesional_id')
+    horarios = generar_horarios_disponibles(fecha.strftime('%Y-%m-%d'), profesional_id)
 
     if not horarios:
-        return f"❌ No hay horarios disponibles para el {fecha.strftime('%d/%m/%Y')}.\n\nPrueba con otra fecha."
+        profesional_nombre = data[phone_number].get('profesional_nombre', '')
+        if profesional_nombre == 'Cualquiera':
+            return f"❌ No hay horarios disponibles para el {fecha.strftime('%d/%m/%Y')} con ningún profesional.\n\nPrueba con otra fecha."
+        else:
+            return f"❌ No hay horarios disponibles para el {fecha.strftime('%d/%m/%Y')} con {profesional_nombre}.\n\nPrueba con otra fecha o escribe *menu* para elegir otro profesional."
 
     states[phone_number] = STATE_WAITING_TIME
 
     # Mostrar horarios agrupados
-    respuesta = f"⏰ *Horarios disponibles para {fecha.strftime('%d/%m/%Y')}:*\n\n"
-    respuesta += "*Mañana:*\n"
+    profesional_nombre = data[phone_number].get('profesional_nombre', '')
+    if profesional_nombre == 'Cualquiera':
+        respuesta = f"⏰ *Horarios disponibles para {fecha.strftime('%d/%m/%Y')} (todos los profesionales):*\n\n"
+    else:
+        respuesta = f"⏰ *Horarios disponibles para {fecha.strftime('%d/%m/%Y')} con {profesional_nombre}:*\n\n"
 
     mañana = [h for h in horarios if int(h.split(':')[0]) < 14]
     tarde = [h for h in horarios if int(h.split(':')[0]) >= 14]
 
-    if mañana:
-        for hora in mañana:
-            respuesta += f"🌅 {hora}\n"
-    else:
-        respuesta += "Sin horarios disponibles\n"
+    # Guardar horarios para selección numerada
+    data[phone_number]['horarios_disponibles'] = horarios
+    
+    # Mostrar horarios como opciones numeradas
+    respuesta += "📋 *Horarios disponibles:*\n\n"
+    
+    for i, hora in enumerate(horarios, 1):
+        if profesional_nombre == 'Cualquiera':
+            profs_disponibles = obtener_profesionales_disponibles_fecha_hora(fecha.strftime('%Y-%m-%d'), hora)
+            nombres_profs = [p['nombre'] for p in profs_disponibles]
+            respuesta += f"*{i}* - {hora} ({', '.join(nombres_profs)})\n"
+        else:
+            # Determinar si es mañana o tarde
+            hora_num = int(hora.split(':')[0])
+            emoji = "🌅" if hora_num < 14 else "🌆"
+            respuesta += f"*{i}* - {emoji} {hora}\n"
 
-    respuesta += "\n*Tarde:*\n"
-
-    if tarde:
-        for hora in tarde:
-            respuesta += f"🌆 {hora}\n"
-    else:
-        respuesta += "Sin horarios disponibles\n"
-
-    respuesta += "\n¿A qué hora te gustaría el turno? (ejemplo: 10:30)"
+    respuesta += "\nResponde con el número de tu horario preferido."
 
     return respuesta
 
 
 def handle_time_input(message, phone_number, states, data):
-    """Manejar entrada de hora"""
-    hora, error = validar_hora(message)
+    """Manejar selección numérica de hora"""
+    try:
+        seleccion = int(message.strip())
+        horarios_disponibles = data[phone_number].get('horarios_disponibles', [])
+        
+        if 1 <= seleccion <= len(horarios_disponibles):
+            hora = horarios_disponibles[seleccion - 1]
+            data[phone_number]['hora'] = hora
 
-    if error:
-        return f"❌ {error}\n\nIntenta nuevamente (ejemplo: 10:30)"
+            fecha = data[phone_number]['fecha']
+            profesional_id = data[phone_number].get('profesional_id')
+            profesional_especifico = data[phone_number].get('profesional_especifico', True)
 
-    fecha = data[phone_number]['fecha']
+            # Si ya se eligió un profesional específico, ir directo al nombre
+            if profesional_especifico and profesional_id:
+                states[phone_number] = STATE_WAITING_NAME
+                profesional_nombre = data[phone_number]['profesional_nombre']
+                return f"👤 *Profesional: {profesional_nombre}*\n\n¿Cuál es tu nombre completo?"
 
-    # Verificar que la hora esté disponible
-    horarios_disponibles = generar_horarios_disponibles(fecha)
+            # Si se eligió "cualquiera", mostrar profesionales disponibles para esa hora
+            else:
+                profesionales = obtener_profesionales_disponibles_fecha_hora(fecha, hora)
 
-    if hora not in horarios_disponibles:
-        return f"❌ La hora {hora} no está disponible.\n\nPor favor elige una de las horas mostradas anteriormente."
+                if not profesionales:
+                    return f"❌ No hay profesionales disponibles para {data[phone_number]['fecha_mostrar']} a las {hora}.\n\nPrueba con otro horario escribiendo *menu*."
 
-    data[phone_number]['hora'] = hora
+                if len(profesionales) == 1:
+                    # Solo hay un profesional disponible, asignarlo automáticamente
+                    data[phone_number]['profesional_id'] = profesionales[0]['id']
+                    data[phone_number]['profesional_nombre'] = profesionales[0]['nombre']
+                    states[phone_number] = STATE_WAITING_NAME
 
-    # Obtener profesionales disponibles para esta fecha/hora
-    profesionales = obtener_profesionales_disponibles_fecha_hora(fecha, hora)
+                    return f"👤 *Profesional asignado:* {profesionales[0]['nombre']}\n\n¿Cuál es tu nombre completo?"
 
-    if not profesionales:
-        return f"❌ No hay profesionales disponibles para {data[phone_number]['fecha_mostrar']} a las {hora}.\n\nPrueba con otro horario escribiendo *menu*."
+                # Hay múltiples profesionales, permitir elegir
+                data[phone_number]['profesionales_disponibles'] = profesionales
+                states[phone_number] = STATE_WAITING_PROFESSIONAL
 
-    if len(profesionales) == 1:
-        # Solo hay un profesional disponible, asignarlo automáticamente
-        data[phone_number]['profesional_id'] = profesionales[0]['id']
-        data[phone_number]['profesional_nombre'] = profesionales[0]['nombre']
-        states[phone_number] = STATE_WAITING_NAME
+                respuesta = f"👥 *Profesionales disponibles para {data[phone_number]['fecha_mostrar']} a las {hora}:*\n\n"
 
-        return f"👤 *Profesional asignado:* {profesionales[0]['nombre']}\n\n¿Cuál es tu nombre completo?"
+                for i, prof in enumerate(profesionales, 1):
+                    respuesta += f"*{i}* - {prof['nombre']}\n"
 
-    # Hay múltiples profesionales, permitir elegir
-    data[phone_number]['profesionales_disponibles'] = profesionales
-    states[phone_number] = STATE_WAITING_PROFESSIONAL
+                respuesta += "\n¿Con quién te gustaría reservar? Responde con el número."
 
-    respuesta = f"👥 *Hay varios profesionales disponibles para {data[phone_number]['fecha_mostrar']} a las {hora}:*\n\n"
-
-    for i, prof in enumerate(profesionales, 1):
-        respuesta += f"*{i}* - {prof['nombre']}\n"
-
-    respuesta += "\n¿Con quién te gustaría reservar? Responde con el número."
-
-    return respuesta
+                return respuesta
+                
+        else:
+            return f"❌ Opción inválida. Por favor responde con un número del 1 al {len(horarios_disponibles)}."
+            
+    except ValueError:
+        horarios_disponibles = data[phone_number].get('horarios_disponibles', [])
+        return f"❌ Por favor responde con un número del 1 al {len(horarios_disponibles)}."
 
 
 def handle_professional_selection(message, phone_number, states, data):
@@ -586,3 +652,140 @@ Escribe *menu* para más opciones.
     except ValueError:
         turnos = data[phone_number].get('cancelar_turnos', [])
         return f"❌ Por favor responde con un número del 1 al {len(turnos)}."
+
+
+def handle_choosing_professional(message, phone_number, states, data):
+    """Manejar selección inicial de profesional"""
+    try:
+        seleccion = int(message.strip())
+        profesionales = data[phone_number].get('profesionales_disponibles', [])
+        
+        if 1 <= seleccion <= len(profesionales):
+            # Usuario eligió un profesional específico
+            profesional = profesionales[seleccion - 1]
+            data[phone_number]['profesional_id'] = profesional['id']
+            data[phone_number]['profesional_nombre'] = profesional['nombre']
+            data[phone_number]['profesional_especifico'] = True
+            
+            states[phone_number] = STATE_CHOOSING_DAY
+            return generar_opciones_dias(phone_number, data, f"👤 *Has elegido a {profesional['nombre']}*\n\n")
+            
+        elif seleccion == len(profesionales) + 1:
+            # Usuario eligió "Cualquiera"
+            data[phone_number]['profesional_especifico'] = False
+            data[phone_number]['profesional_id'] = None
+            data[phone_number]['profesional_nombre'] = 'Cualquiera'
+            
+            states[phone_number] = STATE_CHOOSING_DAY
+            return generar_opciones_dias(phone_number, data, "👥 *Has elegido ver disponibilidad de todos los profesionales*\n\n")
+            
+        else:
+            return f"❌ Opción inválida. Por favor responde con un número del 1 al {len(profesionales) + 1}."
+            
+    except ValueError:
+        profesionales = data[phone_number].get('profesionales_disponibles', [])
+        return f"❌ Por favor responde con un número del 1 al {len(profesionales) + 1}."
+
+
+def generar_opciones_dias(phone_number, data, prefijo=""):
+    """Generar opciones de días para reservar"""
+    hoy = datetime.now().date()
+    opciones = []
+    
+    # Generar próximos 7 días (excluyendo domingos)
+    for i in range(7):
+        fecha = hoy + timedelta(days=i)
+        
+        # Saltar domingos
+        if fecha.weekday() == 6:
+            continue
+            
+        # Formatear nombre del día
+        if i == 0:
+            nombre_dia = "Hoy"
+        elif i == 1:
+            nombre_dia = "Mañana"
+        else:
+            dias_semana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
+            nombre_dia = dias_semana[fecha.weekday()]
+        
+        fecha_formateada = fecha.strftime('%d/%m')
+        opciones.append({
+            'fecha': fecha,
+            'nombre': f"{nombre_dia} ({fecha_formateada})",
+            'fecha_str': fecha.strftime('%Y-%m-%d'),
+            'fecha_mostrar': fecha.strftime('%d/%m/%Y')
+        })
+    
+    # Guardar opciones para usar en la selección
+    data[phone_number]['opciones_dias'] = opciones
+    
+    # Generar respuesta
+    respuesta = f"{prefijo}📅 *¿Para qué día necesitas el turno?*\n\n"
+    
+    for i, opcion in enumerate(opciones, 1):
+        respuesta += f"*{i}* - {opcion['nombre']}\n"
+    
+    respuesta += "\nResponde con el número del día."
+    
+    return respuesta
+
+
+def handle_choosing_day(message, phone_number, states, data):
+    """Manejar selección de día"""
+    try:
+        seleccion = int(message.strip())
+        opciones = data[phone_number].get('opciones_dias', [])
+        
+        if 1 <= seleccion <= len(opciones):
+            dia_elegido = opciones[seleccion - 1]
+            
+            data[phone_number]['fecha'] = dia_elegido['fecha_str']
+            data[phone_number]['fecha_mostrar'] = dia_elegido['fecha_mostrar']
+            
+            # Generar horarios disponibles según el profesional elegido
+            profesional_id = data[phone_number].get('profesional_id')
+            horarios = generar_horarios_disponibles(dia_elegido['fecha_str'], profesional_id)
+
+            if not horarios:
+                profesional_nombre = data[phone_number].get('profesional_nombre', '')
+                if profesional_nombre == 'Cualquiera':
+                    return f"❌ No hay horarios disponibles para {dia_elegido['fecha_mostrar']} con ningún profesional.\n\nEscribe *menu* para elegir otro día."
+                else:
+                    return f"❌ No hay horarios disponibles para {dia_elegido['fecha_mostrar']} con {profesional_nombre}.\n\nEscribe *menu* para elegir otro día."
+
+            states[phone_number] = STATE_WAITING_TIME
+
+            # Guardar horarios para selección numerada  
+            data[phone_number]['horarios_disponibles'] = horarios
+
+            # Mostrar horarios como opciones numeradas
+            profesional_nombre = data[phone_number].get('profesional_nombre', '')
+            if profesional_nombre == 'Cualquiera':
+                respuesta = f"⏰ *Horarios disponibles para {dia_elegido['fecha_mostrar']} (todos los profesionales):*\n\n"
+            else:
+                respuesta = f"⏰ *Horarios disponibles para {dia_elegido['fecha_mostrar']} con {profesional_nombre}:*\n\n"
+            
+            respuesta += "📋 *Opciones de horarios:*\n\n"
+            
+            for i, hora in enumerate(horarios, 1):
+                if profesional_nombre == 'Cualquiera':
+                    profs_disponibles = obtener_profesionales_disponibles_fecha_hora(dia_elegido['fecha_str'], hora)
+                    nombres_profs = [p['nombre'] for p in profs_disponibles]
+                    respuesta += f"*{i}* - {hora} ({', '.join(nombres_profs)})\n"
+                else:
+                    # Determinar si es mañana o tarde
+                    hora_num = int(hora.split(':')[0])
+                    emoji = "🌅" if hora_num < 14 else "🌆"
+                    respuesta += f"*{i}* - {emoji} {hora}\n"
+
+            respuesta += "\nResponde con el número de tu horario preferido."
+
+            return respuesta
+            
+        else:
+            return f"❌ Opción inválida. Por favor responde con un número del 1 al {len(opciones)}."
+            
+    except ValueError:
+        opciones = data[phone_number].get('opciones_dias', [])
+        return f"❌ Por favor responde con un número del 1 al {len(opciones)}."
