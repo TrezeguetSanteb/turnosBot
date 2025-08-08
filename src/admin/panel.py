@@ -1,4 +1,4 @@
-from src.admin.notifications import notificar_admin_cancelacion_directa
+from .notifications import notificar_admin_cancelacion_directa
 from src.services.notifications import notificar_cancelacion_turno, notificar_dia_bloqueado
 from flask import Flask, render_template, request, redirect, url_for, jsonify, send_from_directory, Response
 import os
@@ -840,7 +840,7 @@ def enviar_respuesta_whatsapp(phone_number, message):
 def get_notifications():
     """Obtener notificaciones para el panel móvil"""
     try:
-        from src.admin.notifications import obtener_notificaciones_pendientes
+        from .notifications import obtener_notificaciones_pendientes
         notificaciones = obtener_notificaciones_pendientes()
 
         # Formatear notificaciones para el frontend
@@ -901,7 +901,7 @@ def get_notifications():
 def mark_notifications_read():
     """Marcar notificaciones como leídas"""
     try:
-        from src.admin.notifications import limpiar_notificaciones_viejas
+        from .notifications import limpiar_notificaciones_viejas
         # Limpiar notificaciones (las marca como procesadas)
         eliminadas = limpiar_notificaciones_viejas(0)  # Limpiar todas
 
@@ -921,7 +921,7 @@ def mark_notifications_read():
 def get_notifications_count():
     """Obtener solo el conteo de notificaciones pendientes"""
     try:
-        from src.admin.notifications import contar_notificaciones_pendientes
+        from .notifications import contar_notificaciones_pendientes
         count = contar_notificaciones_pendientes()
 
         return jsonify({
@@ -954,7 +954,7 @@ def mark_single_notification_read():
         try:
             timestamp = notification_id.split('_')[0]
 
-            from src.admin.notifications import marcar_notificacion_enviada_por_timestamp
+            from .notifications import marcar_notificacion_enviada_por_timestamp
             success = marcar_notificacion_enviada_por_timestamp(timestamp)
 
             if success:
@@ -1021,7 +1021,7 @@ def notification_monitor():
 
     while True:
         try:
-            from src.admin.notifications import contar_notificaciones_pendientes
+            from .notifications import contar_notificaciones_pendientes
             current_count = contar_notificaciones_pendientes()
 
             if current_count != last_notification_count:
@@ -1103,7 +1103,7 @@ def notification_stream():
 def health_check_detailed():
     """Health check detallado que indica el estado de actividad de la aplicación"""
     try:
-        from src.admin.notifications import contar_notificaciones_pendientes
+        from .notifications import contar_notificaciones_pendientes
         notification_count = contar_notificaciones_pendientes()
         connected_clients = len(clients_sse)
 

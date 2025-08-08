@@ -99,7 +99,7 @@ def run_whatsapp_bot():
     """Ejecutar bot de WhatsApp"""
     try:
         log("📱 Iniciando bot de WhatsApp...")
-        from bots.whatsapp_bot import app as whatsapp_app
+        from src.bots.whatsapp_bot import app as whatsapp_app
 
         # Puerto para WhatsApp (puerto principal + 1)
         main_port = int(os.environ.get('PORT', 9000))
@@ -121,7 +121,7 @@ def run_admin_panel():
     """Ejecutar panel de administración (proceso principal para Railway)"""
     try:
         log("🌐 Iniciando panel de administración...")
-        from admin.panel import app as admin_app
+        from src.admin.panel import app as admin_app
 
         port = int(os.environ.get('PORT', 9000))
 
