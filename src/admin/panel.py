@@ -1154,18 +1154,29 @@ def guardar_profesionales(profesionales_data):
 
         # Insertar nuevos profesionales
         for i, prof in enumerate(profesionales_data):
+            nombre = prof.get('nombre', '').strip()
+            color = prof.get('color', '#666666')
+            
+            if not nombre:
+                continue  # Saltar profesionales sin nombre
+                
             conn.execute('''
                 INSERT INTO profesionales (nombre, color, activo, orden)
                 VALUES (?, ?, 1, ?)
-            ''', (prof['nombre'], prof['color'], i + 1))
+            ''', (nombre, color, i + 1))
+            
+            print(f"✅ Profesional guardado: {nombre} - {color}")
 
         conn.commit()
         conn.close()
 
+        print("✅ Profesionales guardados correctamente")
         return True
 
     except Exception as e:
-        print(f"Error guardando profesionales: {e}")
+        print(f"❌ Error guardando profesionales: {e}")
+        import traceback
+        traceback.print_exc()
         return False
 
 

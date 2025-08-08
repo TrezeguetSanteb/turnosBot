@@ -1344,60 +1344,7 @@
             }
         }
 
-        /* Estilos para chat del bot */
-        .bot-test-container {
-            display: flex;
-            flex-direction: column;
-            height: 500px;
-        }
 
-        .bot-chat {
-            flex: 1;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
-            overflow-y: auto;
-            background: #f8f9fa;
-            font-family: monospace;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .bot-message {
-            margin-bottom: 10px;
-            padding: 8px 12px;
-            border-radius: 8px;
-        }
-
-        .bot-message:nth-child(odd) {
-            background: #ffffff;
-            border-left: 3px solid #007bff;
-        }
-
-        .bot-message:nth-child(even) {
-            background: #e3f2fd;
-            border-left: 3px solid #4caf50;
-        }
-
-        .bot-input-container {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .bot-input-container input {
-            flex: 1;
-            padding: 10px;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-
-        .bot-input-container input:focus {
-            border-color: #007bff;
-            outline: none;
-        }
 
         .bot-info {
             background: #f8f9fa;
@@ -1429,10 +1376,6 @@
             <button class="global-config-btn" onclick="abrirConfiguracionProfesionales()"
                 title="Configurar Profesionales">
                 👥
-            </button>
-            <!-- Botón de prueba del bot -->
-            <button class="global-config-btn" onclick="abrirPruebaBot()" title="Probar Bot">
-                🤖
             </button>
             <!-- Botón de configuración global -->
             <button class="global-config-btn" onclick="abrirConfiguracionGlobal()" title="Configuración Global">
@@ -1694,35 +1637,6 @@
                 <button type="button" class="btn btn-primary" onclick="guardarProfesionales()">
                     💾 Guardar Profesionales
                 </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal para prueba del bot -->
-    <div id="botTestModal" class="modal">
-        <div class="modal-content large">
-            <div class="modal-header">
-                <div class="modal-title">🤖 Probar Bot de Turnos</div>
-                <button class="close-btn" onclick="cerrarModalBot()">&times;</button>
-            </div>
-
-            <div class="bot-test-container">
-                <div class="bot-chat" id="botChat">
-                    <div class="bot-message">
-                        <strong>Bot:</strong> ¡Escribe "hola" para comenzar!
-                    </div>
-                </div>
-
-                <div class="bot-input-container">
-                    <input type="text" id="botMessageInput" placeholder="Escribe tu mensaje..."
-                        onkeypress="handleBotKeyPress(event)">
-                    <button class="btn btn-primary" onclick="enviarMensajeBot()">Enviar</button>
-                </div>
-
-                <div class="bot-info">
-                    <p><strong>Estado actual:</strong> <span id="botState">greeting</span></p>
-                    <p><strong>Teléfono de prueba:</strong> 5491123456789</p>
-                </div>
             </div>
         </div>
     </div>
@@ -3015,12 +2929,16 @@
             // Validar que todos los profesionales tengan nombre
             const profesionalesValidos = profesionalesData.filter(prof => prof.nombre && prof.nombre.trim() !== '');
 
+            console.log('Datos de profesionales a guardar:', profesionalesValidos);
+
             if (profesionalesValidos.length === 0) {
                 alert('Debe haber al menos un profesional con nombre válido.');
                 return;
             }
 
             try {
+                console.log('Enviando datos a /api/profesionales...');
+                
                 const response = await fetch('/api/profesionales', {
                     method: 'POST',
                     headers: {
@@ -3031,7 +2949,10 @@
                     })
                 });
 
+                console.log('Response status:', response.status);
+                
                 const data = await response.json();
+                console.log('Response data:', data);
 
                 if (data.success) {
                     mostrarNotificacion('✅ Profesionales actualizados correctamente', 'success');
@@ -3040,6 +2961,7 @@
                     // Recargar la semana para mostrar los cambios
                     cargarSemana();
                 } else {
+                    console.error('Error del servidor:', data.error);
                     mostrarNotificacion('❌ Error: ' + (data.error || 'No se pudieron guardar los profesionales'), 'error');
                 }
             } catch (error) {
@@ -3080,86 +3002,8 @@
         }
 
         // ========================================
-        // PRUEBA DEL BOT
+        // NOTIFICACIONES
         // ========================================
-        function abrirPruebaBot() {
-            document.getElementById('botTestModal').classList.add('show');
-            document.getElementById('botChat').innerHTML = '<div class="bot-message"><strong>Bot:</strong> ¡Escribe "hola" para comenzar!</div>';
-            document.getElementById('botState').textContent = 'greeting';
-        }
-
-        function cerrarModalBot() {
-            document.getElementById('botTestModal').classList.remove('show');
-        }
-
-        function handleBotKeyPress(event) {
-            if (event.key === 'Enter') {
-                enviarMensajeBot();
-            }
-        }
-
-        async function enviarMensajeBot() {
-            const input = document.getElementById('botMessageInput');
-            const chat = document.getElementById('botChat');
-            const stateSpan = document.getElementById('botState');
-
-            const message = input.value.trim();
-            if (!message) return;
-
-            // Mostrar mensaje del usuario
-            const userMessage = document.createElement('div');
-            userMessage.className = 'bot-message';
-            userMessage.innerHTML = `<strong>Usuario:</strong> ${message}`;
-            chat.appendChild(userMessage);
-
-            // Limpiar input
-            input.value = '';
-
-            try {
-                const response = await fetch('/api/bot/test', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        message: message,
-                        phone: '5491123456789'
-                    })
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    // Mostrar respuesta del bot
-                    const botMessage = document.createElement('div');
-                    botMessage.className = 'bot-message';
-                    botMessage.innerHTML = `<strong>Bot:</strong> ${data.response.replace(/\n/g, '<br>')}`;
-                    chat.appendChild(botMessage);
-
-                    // Actualizar estado
-                    stateSpan.textContent = data.state;
-                } else {
-                    // Mostrar error
-                    const errorMessage = document.createElement('div');
-                    errorMessage.className = 'bot-message';
-                    errorMessage.style.color = 'red';
-                    errorMessage.innerHTML = `<strong>Error:</strong> ${data.error}`;
-                    chat.appendChild(errorMessage);
-                }
-
-                // Scroll al final
-                chat.scrollTop = chat.scrollHeight;
-
-            } catch (error) {
-                console.error('Error probando bot:', error);
-                const errorMessage = document.createElement('div');
-                errorMessage.className = 'bot-message';
-                errorMessage.style.color = 'red';
-                errorMessage.innerHTML = `<strong>Error:</strong> Error de conexión`;
-                chat.appendChild(errorMessage);
-                chat.scrollTop = chat.scrollHeight;
-            }
-        }
     </script>
 
     <!-- Estilos adicionales para notificaciones PWA -->
