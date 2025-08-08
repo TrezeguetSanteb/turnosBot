@@ -30,21 +30,19 @@ CREATE TABLE IF NOT EXISTS capacidad_horarios (
 
 -- Datos iniciales de profesionales
 INSERT OR IGNORE INTO profesionales (id, nombre, color, activo, orden) VALUES 
-    (1, 'Martín', '#e74c3c', 1, 1),
-    (2, 'Joaquín', '#2ecc71', 1, 2),
-    (3, 'Felipe', '#9b59b6', 1, 3);
+    (1, 'profesional1', '#3498db', 1, 1);
 
--- Configuración inicial de capacidad (3 profesionales por defecto)
+-- Configuración inicial de capacidad (1 profesional por defecto)
 INSERT OR IGNORE INTO capacidad_horarios (dia_semana, periodo, capacidad_total) VALUES
-    ('Lunes', 'manana', 3), ('Lunes', 'tarde', 3),
-    ('Martes', 'manana', 3), ('Martes', 'tarde', 3),
-    ('Miércoles', 'manana', 3), ('Miércoles', 'tarde', 3),
-    ('Jueves', 'manana', 3), ('Jueves', 'tarde', 3),
-    ('Viernes', 'manana', 3), ('Viernes', 'tarde', 3),
-    ('Sábado', 'manana', 3), ('Sábado', 'tarde', 3),
+    ('Lunes', 'manana', 1), ('Lunes', 'tarde', 1),
+    ('Martes', 'manana', 1), ('Martes', 'tarde', 1),
+    ('Miércoles', 'manana', 1), ('Miércoles', 'tarde', 1),
+    ('Jueves', 'manana', 1), ('Jueves', 'tarde', 1),
+    ('Viernes', 'manana', 1), ('Viernes', 'tarde', 1),
+    ('Sábado', 'manana', 1), ('Sábado', 'tarde', 1),
     ('Domingo', 'manana', 0), ('Domingo', 'tarde', 0);
 
--- Migración: tabla antigua 'turno' si existe
-INSERT OR IGNORE INTO turnos (nombre, fecha, hora, telefono, profesional_id)
-SELECT nombre, fecha, hora, telefono, 1 FROM turno WHERE EXISTS (SELECT name FROM sqlite_master WHERE type='table' AND name='turno');
+-- Migración: tabla antigua 'turno' si existe (comentada para evitar errores)
+-- INSERT OR IGNORE INTO turnos (nombre, fecha, hora, telefono, profesional_id)
+-- SELECT nombre, fecha, hora, telefono, 1 FROM turno WHERE EXISTS (SELECT name FROM sqlite_master WHERE type='table' AND name='turno');
 

@@ -2841,9 +2841,7 @@
                     console.error('Error cargando profesionales:', data.error);
                     // Datos por defecto en caso de error
                     profesionalesData = [
-                        { nombre: 'Martín', color: '#e74c3c' },
-                        { nombre: 'Joaquín', color: '#2ecc71' },
-                        { nombre: 'Felipe', color: '#9b59b6' }
+                        { nombre: 'profesional1', color: '#3498db' }
                     ];
                 }
 
@@ -2852,9 +2850,7 @@
                 console.error('Error cargando profesionales:', error);
                 // Datos por defecto en caso de error
                 profesionalesData = [
-                    { nombre: 'Martín', color: '#e74c3c' },
-                    { nombre: 'Joaquín', color: '#2ecc71' },
-                    { nombre: 'Felipe', color: '#9b59b6' }
+                    { nombre: 'profesional1', color: '#3498db' }
                 ];
                 renderizarProfesionales();
             }
@@ -2908,7 +2904,7 @@
         function agregarProfesional() {
             const nuevoColor = coloresPorDefecto[profesionalesData.length % coloresPorDefecto.length];
             profesionalesData.push({
-                nombre: `Profesional ${profesionalesData.length + 1}`,
+                nombre: `profesional${profesionalesData.length + 1}`,
                 color: nuevoColor
             });
             renderizarProfesionales();
@@ -2917,9 +2913,7 @@
         function resetearProfesionales() {
             if (confirm('¿Estás seguro de que quieres restaurar los profesionales por defecto? Se perderán los cambios no guardados.')) {
                 profesionalesData = [
-                    { nombre: 'Martín', color: '#e74c3c' },
-                    { nombre: 'Joaquín', color: '#2ecc71' },
-                    { nombre: 'Felipe', color: '#9b59b6' }
+                    { nombre: 'profesional1', color: '#3498db' }
                 ];
                 renderizarProfesionales();
             }
